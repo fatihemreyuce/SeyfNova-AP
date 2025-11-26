@@ -34,6 +34,10 @@ import ReferenceListPage from "./pages/reference/reference-list-page";
 import ReferenceCreatePage from "./pages/reference/reference-create-page";
 import ReferenceEditPage from "./pages/reference/reference-edit-page";
 import ReferenceDetailPage from "./pages/reference/reference-detail-page";
+import CircularListPage from "./pages/circular/circular-list-page";
+import CircularCreatePage from "./pages/circular/circular-create-page";
+import CircularEditPage from "./pages/circular/circular-edit-page";
+import CircularDetailPage from "./pages/circular/circular-detail-page";
 
 
 function App() {
@@ -82,6 +86,11 @@ function App() {
 								<Route path="/reference/edit/:id" element={<ReferenceEditPage />} />
 								<Route path="/reference" element={<ReferenceListPage />} />
 								<Route path="/reference/:id" element={<ReferenceDetailPage />} />
+								{/* Circular Routes */}
+								<Route path="/circular/create" element={<CircularCreatePage />} />
+								<Route path="/circular/edit/:id" element={<CircularEditPage />} />
+								<Route path="/circular" element={<CircularListPage />} />
+								<Route path="/circular/:id" element={<CircularDetailPage />} />
 							</Route>
 						</Route>
 					</Routes>

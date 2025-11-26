@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import DarkModeToggle from "@/components/dark-mode-toggle";
 import { useLoginState } from "@/hooks/use-login-state";
-import { LayoutDashboard, LogOut, FileText, BarChart3, Briefcase, Image as ImageIcon, Handshake, FolderTree, Award } from "lucide-react";
+import { LayoutDashboard, LogOut, FileText, BarChart3, Briefcase, Image as ImageIcon, Handshake, FolderTree, Award, Newspaper } from "lucide-react";
 
 interface NavItem {
 	to: string;
@@ -58,6 +58,12 @@ const navigationItems: NavItem[] = [
 		to: "/reference",
 		label: "References",
 		icon: Award,
+		end: false,
+	},
+	{
+		to: "/circular",
+		label: "Circulars",
+		icon: Newspaper,
 		end: false,
 	},
 ];
