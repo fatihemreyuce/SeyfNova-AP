@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCreateServiceStats } from "@/hooks/use-service-stats";
-import { ArrowLeft, Loader2, Check } from "lucide-react";
+import { ArrowLeft, Loader2, Check, Sparkles, TrendingUp } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import {
 	Select,
@@ -93,139 +93,187 @@ export default function ServiceStatsCreatePage() {
 	const isLoading = createMutation.isPending;
 
 	return (
-		<div className="space-y-6">
-			{/* Header */}
-			<div className="flex items-center gap-4">
-				<Button
-					variant="ghost"
-					size="icon"
-					onClick={() => navigate("/service-stats")}
-					className="h-9 w-9"
-				>
-					<ArrowLeft className="h-4 w-4" />
-				</Button>
-				<div>
-					<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-						Create Service Stat
-					</h1>
-					<p className="text-muted-foreground mt-1">
-						Add a new service statistic
-					</p>
-				</div>
-			</div>
-
-			{/* Form */}
-			<Card className="max-w-2xl border-border/50 shadow-lg shadow-primary/5">
-				<form onSubmit={handleSubmit}>
-					<CardHeader>
-						<CardTitle>Service Stat Details</CardTitle>
-						<CardDescription>
-							Fill in the information below to create a new service stat
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="space-y-6">
-						{/* Icon Selection */}
-						<div className="space-y-2">
-							<Label htmlFor="icon">Icon *</Label>
-							<Select value={icon} onValueChange={setIcon}>
-								<SelectTrigger id="icon" className="h-11">
-									<div className="flex items-center gap-2">
-										{renderIcon(icon) && (
-											<div className="flex items-center justify-center h-6 w-6 rounded bg-primary/10 text-primary">
-												{renderIcon(icon)}
-											</div>
-										)}
-										<SelectValue placeholder="Select an icon" />
-									</div>
-								</SelectTrigger>
-								<SelectContent>
-									{popularIcons.map((iconName) => {
-										const IconComponent = (LucideIcons as any)[iconName];
-										return (
-											<SelectItem key={iconName} value={iconName}>
-												<div className="flex items-center gap-2">
-													{IconComponent && (
-														<div className="flex items-center justify-center h-5 w-5">
-															<IconComponent className="h-4 w-4" />
-														</div>
-													)}
-													<span>{iconName}</span>
-												</div>
-											</SelectItem>
-										);
-									})}
-								</SelectContent>
-							</Select>
-							<p className="text-xs text-muted-foreground">
-								Choose an icon to represent this statistic
-							</p>
-						</div>
-
-						{/* Title */}
-						<div className="space-y-2">
-							<Label htmlFor="title">Title *</Label>
-							<Input
-								id="title"
-								placeholder="e.g., Happy Customers"
-								value={title}
-								onChange={(e) => setTitle(e.target.value)}
-								required
-								disabled={isLoading}
-								className="h-11"
-							/>
-						</div>
-
-						{/* Number Value */}
-						<div className="space-y-2">
-							<Label htmlFor="numberValue">Number Value *</Label>
-							<Input
-								id="numberValue"
-								type="number"
-								placeholder="e.g., 1000"
-								value={numberValue}
-								onChange={(e) => {
-									const value = e.target.value;
-									setNumberValue(value === "" ? "" : Number(value));
-								}}
-								min="0"
-								required
-								disabled={isLoading}
-								className="h-11"
-							/>
-							<p className="text-xs text-muted-foreground">
-								Enter a positive number
-							</p>
-						</div>
-					</CardContent>
-					<CardFooter className="flex items-center justify-end gap-3">
-						<Button
-							type="button"
-							variant="outline"
-							onClick={() => navigate("/service-stats")}
-							disabled={isLoading}
-						>
-							Cancel
-						</Button>
-						<Button
-							type="submit"
-							disabled={!isFormValid || isLoading}
-							className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
-						>
-							{isLoading ? (
-								<>
-									<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-									Creating...
-								</>
-							) : (
-								<>
-									<Check className="h-4 w-4 mr-2" />
+		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
+			<div className="max-w-3xl mx-auto space-y-8">
+				{/* Header */}
+				<div className="flex items-center gap-4">
+					<Button
+						variant="ghost"
+						size="icon"
+						onClick={() => navigate("/service-stats")}
+						className="h-10 w-10 rounded-full hover:bg-muted/80 transition-all duration-200 hover:scale-105"
+					>
+						<ArrowLeft className="h-5 w-5" />
+					</Button>
+					<div className="flex-1">
+						<div className="flex items-center gap-3">
+							<div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20">
+								<Sparkles className="h-6 w-6 text-primary" />
+							</div>
+							<div>
+								<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
 									Create Service Stat
-								</>
-							)}
-						</Button>
-					</CardFooter>
-				</form>
-			</Card>
+								</h1>
+								<p className="text-muted-foreground mt-1.5 text-base">
+									Add a new service statistic to showcase your achievements
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{/* Form */}
+				<Card className="border-2 border-border/60 shadow-2xl shadow-primary/5 bg-card/50 backdrop-blur-sm overflow-hidden">
+					{/* Decorative gradient bar */}
+					<div className="h-1.5 bg-gradient-to-r from-primary via-primary/80 to-primary/60" />
+					
+					<form onSubmit={handleSubmit}>
+						<CardHeader className="pb-6 pt-8 px-8">
+							<div className="flex items-start gap-4">
+								<div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
+									<TrendingUp className="h-6 w-6 text-primary" />
+								</div>
+								<div className="flex-1">
+									<CardTitle className="text-2xl font-semibold mb-2">
+										Service Stat Details
+									</CardTitle>
+									<CardDescription className="text-base">
+										Fill in the information below to create a new service statistic
+									</CardDescription>
+								</div>
+							</div>
+						</CardHeader>
+						
+						<CardContent className="space-y-8 px-8 pb-8">
+							{/* Icon Selection */}
+							<div className="space-y-3">
+								<Label htmlFor="icon" className="text-base font-medium flex items-center gap-2">
+									<span>Icon</span>
+									<span className="text-destructive">*</span>
+								</Label>
+								<Select value={icon} onValueChange={setIcon}>
+									<SelectTrigger 
+										id="icon" 
+										className="h-12 border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
+									>
+										<div className="flex items-center gap-3 w-full">
+											{renderIcon(icon) && (
+												<div className="flex items-center justify-center h-8 w-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 text-primary border border-primary/20 shadow-sm">
+													{renderIcon(icon)}
+												</div>
+											)}
+											<SelectValue placeholder="Select an icon" className="text-base" />
+										</div>
+									</SelectTrigger>
+									<SelectContent className="max-h-[300px]">
+										{popularIcons.map((iconName) => {
+											const IconComponent = (LucideIcons as any)[iconName];
+											return (
+												<SelectItem 
+													key={iconName} 
+													value={iconName}
+													className="cursor-pointer hover:bg-muted/80 transition-colors"
+												>
+													<div className="flex items-center gap-3 py-1">
+														{IconComponent && (
+															<div className="flex items-center justify-center h-6 w-6 rounded-md bg-primary/10 text-primary">
+																<IconComponent className="h-4 w-4" />
+															</div>
+														)}
+														<span className="font-medium">{iconName}</span>
+													</div>
+												</SelectItem>
+											);
+										})}
+									</SelectContent>
+								</Select>
+								<p className="text-sm text-muted-foreground flex items-center gap-1.5">
+									<span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
+									Choose an icon to represent this statistic
+								</p>
+							</div>
+
+							{/* Divider */}
+							<div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
+							{/* Title */}
+							<div className="space-y-3">
+								<Label htmlFor="title" className="text-base font-medium flex items-center gap-2">
+									<span>Title</span>
+									<span className="text-destructive">*</span>
+								</Label>
+								<Input
+									id="title"
+									placeholder="e.g., Happy Customers"
+									value={title}
+									onChange={(e) => setTitle(e.target.value)}
+									required
+									disabled={isLoading}
+									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
+								/>
+							</div>
+
+							{/* Divider */}
+							<div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
+							{/* Number Value */}
+							<div className="space-y-3">
+								<Label htmlFor="numberValue" className="text-base font-medium flex items-center gap-2">
+									<span>Number Value</span>
+									<span className="text-destructive">*</span>
+								</Label>
+								<Input
+									id="numberValue"
+									type="number"
+									placeholder="e.g., 1000"
+									value={numberValue}
+									onChange={(e) => {
+										const value = e.target.value;
+										setNumberValue(value === "" ? "" : Number(value));
+									}}
+									min="0"
+									required
+									disabled={isLoading}
+									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
+								/>
+								<p className="text-sm text-muted-foreground flex items-center gap-1.5">
+									<span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
+									Enter a positive number
+								</p>
+							</div>
+						</CardContent>
+						
+						<CardFooter className="flex items-center justify-end gap-4 px-8 pb-8 pt-6 bg-muted/30 border-t border-border/50">
+							<Button
+								type="button"
+								variant="outline"
+								onClick={() => navigate("/service-stats")}
+								disabled={isLoading}
+								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
+							>
+								Cancel
+							</Button>
+							<Button
+								type="submit"
+								disabled={!isFormValid || isLoading}
+								className="h-11 px-8 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+							>
+								{isLoading ? (
+									<>
+										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
+										Creating...
+									</>
+								) : (
+									<>
+										<Check className="h-4 w-4 mr-2" />
+										Create Service Stat
+									</>
+								)}
+							</Button>
+						</CardFooter>
+					</form>
+				</Card>
+			</div>
 		</div>
 	);
 }

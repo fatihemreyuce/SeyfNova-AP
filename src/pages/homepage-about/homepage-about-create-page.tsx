@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCreateHomePageAbout } from "@/hooks/use-homapage-about";
 import type { HomePageAboutRequest } from "@/types/homepage.about.types";
-import { ArrowLeft, Save } from "lucide-react";
+import { ArrowLeft, Save, Sparkles, FileText, Loader2, Check } from "lucide-react";
 
 export default function HomepageAboutCreatePage() {
 	const navigate = useNavigate();
@@ -34,151 +34,196 @@ export default function HomepageAboutCreatePage() {
 		navigate("/homepage-about");
 	};
 
+	const isLoading = createMutation.isPending;
+	const isFormValid = 
+		formData.leftTitle.trim() && 
+		formData.leftDescription.trim() && 
+		formData.rightTitle.trim() && 
+		formData.rightDescription.trim();
+
 	return (
-		<div className="space-y-6">
-			{/* Header */}
-			<div className="flex items-center gap-4">
-				<Button
-					variant="ghost"
-					size="icon"
-					onClick={handleCancel}
-					className="h-9 w-9"
-				>
-					<ArrowLeft className="h-4 w-4" />
-				</Button>
-				<div>
-					<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-						Create Homepage About
-					</h1>
-					<p className="text-muted-foreground mt-1">
-						Add new homepage about content
-					</p>
-				</div>
-			</div>
-
-			{/* Form */}
-			<Card className="shadow-lg">
-				<CardHeader>
-					<CardTitle>Homepage About Information</CardTitle>
-					<CardDescription>
-						Fill in the details below to create a new homepage about entry
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<form onSubmit={handleSubmit} className="space-y-6">
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-							{/* Left Side */}
-							<div className="space-y-4">
-								<div className="space-y-2">
-									<Label htmlFor="leftTitle" className="text-sm font-medium">
-										Left Title *
-									</Label>
-									<Input
-										id="leftTitle"
-										value={formData.leftTitle}
-										onChange={(e) =>
-											setFormData({ ...formData, leftTitle: e.target.value })
-										}
-										placeholder="Enter left title"
-										required
-										disabled={createMutation.isPending}
-										className="h-11"
-									/>
-								</div>
-								<div className="space-y-2">
-									<Label htmlFor="leftDescription" className="text-sm font-medium">
-										Left Description *
-									</Label>
-									<Textarea
-										id="leftDescription"
-										value={formData.leftDescription}
-										onChange={(e) =>
-											setFormData({
-												...formData,
-												leftDescription: e.target.value,
-											})
-										}
-										placeholder="Enter left description"
-										rows={6}
-										required
-										disabled={createMutation.isPending}
-										className="resize-none"
-									/>
-								</div>
+		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
+			<div className="max-w-5xl mx-auto space-y-8">
+				{/* Header */}
+				<div className="flex items-center gap-4">
+					<Button
+						variant="ghost"
+						size="icon"
+						onClick={handleCancel}
+						className="h-10 w-10 rounded-full hover:bg-muted/80 transition-all duration-200 hover:scale-105"
+					>
+						<ArrowLeft className="h-5 w-5" />
+					</Button>
+					<div className="flex-1">
+						<div className="flex items-center gap-3">
+							<div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20">
+								<Sparkles className="h-6 w-6 text-primary" />
 							</div>
-
-							{/* Right Side */}
-							<div className="space-y-4">
-								<div className="space-y-2">
-									<Label htmlFor="rightTitle" className="text-sm font-medium">
-										Right Title *
-									</Label>
-									<Input
-										id="rightTitle"
-										value={formData.rightTitle}
-										onChange={(e) =>
-											setFormData({ ...formData, rightTitle: e.target.value })
-										}
-										placeholder="Enter right title"
-										required
-										disabled={createMutation.isPending}
-										className="h-11"
-									/>
-								</div>
-								<div className="space-y-2">
-									<Label htmlFor="rightDescription" className="text-sm font-medium">
-										Right Description *
-									</Label>
-									<Textarea
-										id="rightDescription"
-										value={formData.rightDescription}
-										onChange={(e) =>
-											setFormData({
-												...formData,
-												rightDescription: e.target.value,
-											})
-										}
-										placeholder="Enter right description"
-										rows={6}
-										required
-										disabled={createMutation.isPending}
-										className="resize-none"
-									/>
-								</div>
+							<div>
+								<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
+									Create Homepage About
+								</h1>
+								<p className="text-muted-foreground mt-1.5 text-base">
+									Add new homepage about content to showcase your information
+								</p>
 							</div>
 						</div>
+					</div>
+				</div>
 
-						{/* Actions */}
-						<div className="flex items-center justify-end gap-3 pt-4 border-t">
+				{/* Form */}
+				<Card className="border-2 border-border/60 shadow-2xl shadow-primary/5 bg-card/50 backdrop-blur-sm overflow-hidden">
+					{/* Decorative gradient bar */}
+					<div className="h-1.5 bg-gradient-to-r from-primary via-primary/80 to-primary/60" />
+					
+					<form onSubmit={handleSubmit}>
+						<CardHeader className="pb-6 pt-8 px-8">
+							<div className="flex items-start gap-4">
+								<div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
+									<FileText className="h-6 w-6 text-primary" />
+								</div>
+								<div className="flex-1">
+									<CardTitle className="text-2xl font-semibold mb-2">
+										Homepage About Information
+									</CardTitle>
+									<CardDescription className="text-base">
+										Fill in the details below to create a new homepage about entry
+									</CardDescription>
+								</div>
+							</div>
+						</CardHeader>
+						
+						<CardContent className="px-8 pb-8">
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+								{/* Left Side */}
+								<div className="space-y-6">
+									<div className="pb-4 border-b border-border/50">
+										<h3 className="text-lg font-semibold text-foreground/90 mb-1">Left Section</h3>
+										<p className="text-sm text-muted-foreground">Content for the left side</p>
+									</div>
+									
+									<div className="space-y-3">
+										<Label htmlFor="leftTitle" className="text-base font-medium flex items-center gap-2">
+											<span>Left Title</span>
+											<span className="text-destructive">*</span>
+										</Label>
+										<Input
+											id="leftTitle"
+											value={formData.leftTitle}
+											onChange={(e) =>
+												setFormData({ ...formData, leftTitle: e.target.value })
+											}
+											placeholder="Enter left title"
+											required
+											disabled={isLoading}
+											className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
+										/>
+									</div>
+									
+									<div className="space-y-3">
+										<Label htmlFor="leftDescription" className="text-base font-medium flex items-center gap-2">
+											<span>Left Description</span>
+											<span className="text-destructive">*</span>
+										</Label>
+										<Textarea
+											id="leftDescription"
+											value={formData.leftDescription}
+											onChange={(e) =>
+												setFormData({
+													...formData,
+													leftDescription: e.target.value,
+												})
+											}
+											placeholder="Enter left description"
+											rows={6}
+											required
+											disabled={isLoading}
+											className="resize-none text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
+										/>
+									</div>
+								</div>
+
+								{/* Right Side */}
+								<div className="space-y-6">
+									<div className="pb-4 border-b border-border/50">
+										<h3 className="text-lg font-semibold text-foreground/90 mb-1">Right Section</h3>
+										<p className="text-sm text-muted-foreground">Content for the right side</p>
+									</div>
+									
+									<div className="space-y-3">
+										<Label htmlFor="rightTitle" className="text-base font-medium flex items-center gap-2">
+											<span>Right Title</span>
+											<span className="text-destructive">*</span>
+										</Label>
+										<Input
+											id="rightTitle"
+											value={formData.rightTitle}
+											onChange={(e) =>
+												setFormData({ ...formData, rightTitle: e.target.value })
+											}
+											placeholder="Enter right title"
+											required
+											disabled={isLoading}
+											className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
+										/>
+									</div>
+									
+									<div className="space-y-3">
+										<Label htmlFor="rightDescription" className="text-base font-medium flex items-center gap-2">
+											<span>Right Description</span>
+											<span className="text-destructive">*</span>
+										</Label>
+										<Textarea
+											id="rightDescription"
+											value={formData.rightDescription}
+											onChange={(e) =>
+												setFormData({
+													...formData,
+													rightDescription: e.target.value,
+												})
+											}
+											placeholder="Enter right description"
+											rows={6}
+											required
+											disabled={isLoading}
+											className="resize-none text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
+										/>
+									</div>
+								</div>
+							</div>
+						</CardContent>
+						
+						<CardFooter className="flex items-center justify-end gap-4 px-8 pb-8 pt-6 bg-muted/30 border-t border-border/50">
 							<Button
 								type="button"
 								variant="outline"
 								onClick={handleCancel}
-								disabled={createMutation.isPending}
+								disabled={isLoading}
+								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
 								Cancel
 							</Button>
 							<Button
 								type="submit"
-								disabled={createMutation.isPending}
-								className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
+								disabled={!isFormValid || isLoading}
+								className="h-11 px-8 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
 							>
-								{createMutation.isPending ? (
+								{isLoading ? (
 									<>
-										<div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
 										Creating...
 									</>
 								) : (
 									<>
-										<Save className="h-4 w-4 mr-2" />
-										Create
+										<Check className="h-4 w-4 mr-2" />
+										Create Homepage About
 									</>
 								)}
 							</Button>
-						</div>
+						</CardFooter>
 					</form>
-				</CardContent>
-			</Card>
+				</Card>
+			</div>
 		</div>
 	);
 }

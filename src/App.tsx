@@ -14,6 +14,14 @@ import ServiceStatsListPage from "./pages/service-stats/service-stats-list-page"
 import ServiceStatsCreatePage from "./pages/service-stats/service-stats-create-page";
 import ServiceStatsEditPage from "./pages/service-stats/service-stats-edit-page";
 import ServiceStatsDetailPage from "./pages/service-stats/service-stats-detail-page";
+import ServiceListPage from "./pages/service/service-list-page";
+import ServiceCreatePage from "./pages/service/service-create-page";
+import ServiceEditPage from "./pages/service/service-edit-page";
+import ServiceDetailPage from "./pages/service/service-detail-page";
+import SliderListPage from "./pages/slider/slider-list-page";
+import SliderCreatePage from "./pages/slider/slider-create-page";
+import SliderEditPage from "./pages/slider/slider-edit-page";
+import SliderDetailPage from "./pages/slider/slider-detail-page";
 
 
 function App() {
@@ -37,6 +45,16 @@ function App() {
 								<Route path="/service-stats/edit/:id" element={<ServiceStatsEditPage />} />
 								<Route path="/service-stats/:id" element={<ServiceStatsDetailPage />} />
 								<Route path="/service-stats" element={<ServiceStatsListPage />} />
+								{/* Service Routes */}
+								<Route path="/service/create" element={<ServiceCreatePage />} />
+								<Route path="/service/edit/:id" element={<ServiceEditPage />} />
+								<Route path="/service/:id" element={<ServiceDetailPage />} />
+								<Route path="/service" element={<ServiceListPage />} />
+								{/* Slider Routes */}
+								<Route path="/slider/create" element={<SliderCreatePage />} />
+								<Route path="/slider/edit/:id" element={<SliderEditPage />} />
+								<Route path="/slider/:id" element={<SliderDetailPage />} />
+								<Route path="/slider" element={<SliderListPage />} />
 							</Route>
 						</Route>
 					</Routes>
