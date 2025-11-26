@@ -26,6 +26,10 @@ import PartnerListPage from "./pages/partner/partner-list-page";
 import PartnerCreatePage from "./pages/partner/partner-create-page";
 import PartnerEditPage from "./pages/partner/partner-edit-page";
 import PartnerDetailPage from "./pages/partner/partner-detail-page";
+import FaqListPage from "./pages/faq/faq-list-page";
+import FaqCreatePage from "./pages/faq/faq-create-page";
+import FaqEditPage from "./pages/faq/faq-edit-page";
+import FaqDetailPage from "./pages/faq/faq-detail-page";
 
 
 function App() {
@@ -64,6 +68,11 @@ function App() {
 								<Route path="/partner/edit/:id" element={<PartnerEditPage />} />
 								<Route path="/partner/:id" element={<PartnerDetailPage />} />
 								<Route path="/partner" element={<PartnerListPage />} />
+								{/* FAQ Routes */}
+								<Route path="/faq/create" element={<FaqCreatePage />} />
+								<Route path="/faq/edit/:id" element={<FaqEditPage />} />
+								<Route path="/faq/:id" element={<FaqDetailPage />} />
+								<Route path="/faq" element={<FaqListPage />} />
 							</Route>
 						</Route>
 					</Routes>

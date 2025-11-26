@@ -26,34 +26,34 @@ export default function ServiceStatsEditPage() {
 	const [title, setTitle] = useState("");
 	const [numberValue, setNumberValue] = useState<number | "">("");
 
-	// Popular Lucide icons for service stats
-	const popularIcons = [
-		"BarChart3",
-		"TrendingUp",
-		"Users",
-		"Award",
-		"Star",
-		"Target",
-		"Zap",
-		"Rocket",
-		"ThumbsUp",
-		"CheckCircle",
-		"Heart",
-		"Smile",
-		"Trophy",
-		"Gift",
-		"Shield",
-		"Globe",
-		"Building",
-		"Briefcase",
-		"Mail",
-		"Phone",
-		"MessageSquare",
-		"Clock",
-		"Calendar",
-		"Folder",
-		"FileText",
-	] as const;
+// Popular Lucide icons for service stats
+const popularIcons = [
+	"BarChart3",
+	"TrendingUp",
+	"Users",
+	"Award",
+	"Star",
+	"Target",
+	"Zap",
+	"Rocket",
+	"ThumbsUp",
+	"CheckCircle",
+	"Heart",
+	"Smile",
+	"Trophy",
+	"Gift",
+	"Shield",
+	"Globe",
+	"Building",
+	"Briefcase",
+	"Mail",
+	"Phone",
+	"MessageSquare",
+	"Clock",
+	"Calendar",
+	"Folder",
+	"FileText",
+] as const;
 
 	// Helper function to extract icon name from URL
 	const extractIconNameFromUrl = (iconValue: string | null | undefined): string => {
