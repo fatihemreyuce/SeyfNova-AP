@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,37 +12,68 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { useCreateFaq } from "@/hooks/use-faqs";
-import { ArrowLeft, HelpCircle, Loader2, Save } from "lucide-react";
+import { useUpdateServiceCategory, useGetServiceCategoryById } from "@/hooks/use-service-category";
+import { ArrowLeft, FolderTree, Loader2, Save } from "lucide-react";
+import { toast } from "sonner";
 
-export default function FaqCreatePage() {
+export default function ServiceCategoryEditPage() {
 	const navigate = useNavigate();
-	const createMutation = useCreateFaq();
+	const { id } = useParams<{ id: string }>();
+	const updateMutation = useUpdateServiceCategory();
+	const { data, isLoading, error } = useGetServiceCategoryById(Number(id));
 
-	const [question, setQuestion] = useState("");
-	const [answer, setAnswer] = useState("");
+	const [name, setName] = useState("");
+	const [description, setDescription] = useState("");
 	const [orderIndex, setOrderIndex] = useState<number | "">("");
 
-	const isSubmitting = createMutation.isPending;
+	useEffect(() => {
+		if (data) {
+			setName(data.name || "");
+			setDescription(data.description || "");
+			setOrderIndex(data.orderIndex ?? "");
+		}
+	}, [data]);
+
+	useEffect(() => {
+		if (error) {
+			toast.error("Failed to load service category data");
+			navigate("/service-category");
+		}
+	}, [error, navigate]);
+
+	const isSubmitting = updateMutation.isPending;
 	const isFormValid =
-		question.trim() !== "" && answer.trim() !== "" && orderIndex !== "" && Number(orderIndex) >= 0;
+		name.trim() !== "" && description.trim() !== "" && orderIndex !== "" && Number(orderIndex) >= 0;
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-
-		if (!isFormValid) return;
+		if (!id || !isFormValid) return;
 
 		try {
-			await createMutation.mutateAsync({
-				question: question.trim(),
-				answer: answer.trim(),
-				orderIndex: Number(orderIndex),
+			await updateMutation.mutateAsync({
+				id: Number(id),
+				request: {
+					name: name.trim(),
+					description: description.trim(),
+					orderIndex: Number(orderIndex),
+				},
 			});
-			navigate("/faq");
+			navigate("/service-category");
 		} catch {
 			// handled in mutation
 		}
 	};
+
+	if (isLoading) {
+		return (
+			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
+				<div className="flex flex-col items-center gap-4">
+					<Loader2 className="h-10 w-10 animate-spin text-primary" />
+					<p className="text-muted-foreground text-lg">Loading service category data...</p>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
@@ -52,21 +83,21 @@ export default function FaqCreatePage() {
 					<Button
 						variant="ghost"
 						size="icon"
-						onClick={() => navigate("/faq")}
+						onClick={() => navigate("/service-category")}
 						className="h-10 w-10 rounded-full hover:bg-muted/80 transition-all duration-200 hover:scale-105"
 					>
 						<ArrowLeft className="h-5 w-5" />
 					</Button>
 					<div className="flex-1 flex items-center gap-3">
 						<div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20">
-							<HelpCircle className="h-6 w-6 text-primary" />
+							<FolderTree className="h-6 w-6 text-primary" />
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Create FAQ
+								Edit Service Category
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Add a new frequently asked question and its answer
+								Update service category information (ID: {id})
 							</p>
 						</div>
 					</div>
@@ -78,46 +109,46 @@ export default function FaqCreatePage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								FAQ Details
+								Service Category Details
 							</CardTitle>
 							<CardDescription className="text-base">
-								Fill in the fields below to create a new FAQ entry
+								Update the fields below to modify this service category
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
-							{/* Question */}
+							{/* Name */}
 							<div className="space-y-3">
 								<Label
-									htmlFor="question"
+									htmlFor="name"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Question</span>
+									<span>Name</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
-									id="question"
-									placeholder="e.g., How can I contact support?"
-									value={question}
-									onChange={(e) => setQuestion(e.target.value)}
+									id="name"
+									placeholder="e.g., Web Development"
+									value={name}
+									onChange={(e) => setName(e.target.value)}
 									disabled={isSubmitting}
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
 							</div>
 
-							{/* Answer */}
+							{/* Description */}
 							<div className="space-y-3">
 								<Label
-									htmlFor="answer"
+									htmlFor="description"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Answer</span>
+									<span>Description</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
-									id="answer"
-									placeholder="Provide a clear and concise answer..."
-									value={answer}
-									onChange={(e) => setAnswer(e.target.value)}
+									id="description"
+									placeholder="Provide a clear description of the service category..."
+									value={description}
+									onChange={(e) => setDescription(e.target.value)}
 									disabled={isSubmitting}
 									className="min-h-[120px] text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm resize-y"
 								/>
@@ -146,7 +177,7 @@ export default function FaqCreatePage() {
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
 								<p className="text-sm text-muted-foreground">
-									Lower numbers appear earlier in FAQ lists
+									Lower numbers appear earlier in category lists
 								</p>
 							</div>
 						</CardContent>
@@ -154,7 +185,7 @@ export default function FaqCreatePage() {
 							<Button
 								type="button"
 								variant="outline"
-								onClick={() => navigate("/faq")}
+								onClick={() => navigate("/service-category")}
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
@@ -168,12 +199,12 @@ export default function FaqCreatePage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Creating...
+										Updating...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Create FAQ
+										Update Service Category
 									</>
 								)}
 							</Button>
@@ -184,6 +215,4 @@ export default function FaqCreatePage() {
 		</div>
 	);
 }
-
-
 

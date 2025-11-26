@@ -12,20 +12,20 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { useCreateFaq } from "@/hooks/use-faqs";
-import { ArrowLeft, HelpCircle, Loader2, Save } from "lucide-react";
+import { useCreateServiceCategory } from "@/hooks/use-service-category";
+import { ArrowLeft, FolderTree, Loader2, Save } from "lucide-react";
 
-export default function FaqCreatePage() {
+export default function ServiceCategoryCreatePage() {
 	const navigate = useNavigate();
-	const createMutation = useCreateFaq();
+	const createMutation = useCreateServiceCategory();
 
-	const [question, setQuestion] = useState("");
-	const [answer, setAnswer] = useState("");
+	const [name, setName] = useState("");
+	const [description, setDescription] = useState("");
 	const [orderIndex, setOrderIndex] = useState<number | "">("");
 
 	const isSubmitting = createMutation.isPending;
 	const isFormValid =
-		question.trim() !== "" && answer.trim() !== "" && orderIndex !== "" && Number(orderIndex) >= 0;
+		name.trim() !== "" && description.trim() !== "" && orderIndex !== "" && Number(orderIndex) >= 0;
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -34,11 +34,11 @@ export default function FaqCreatePage() {
 
 		try {
 			await createMutation.mutateAsync({
-				question: question.trim(),
-				answer: answer.trim(),
+				name: name.trim(),
+				description: description.trim(),
 				orderIndex: Number(orderIndex),
 			});
-			navigate("/faq");
+			navigate("/service-category");
 		} catch {
 			// handled in mutation
 		}
@@ -52,21 +52,21 @@ export default function FaqCreatePage() {
 					<Button
 						variant="ghost"
 						size="icon"
-						onClick={() => navigate("/faq")}
+						onClick={() => navigate("/service-category")}
 						className="h-10 w-10 rounded-full hover:bg-muted/80 transition-all duration-200 hover:scale-105"
 					>
 						<ArrowLeft className="h-5 w-5" />
 					</Button>
 					<div className="flex-1 flex items-center gap-3">
 						<div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20">
-							<HelpCircle className="h-6 w-6 text-primary" />
+							<FolderTree className="h-6 w-6 text-primary" />
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Create FAQ
+								Create Service Category
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Add a new frequently asked question and its answer
+								Add a new service category
 							</p>
 						</div>
 					</div>
@@ -78,46 +78,46 @@ export default function FaqCreatePage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								FAQ Details
+								Service Category Details
 							</CardTitle>
 							<CardDescription className="text-base">
-								Fill in the fields below to create a new FAQ entry
+								Fill in the fields below to create a new service category
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
-							{/* Question */}
+							{/* Name */}
 							<div className="space-y-3">
 								<Label
-									htmlFor="question"
+									htmlFor="name"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Question</span>
+									<span>Name</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
-									id="question"
-									placeholder="e.g., How can I contact support?"
-									value={question}
-									onChange={(e) => setQuestion(e.target.value)}
+									id="name"
+									placeholder="e.g., Web Development"
+									value={name}
+									onChange={(e) => setName(e.target.value)}
 									disabled={isSubmitting}
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
 							</div>
 
-							{/* Answer */}
+							{/* Description */}
 							<div className="space-y-3">
 								<Label
-									htmlFor="answer"
+									htmlFor="description"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Answer</span>
+									<span>Description</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
-									id="answer"
-									placeholder="Provide a clear and concise answer..."
-									value={answer}
-									onChange={(e) => setAnswer(e.target.value)}
+									id="description"
+									placeholder="Provide a clear description of the service category..."
+									value={description}
+									onChange={(e) => setDescription(e.target.value)}
 									disabled={isSubmitting}
 									className="min-h-[120px] text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm resize-y"
 								/>
@@ -146,7 +146,7 @@ export default function FaqCreatePage() {
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
 								<p className="text-sm text-muted-foreground">
-									Lower numbers appear earlier in FAQ lists
+									Lower numbers appear earlier in category lists
 								</p>
 							</div>
 						</CardContent>
@@ -154,7 +154,7 @@ export default function FaqCreatePage() {
 							<Button
 								type="button"
 								variant="outline"
-								onClick={() => navigate("/faq")}
+								onClick={() => navigate("/service-category")}
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
@@ -173,7 +173,7 @@ export default function FaqCreatePage() {
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Create FAQ
+										Create Service Category
 									</>
 								)}
 							</Button>
@@ -184,6 +184,4 @@ export default function FaqCreatePage() {
 		</div>
 	);
 }
-
-
 

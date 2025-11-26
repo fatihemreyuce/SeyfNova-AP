@@ -26,10 +26,14 @@ import PartnerListPage from "./pages/partner/partner-list-page";
 import PartnerCreatePage from "./pages/partner/partner-create-page";
 import PartnerEditPage from "./pages/partner/partner-edit-page";
 import PartnerDetailPage from "./pages/partner/partner-detail-page";
-import FaqListPage from "./pages/faq/faq-list-page";
-import FaqCreatePage from "./pages/faq/faq-create-page";
-import FaqEditPage from "./pages/faq/faq-edit-page";
-import FaqDetailPage from "./pages/faq/faq-detail-page";
+import ServiceCategoryListPage from "./pages/service-category/service-category-list-page";
+import ServiceCategoryCreatePage from "./pages/service-category/service-category-create-page";
+import ServiceCategoryEditPage from "./pages/service-category/service-category-edit-page";
+import ServiceCategoryDetailPage from "./pages/service-category/service-category-detail-page";
+import ReferenceListPage from "./pages/reference/reference-list-page";
+import ReferenceCreatePage from "./pages/reference/reference-create-page";
+import ReferenceEditPage from "./pages/reference/reference-edit-page";
+import ReferenceDetailPage from "./pages/reference/reference-detail-page";
 
 
 function App() {
@@ -68,11 +72,16 @@ function App() {
 								<Route path="/partner/edit/:id" element={<PartnerEditPage />} />
 								<Route path="/partner/:id" element={<PartnerDetailPage />} />
 								<Route path="/partner" element={<PartnerListPage />} />
-								{/* FAQ Routes */}
-								<Route path="/faq/create" element={<FaqCreatePage />} />
-								<Route path="/faq/edit/:id" element={<FaqEditPage />} />
-								<Route path="/faq/:id" element={<FaqDetailPage />} />
-								<Route path="/faq" element={<FaqListPage />} />
+								{/* Service Category Routes */}
+								<Route path="/service-category/create" element={<ServiceCategoryCreatePage />} />
+								<Route path="/service-category/edit/:id" element={<ServiceCategoryEditPage />} />
+								<Route path="/service-category" element={<ServiceCategoryListPage />} />
+								<Route path="/service-category/:id" element={<ServiceCategoryDetailPage />} />
+								{/* Reference Routes */}
+								<Route path="/reference/create" element={<ReferenceCreatePage />} />
+								<Route path="/reference/edit/:id" element={<ReferenceEditPage />} />
+								<Route path="/reference" element={<ReferenceListPage />} />
+								<Route path="/reference/:id" element={<ReferenceDetailPage />} />
 							</Route>
 						</Route>
 					</Routes>
