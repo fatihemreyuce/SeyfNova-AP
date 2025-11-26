@@ -22,6 +22,10 @@ import SliderListPage from "./pages/slider/slider-list-page";
 import SliderCreatePage from "./pages/slider/slider-create-page";
 import SliderEditPage from "./pages/slider/slider-edit-page";
 import SliderDetailPage from "./pages/slider/slider-detail-page";
+import PartnerListPage from "./pages/partner/partner-list-page";
+import PartnerCreatePage from "./pages/partner/partner-create-page";
+import PartnerEditPage from "./pages/partner/partner-edit-page";
+import PartnerDetailPage from "./pages/partner/partner-detail-page";
 
 
 function App() {
@@ -55,6 +59,11 @@ function App() {
 								<Route path="/slider/edit/:id" element={<SliderEditPage />} />
 								<Route path="/slider/:id" element={<SliderDetailPage />} />
 								<Route path="/slider" element={<SliderListPage />} />
+								{/* Partner Routes */}
+								<Route path="/partner/create" element={<PartnerCreatePage />} />
+								<Route path="/partner/edit/:id" element={<PartnerEditPage />} />
+								<Route path="/partner/:id" element={<PartnerDetailPage />} />
+								<Route path="/partner" element={<PartnerListPage />} />
 							</Route>
 						</Route>
 					</Routes>

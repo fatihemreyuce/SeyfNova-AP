@@ -16,35 +16,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
-// Popular Lucide icons for service stats
-const popularIcons = [
-	"BarChart3",
-	"TrendingUp",
-	"Users",
-	"Award",
-	"Star",
-	"Target",
-	"Zap",
-	"Rocket",
-	"ThumbsUp",
-	"CheckCircle",
-	"Heart",
-	"Smile",
-	"Trophy",
-	"Gift",
-	"Shield",
-	"Globe",
-	"Building",
-	"Briefcase",
-	"Mail",
-	"Phone",
-	"MessageSquare",
-	"Clock",
-	"Calendar",
-	"Folder",
-	"FileText",
-] as const;
-
 export default function ServiceStatsEditPage() {
 	const navigate = useNavigate();
 	const { id } = useParams<{ id: string }>();
@@ -54,6 +25,35 @@ export default function ServiceStatsEditPage() {
 	const [icon, setIcon] = useState<string>("BarChart3");
 	const [title, setTitle] = useState("");
 	const [numberValue, setNumberValue] = useState<number | "">("");
+
+	// Popular Lucide icons for service stats
+	const popularIcons = [
+		"BarChart3",
+		"TrendingUp",
+		"Users",
+		"Award",
+		"Star",
+		"Target",
+		"Zap",
+		"Rocket",
+		"ThumbsUp",
+		"CheckCircle",
+		"Heart",
+		"Smile",
+		"Trophy",
+		"Gift",
+		"Shield",
+		"Globe",
+		"Building",
+		"Briefcase",
+		"Mail",
+		"Phone",
+		"MessageSquare",
+		"Clock",
+		"Calendar",
+		"Folder",
+		"FileText",
+	] as const;
 
 	// Helper function to extract icon name from URL
 	const extractIconNameFromUrl = (iconValue: string | null | undefined): string => {
@@ -94,12 +94,6 @@ export default function ServiceStatsEditPage() {
 		}
 	}, [error, navigate]);
 
-	// Helper function to convert icon string to File
-	const iconStringToFile = (iconName: string): File => {
-		const blob = new Blob([iconName], { type: 'text/plain' });
-		return new File([blob], iconName, { type: 'text/plain' });
-	};
-
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!id || !icon || !title || numberValue === "" || numberValue < 0) {
@@ -110,7 +104,7 @@ export default function ServiceStatsEditPage() {
 			await updateMutation.mutateAsync({
 				id: Number(id),
 				request: {
-					icon: iconStringToFile(icon),
+					icon,
 					title,
 					numberValue: Number(numberValue),
 				},
@@ -121,6 +115,7 @@ export default function ServiceStatsEditPage() {
 		}
 	};
 
+	// Icon render helper
 	const renderIcon = (iconName: string) => {
 		try {
 			const IconComponent = (LucideIcons as any)[iconName];
