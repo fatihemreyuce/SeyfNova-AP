@@ -1,6 +1,6 @@
 import { useAuthQuery } from "./use-auth-query";
 import { createContact, getContacts, deleteContact, getContactById } from "@/services/contact-service";
-import type { ContactRequest, ContactResponse } from "@/types/contact.types";
+import type { ContactRequest } from "@/types/contact.types";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
