@@ -53,6 +53,11 @@ import SettingsListPage from "./pages/settings/settings-list-page";
 import SettingsCreatePage from "./pages/settings/settings-create-page";
 import SettingsEditPage from "./pages/settings/settings-edit-page";
 import SettingsDetailPage from "./pages/settings/settings-detail-page";
+import OfficialPageDetailPage from "./pages/official-page/official-page-detail-page";
+import OfficialPageEditPage from "./pages/official-page/official-page-edit-page";
+import ContactListPage from "./pages/contact/contact-list-page";
+import ContactCreatePage from "./pages/contact/contact-create-page";
+import ContactDetailPage from "./pages/contact/contact-detail-page";
 
 
 function App() {
@@ -125,6 +130,13 @@ function App() {
 								<Route path="/settings/edit/:id" element={<SettingsEditPage />} />
 								<Route path="/settings" element={<SettingsListPage />} />
 								<Route path="/settings/:id" element={<SettingsDetailPage />} />
+								{/* Official Page Routes */}
+								<Route path="/official-page/edit" element={<OfficialPageEditPage />} />
+								<Route path="/official-page" element={<OfficialPageDetailPage />} />
+								{/* Contact Routes */}
+								<Route path="/contact/create" element={<ContactCreatePage />} />
+								<Route path="/contact/:id" element={<ContactDetailPage />} />
+								<Route path="/contact" element={<ContactListPage />} />
 							</Route>
 						</Route>
 					</Routes>
