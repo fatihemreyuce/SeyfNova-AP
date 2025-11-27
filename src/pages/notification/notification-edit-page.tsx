@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,37 +12,66 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { useCreateFaq } from "@/hooks/use-faqs";
-import { ArrowLeft, HelpCircle, Loader2, Save } from "lucide-react";
+import { useUpdateNotification, useGetNotificationById } from "@/hooks/use-notifications";
+import type { NotificationRequest } from "@/types/notifications.types";
+import { ArrowLeft, Bell, Loader2, Save } from "lucide-react";
+import { toast } from "sonner";
 
-export default function FaqCreatePage() {
+export default function NotificationEditPage() {
 	const navigate = useNavigate();
-	const createMutation = useCreateFaq();
+	const { id } = useParams<{ id: string }>();
+	const updateMutation = useUpdateNotification();
+	const { data, isLoading, error } = useGetNotificationById(id || "");
 
-	const [question, setQuestion] = useState("");
-	const [answer, setAnswer] = useState("");
-	const [orderIndex, setOrderIndex] = useState<number | "">("");
+	const [title, setTitle] = useState("");
+	const [content, setContent] = useState("");
 
-	const isSubmitting = createMutation.isPending;
-	const isFormValid =
-		question.trim() !== "" && answer.trim() !== "" && orderIndex !== "" && Number(orderIndex) >= 0;
+	useEffect(() => {
+		if (data) {
+			setTitle(data.title || "");
+			setContent(data.content || "");
+		}
+	}, [data]);
+
+	useEffect(() => {
+		if (error) {
+			toast.error("Failed to load notification data");
+			navigate("/notification");
+		}
+	}, [error, navigate]);
+
+	const isSubmitting = updateMutation.isPending;
+	const isFormValid = title.trim() !== "" && content.trim() !== "";
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-
-		if (!isFormValid) return;
+		if (!id || !isFormValid) return;
 
 		try {
-			await createMutation.mutateAsync({
-				question: question.trim(),
-				answer: answer.trim(),
-				orderIndex: Number(orderIndex),
+			const request: NotificationRequest = {
+				title: title.trim(),
+				content: content.trim(),
+			};
+			await updateMutation.mutateAsync({
+				id,
+				request,
 			});
-			navigate("/faq");
+			navigate("/notification");
 		} catch {
 			// handled in mutation
 		}
 	};
+
+	if (isLoading) {
+		return (
+			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
+				<div className="flex flex-col items-center gap-4">
+					<Loader2 className="h-10 w-10 animate-spin text-primary" />
+					<p className="text-muted-foreground text-lg">Loading notification data...</p>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
@@ -52,21 +81,21 @@ export default function FaqCreatePage() {
 					<Button
 						variant="ghost"
 						size="icon"
-						onClick={() => navigate("/faq")}
+						onClick={() => navigate("/notification")}
 						className="h-10 w-10 rounded-full hover:bg-muted/80 transition-all duration-200 hover:scale-105"
 					>
 						<ArrowLeft className="h-5 w-5" />
 					</Button>
 					<div className="flex-1 flex items-center gap-3">
 						<div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20">
-							<HelpCircle className="h-6 w-6 text-primary" />
+							<Bell className="h-6 w-6 text-primary" />
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Create FAQ
+								Edit Notification
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Add a new frequently asked question and its answer
+								Update notification information (ID: {id})
 							</p>
 						</div>
 					</div>
@@ -78,83 +107,56 @@ export default function FaqCreatePage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								FAQ Details
+								Notification Details
 							</CardTitle>
 							<CardDescription className="text-base">
-								Fill in the fields below to create a new FAQ entry
+								Update the fields below to modify this notification
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
-							{/* Question */}
+							{/* Title */}
 							<div className="space-y-3">
 								<Label
-									htmlFor="question"
+									htmlFor="title"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Question</span>
+									<span>Title</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
-									id="question"
-									placeholder="e.g., How can I contact support?"
-									value={question}
-									onChange={(e) => setQuestion(e.target.value)}
+									id="title"
+									placeholder="e.g., Important Announcement"
+									value={title}
+									onChange={(e) => setTitle(e.target.value)}
 									disabled={isSubmitting}
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
 							</div>
 
-							{/* Answer */}
+							{/* Content */}
 							<div className="space-y-3">
 								<Label
-									htmlFor="answer"
+									htmlFor="content"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Answer</span>
+									<span>Content</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
-									id="answer"
-									placeholder="Provide a clear and concise answer..."
-									value={answer}
-									onChange={(e) => setAnswer(e.target.value)}
+									id="content"
+									placeholder="Enter the notification content..."
+									value={content}
+									onChange={(e) => setContent(e.target.value)}
 									disabled={isSubmitting}
-									className="min-h-[120px] text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm resize-y"
+									className="min-h-[200px] text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm resize-y"
 								/>
-							</div>
-
-							{/* Order Index */}
-							<div className="space-y-3">
-								<Label
-									htmlFor="orderIndex"
-									className="text-base font-medium flex items-center gap-2"
-								>
-									<span>Order Index</span>
-									<span className="text-destructive">*</span>
-								</Label>
-								<Input
-									id="orderIndex"
-									type="number"
-									min="0"
-									placeholder="e.g., 1"
-									value={orderIndex}
-									onChange={(e) => {
-										const value = e.target.value;
-										setOrderIndex(value === "" ? "" : Number(value));
-									}}
-									disabled={isSubmitting}
-									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
-								/>
-								<p className="text-sm text-muted-foreground">
-									Lower numbers appear earlier in FAQ lists
-								</p>
 							</div>
 						</CardContent>
 						<CardFooter className="flex items-center justify-end gap-4 px-8 pb-8 pt-6 bg-muted/30 border-t border-border/50">
 							<Button
 								type="button"
 								variant="outline"
-								onClick={() => navigate("/faq")}
+								onClick={() => navigate("/notification")}
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
@@ -168,12 +170,12 @@ export default function FaqCreatePage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Creating...
+										Updating...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Create FAQ
+										Update Notification
 									</>
 								)}
 							</Button>
@@ -184,8 +186,4 @@ export default function FaqCreatePage() {
 		</div>
 	);
 }
-
-
-
-
 

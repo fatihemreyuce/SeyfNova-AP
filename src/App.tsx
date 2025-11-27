@@ -38,6 +38,13 @@ import CircularListPage from "./pages/circular/circular-list-page";
 import CircularCreatePage from "./pages/circular/circular-create-page";
 import CircularEditPage from "./pages/circular/circular-edit-page";
 import CircularDetailPage from "./pages/circular/circular-detail-page";
+import NotificationListPage from "./pages/notification/notification-list-page";
+import NotificationCreatePage from "./pages/notification/notification-create-page";
+import NotificationEditPage from "./pages/notification/notification-edit-page";
+import NotificationDetailPage from "./pages/notification/notification-detail-page";
+import NotificationSubscriberListPage from "./pages/notification-subscriber/notification-subscriber-list-page";
+import NotificationSubscriberCreatePage from "./pages/notification-subscriber/notification-subscriber-create-page";
+import NotificationSubscriberDetailPage from "./pages/notification-subscriber/notification-subscriber-detail-page";
 
 
 function App() {
@@ -91,6 +98,15 @@ function App() {
 								<Route path="/circular/edit/:id" element={<CircularEditPage />} />
 								<Route path="/circular" element={<CircularListPage />} />
 								<Route path="/circular/:id" element={<CircularDetailPage />} />
+								{/* Notification Routes */}
+								<Route path="/notification/create" element={<NotificationCreatePage />} />
+								<Route path="/notification/edit/:id" element={<NotificationEditPage />} />
+								<Route path="/notification" element={<NotificationListPage />} />
+								<Route path="/notification/:id" element={<NotificationDetailPage />} />
+								{/* Notification Subscriber Routes */}
+								<Route path="/notification-subscriber/create" element={<NotificationSubscriberCreatePage />} />
+								<Route path="/notification-subscriber" element={<NotificationSubscriberListPage />} />
+								<Route path="/notification-subscriber/:id" element={<NotificationSubscriberDetailPage />} />
 							</Route>
 						</Route>
 					</Routes>

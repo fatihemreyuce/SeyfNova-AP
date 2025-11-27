@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import {
 	Card,
@@ -12,20 +11,27 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { useCreateFaq } from "@/hooks/use-faqs";
-import { ArrowLeft, HelpCircle, Loader2, Save } from "lucide-react";
+import { useCreateNotificationSubscriber } from "@/hooks/use-notifications-subscribers";
+import type { NotificationSubscriberRequest } from "@/types/notifications.subscribers.types";
+import { ArrowLeft, Users, Loader2, Save, Mail, User, Building2, Briefcase } from "lucide-react";
 
-export default function FaqCreatePage() {
+export default function NotificationSubscriberCreatePage() {
 	const navigate = useNavigate();
-	const createMutation = useCreateFaq();
+	const createMutation = useCreateNotificationSubscriber();
 
-	const [question, setQuestion] = useState("");
-	const [answer, setAnswer] = useState("");
-	const [orderIndex, setOrderIndex] = useState<number | "">("");
+	const [email, setEmail] = useState("");
+	const [name, setName] = useState("");
+	const [surname, setSurname] = useState("");
+	const [companyName, setCompanyName] = useState("");
+	const [title, setTitle] = useState("");
 
 	const isSubmitting = createMutation.isPending;
 	const isFormValid =
-		question.trim() !== "" && answer.trim() !== "" && orderIndex !== "" && Number(orderIndex) >= 0;
+		email.trim() !== "" &&
+		name.trim() !== "" &&
+		surname.trim() !== "" &&
+		companyName.trim() !== "" &&
+		title.trim() !== "";
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -33,12 +39,15 @@ export default function FaqCreatePage() {
 		if (!isFormValid) return;
 
 		try {
-			await createMutation.mutateAsync({
-				question: question.trim(),
-				answer: answer.trim(),
-				orderIndex: Number(orderIndex),
-			});
-			navigate("/faq");
+			const request: NotificationSubscriberRequest = {
+				email: email.trim(),
+				name: name.trim(),
+				surname: surname.trim(),
+				companyName: companyName.trim(),
+				title: title.trim(),
+			};
+			await createMutation.mutateAsync(request);
+			navigate("/notification-subscriber");
 		} catch {
 			// handled in mutation
 		}
@@ -52,21 +61,21 @@ export default function FaqCreatePage() {
 					<Button
 						variant="ghost"
 						size="icon"
-						onClick={() => navigate("/faq")}
+						onClick={() => navigate("/notification-subscriber")}
 						className="h-10 w-10 rounded-full hover:bg-muted/80 transition-all duration-200 hover:scale-105"
 					>
 						<ArrowLeft className="h-5 w-5" />
 					</Button>
 					<div className="flex-1 flex items-center gap-3">
 						<div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20">
-							<HelpCircle className="h-6 w-6 text-primary" />
+							<Users className="h-6 w-6 text-primary" />
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Create FAQ
+								Create Subscriber
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Add a new frequently asked question and its answer
+								Add a new notification subscriber
 							</p>
 						</div>
 					</div>
@@ -78,83 +87,119 @@ export default function FaqCreatePage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								FAQ Details
+								Subscriber Details
 							</CardTitle>
 							<CardDescription className="text-base">
-								Fill in the fields below to create a new FAQ entry
+								Fill in the fields below to create a new notification subscriber
 							</CardDescription>
 						</CardHeader>
-						<CardContent className="space-y-8 px-8 pb-8">
-							{/* Question */}
+						<CardContent className="space-y-6 px-8 pb-8">
+							{/* Email */}
 							<div className="space-y-3">
 								<Label
-									htmlFor="question"
+									htmlFor="email"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Question</span>
+									<Mail className="h-4 w-4 text-primary/70" />
+									<span>Email</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
-									id="question"
-									placeholder="e.g., How can I contact support?"
-									value={question}
-									onChange={(e) => setQuestion(e.target.value)}
+									id="email"
+									type="email"
+									placeholder="e.g., john.doe@example.com"
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
 									disabled={isSubmitting}
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
 							</div>
 
-							{/* Answer */}
+							{/* Name */}
 							<div className="space-y-3">
 								<Label
-									htmlFor="answer"
+									htmlFor="name"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Answer</span>
-									<span className="text-destructive">*</span>
-								</Label>
-								<Textarea
-									id="answer"
-									placeholder="Provide a clear and concise answer..."
-									value={answer}
-									onChange={(e) => setAnswer(e.target.value)}
-									disabled={isSubmitting}
-									className="min-h-[120px] text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm resize-y"
-								/>
-							</div>
-
-							{/* Order Index */}
-							<div className="space-y-3">
-								<Label
-									htmlFor="orderIndex"
-									className="text-base font-medium flex items-center gap-2"
-								>
-									<span>Order Index</span>
+									<User className="h-4 w-4 text-primary/70" />
+									<span>Name</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
-									id="orderIndex"
-									type="number"
-									min="0"
-									placeholder="e.g., 1"
-									value={orderIndex}
-									onChange={(e) => {
-										const value = e.target.value;
-										setOrderIndex(value === "" ? "" : Number(value));
-									}}
+									id="name"
+									placeholder="e.g., John"
+									value={name}
+									onChange={(e) => setName(e.target.value)}
 									disabled={isSubmitting}
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
-								<p className="text-sm text-muted-foreground">
-									Lower numbers appear earlier in FAQ lists
-								</p>
+							</div>
+
+							{/* Surname */}
+							<div className="space-y-3">
+								<Label
+									htmlFor="surname"
+									className="text-base font-medium flex items-center gap-2"
+								>
+									<User className="h-4 w-4 text-primary/70" />
+									<span>Surname</span>
+									<span className="text-destructive">*</span>
+								</Label>
+								<Input
+									id="surname"
+									placeholder="e.g., Doe"
+									value={surname}
+									onChange={(e) => setSurname(e.target.value)}
+									disabled={isSubmitting}
+									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
+								/>
+							</div>
+
+							{/* Company Name */}
+							<div className="space-y-3">
+								<Label
+									htmlFor="companyName"
+									className="text-base font-medium flex items-center gap-2"
+								>
+									<Building2 className="h-4 w-4 text-primary/70" />
+									<span>Company Name</span>
+									<span className="text-destructive">*</span>
+								</Label>
+								<Input
+									id="companyName"
+									placeholder="e.g., Acme Corporation"
+									value={companyName}
+									onChange={(e) => setCompanyName(e.target.value)}
+									disabled={isSubmitting}
+									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
+								/>
+							</div>
+
+							{/* Title */}
+							<div className="space-y-3">
+								<Label
+									htmlFor="title"
+									className="text-base font-medium flex items-center gap-2"
+								>
+									<Briefcase className="h-4 w-4 text-primary/70" />
+									<span>Title</span>
+									<span className="text-destructive">*</span>
+								</Label>
+								<Input
+									id="title"
+									placeholder="e.g., Software Engineer"
+									value={title}
+									onChange={(e) => setTitle(e.target.value)}
+									disabled={isSubmitting}
+									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
+								/>
 							</div>
 						</CardContent>
 						<CardFooter className="flex items-center justify-end gap-4 px-8 pb-8 pt-6 bg-muted/30 border-t border-border/50">
 							<Button
 								type="button"
 								variant="outline"
-								onClick={() => navigate("/faq")}
+								onClick={() => navigate("/notification-subscriber")}
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
@@ -173,7 +218,7 @@ export default function FaqCreatePage() {
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Create FAQ
+										Create Subscriber
 									</>
 								)}
 							</Button>
@@ -184,8 +229,4 @@ export default function FaqCreatePage() {
 		</div>
 	);
 }
-
-
-
-
 
