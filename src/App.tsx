@@ -45,6 +45,10 @@ import NotificationDetailPage from "./pages/notification/notification-detail-pag
 import NotificationSubscriberListPage from "./pages/notification-subscriber/notification-subscriber-list-page";
 import NotificationSubscriberCreatePage from "./pages/notification-subscriber/notification-subscriber-create-page";
 import NotificationSubscriberDetailPage from "./pages/notification-subscriber/notification-subscriber-detail-page";
+import UsefulInformationListPage from "./pages/useful-information/useful-information-list-page";
+import UsefulInformationCreatePage from "./pages/useful-information/useful-information-create-page";
+import UsefulInformationEditPage from "./pages/useful-information/useful-information-edit-page";
+import UsefulInformationDetailPage from "./pages/useful-information/useful-information-detail-page";
 
 
 function App() {
@@ -107,6 +111,11 @@ function App() {
 								<Route path="/notification-subscriber/create" element={<NotificationSubscriberCreatePage />} />
 								<Route path="/notification-subscriber" element={<NotificationSubscriberListPage />} />
 								<Route path="/notification-subscriber/:id" element={<NotificationSubscriberDetailPage />} />
+								{/* Useful Information Routes */}
+								<Route path="/useful-information/create" element={<UsefulInformationCreatePage />} />
+								<Route path="/useful-information/edit/:id" element={<UsefulInformationEditPage />} />
+								<Route path="/useful-information" element={<UsefulInformationListPage />} />
+								<Route path="/useful-information/:id" element={<UsefulInformationDetailPage />} />
 							</Route>
 						</Route>
 					</Routes>

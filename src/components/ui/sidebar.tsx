@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import DarkModeToggle from "@/components/dark-mode-toggle";
 import { useLoginState } from "@/hooks/use-login-state";
-import { LayoutDashboard, LogOut, FileText, BarChart3, Briefcase, Image as ImageIcon, Handshake, FolderTree, Award, Newspaper, Bell, Users } from "lucide-react";
+import { LayoutDashboard, LogOut, FileText, BarChart3, Briefcase, Image as ImageIcon, Handshake, FolderTree, Award, Newspaper, Bell, Users, Info } from "lucide-react";
 
 interface NavItem {
 	to: string;
@@ -76,6 +76,12 @@ const navigationItems: NavItem[] = [
 		to: "/notification-subscriber",
 		label: "Subscribers",
 		icon: Users,
+		end: false,
+	},
+	{
+		to: "/useful-information",
+		label: "Useful Information",
+		icon: Info,
 		end: false,
 	},
 ];
