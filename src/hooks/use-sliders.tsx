@@ -15,11 +15,11 @@ export const useCreateSlider = () => {
     return useMutation({
         mutationFn: (request: SliderRequest) => createSlider(request),
         onSuccess: () => {
-            toast.success("Slider created successfully");
+            toast.success("Slider başarıyla oluşturuldu");
             queryClient.invalidateQueries({ queryKey: ["sliders"] });
         },
         onError: () => {
-            toast.error("Failed to create slider");
+            toast.error("Slider oluşturulurken hata oluştu");
         },
     });
 }
@@ -29,11 +29,11 @@ export const useUpdateSlider = () => {
     return useMutation({
         mutationFn: ({ id, request }: { id: number; request: SliderRequest }) => updateSlider(id, request),
         onSuccess: () => {
-            toast.success("Slider updated successfully");
+            toast.success("Slider başarıyla güncellendi");
             queryClient.invalidateQueries({ queryKey: ["sliders"] });
         },
         onError: () => {
-            toast.error("Failed to update slider");
+            toast.error("Slider güncellenirken hata oluştu");
         },
     });
 }
@@ -43,11 +43,11 @@ export const useDeleteSlider = () => {
     return useMutation({
         mutationFn: (id: number) => deleteSlider(id),
         onSuccess: () => {
-            toast.success("Slider deleted successfully");
+            toast.success("Slider başarıyla silindi");
             queryClient.invalidateQueries({ queryKey: ["sliders"] });
         },
         onError: () => {
-            toast.error("Failed to delete slider");
+            toast.error("Slider silinirken hata oluştu");
         },
     });
 }

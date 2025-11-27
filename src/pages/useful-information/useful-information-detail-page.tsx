@@ -31,7 +31,7 @@ export default function UsefulInformationDetailPage() {
 			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-4">
 					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Loading useful information details...</p>
+					<p className="text-muted-foreground text-lg">Faydalı bilgi detayları yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -45,16 +45,16 @@ export default function UsefulInformationDetailPage() {
 						<div className="p-4 rounded-full bg-destructive/10 w-fit mx-auto">
 							<Info className="h-8 w-8 text-destructive" />
 						</div>
-						<p className="text-lg font-semibold text-foreground">Useful information not found</p>
+						<p className="text-lg font-semibold text-foreground">Faydalı bilgi bulunamadı</p>
 						<p className="text-sm text-muted-foreground">
-							The useful information you're looking for doesn't exist or has been removed.
+							Aradığınız faydalı bilgi mevcut değil veya kaldırılmış.
 						</p>
 						<Button
 							onClick={() => navigate("/useful-information")}
 							className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 						>
 							<ArrowLeft className="h-4 w-4 mr-2" />
-							Go Back
+							Geri Dön
 						</Button>
 					</CardContent>
 				</Card>
@@ -82,10 +82,10 @@ export default function UsefulInformationDetailPage() {
 							</div>
 							<div>
 								<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-									Useful Information Details
+									Faydalı Bilgi Detayları
 								</h1>
 								<p className="text-muted-foreground mt-1.5 text-base">
-									View useful information (ID: {id})
+									Faydalı bilgiyi görüntüle (ID: {id})
 								</p>
 							</div>
 						</div>
@@ -95,7 +95,7 @@ export default function UsefulInformationDetailPage() {
 						className="h-11 px-6 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
 					>
 						<Pencil className="h-4 w-4 mr-2" />
-						Edit
+						Düzenle
 					</Button>
 				</div>
 
@@ -104,17 +104,17 @@ export default function UsefulInformationDetailPage() {
 					<div className="h-1.5 bg-gradient-to-r from-primary via-primary/80 to-primary/60" />
 					<CardHeader className="pb-6 pt-8 px-8">
 						<CardTitle className="text-2xl font-semibold mb-2">
-							Useful Information
+							Faydalı Bilgi
 						</CardTitle>
 						<CardDescription className="text-base">
-							Detailed information about this useful information document
+							Bu faydalı bilgi belgesi hakkında detaylı bilgi
 						</CardDescription>
 					</CardHeader>
 					<CardContent className="px-8 pb-8 space-y-8">
 						{/* File */}
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
-								<span>File</span>
+								<span>Dosya</span>
 							</Label>
 							{normalizeImageUrl(data.fileUrl) ? (
 								<div className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 border border-border/50">
@@ -122,8 +122,8 @@ export default function UsefulInformationDetailPage() {
 										<FileText className="h-6 w-6 text-primary" />
 									</div>
 									<div className="flex-1 min-w-0">
-										<p className="text-sm font-medium">Document File</p>
-										<p className="text-xs text-muted-foreground">Click to download</p>
+										<p className="text-sm font-medium">Belge Dosyası</p>
+										<p className="text-xs text-muted-foreground">İndirmek için tıklayın</p>
 									</div>
 									<a
 										href={normalizeImageUrl(data.fileUrl)}
@@ -136,7 +136,7 @@ export default function UsefulInformationDetailPage() {
 											className="gap-2"
 										>
 											<Download className="h-4 w-4" />
-											Download
+											İndir
 										</Button>
 									</a>
 								</div>
@@ -144,7 +144,7 @@ export default function UsefulInformationDetailPage() {
 								<div className="flex items-center justify-center h-32 rounded-lg border border-border/50 bg-muted/50">
 									<div className="text-center space-y-2">
 										<FileText className="h-12 w-12 text-muted-foreground mx-auto" />
-										<p className="text-sm text-muted-foreground">No file available</p>
+										<p className="text-sm text-muted-foreground">Dosya mevcut değil</p>
 									</div>
 								</div>
 							)}
@@ -156,7 +156,7 @@ export default function UsefulInformationDetailPage() {
 						{/* Title */}
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
-								<span>Title</span>
+								<span>Başlık</span>
 							</Label>
 							<div className="p-4 rounded-xl bg-muted/50 border border-border/50">
 								<p className="text-lg font-semibold text-foreground">
@@ -171,7 +171,7 @@ export default function UsefulInformationDetailPage() {
 						{/* Description */}
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
-								<span>Description</span>
+								<span>Açıklama</span>
 							</Label>
 							<div className="p-4 rounded-xl bg-muted/50 border border-border/50">
 								<p className="text-base text-foreground whitespace-pre-line">

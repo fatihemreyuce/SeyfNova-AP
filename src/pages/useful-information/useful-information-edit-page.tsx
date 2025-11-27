@@ -102,7 +102,7 @@ export default function UsefulInformationEditPage() {
 			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-4">
 					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Loading useful information data...</p>
+					<p className="text-muted-foreground text-lg">Faydalı bilgi verileri yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -127,10 +127,10 @@ export default function UsefulInformationEditPage() {
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Edit Useful Information
+								Faydalı Bilgi Düzenle
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Update useful information (ID: {id})
+								Faydalı bilgiyi güncelle (ID: {id})
 							</p>
 						</div>
 					</div>
@@ -142,10 +142,10 @@ export default function UsefulInformationEditPage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								Useful Information Details
+								Faydalı Bilgi Detayları
 							</CardTitle>
 							<CardDescription className="text-base">
-								Update the fields below to modify this useful information
+								Bu faydalı bilgiyi değiştirmek için aşağıdaki alanları güncelleyin
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
@@ -165,8 +165,8 @@ export default function UsefulInformationEditPage() {
 												<FileText className="h-5 w-5 text-primary" />
 											</div>
 											<div className="flex-1 min-w-0">
-												<p className="text-sm font-medium truncate">Current file</p>
-												<p className="text-xs text-muted-foreground">Click below to change</p>
+												<p className="text-sm font-medium truncate">Mevcut dosya</p>
+												<p className="text-xs text-muted-foreground">Değiştirmek için aşağıya tıklayın</p>
 											</div>
 											<a
 												href={normalizeImageUrl(data.fileUrl)}
@@ -181,7 +181,7 @@ export default function UsefulInformationEditPage() {
 													className="gap-2"
 												>
 													<Download className="h-4 w-4" />
-													View
+													Görüntüle
 												</Button>
 											</a>
 										</div>
@@ -192,7 +192,7 @@ export default function UsefulInformationEditPage() {
 										<input
 											type="file"
 											id="file"
-											accept=".pdf,.doc,.docx,.txt"
+											accept=".pdf,.doc,.docx"
 											onChange={handleFileChange}
 											className="hidden"
 											disabled={isSubmitting}
@@ -205,9 +205,9 @@ export default function UsefulInformationEditPage() {
 												<Upload className="h-6 w-6 text-primary" />
 											</div>
 											<div>
-												<p className="text-sm font-medium">Click to upload file</p>
+												<p className="text-sm font-medium">Dosya yüklemek için tıklayın</p>
 												<p className="text-xs text-muted-foreground mt-1">
-													PDF, DOC, DOCX, TXT up to 10MB
+													PDF, DOC, DOCX, 10MB'a kadar
 												</p>
 											</div>
 										</label>
@@ -221,7 +221,7 @@ export default function UsefulInformationEditPage() {
 											<div className="flex-1 min-w-0">
 												<p className="text-sm font-medium truncate">{fileName}</p>
 												<p className="text-xs text-muted-foreground">
-													{file ? `${(file.size / 1024 / 1024).toFixed(2)} MB` : "Current file"}
+													{file ? `${(file.size / 1024 / 1024).toFixed(2)} MB` : "Mevcut dosya"}
 												</p>
 											</div>
 											<Button
@@ -238,7 +238,7 @@ export default function UsefulInformationEditPage() {
 										<input
 											type="file"
 											id="file"
-											accept=".pdf,.doc,.docx,.txt"
+											accept=".pdf,.doc,.docx"
 											onChange={handleFileChange}
 											className="hidden"
 											disabled={isSubmitting}
@@ -251,7 +251,7 @@ export default function UsefulInformationEditPage() {
 											disabled={isSubmitting}
 										>
 											<Upload className="h-4 w-4 mr-2" />
-											Change File
+											Dosyayı Değiştir
 										</Button>
 									</div>
 								)}
@@ -263,12 +263,12 @@ export default function UsefulInformationEditPage() {
 									htmlFor="title"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Title</span>
+									<span>Başlık</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="title"
-									placeholder="e.g., User Guide 2024"
+									placeholder="Örn: Kullanıcı Kılavuzu 2024"
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
 									disabled={isSubmitting}
@@ -282,12 +282,12 @@ export default function UsefulInformationEditPage() {
 									htmlFor="description"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Description</span>
+									<span>Açıklama</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
 									id="description"
-									placeholder="Provide a description of the useful information..."
+									placeholder="Faydalı bilgi için bir açıklama verin..."
 									value={description}
 									onChange={(e) => setDescription(e.target.value)}
 									disabled={isSubmitting}
@@ -303,7 +303,7 @@ export default function UsefulInformationEditPage() {
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -313,12 +313,12 @@ export default function UsefulInformationEditPage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Updating...
+										Güncelleniyor...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Update Useful Information
+										Faydalı Bilgiyi Güncelle
 									</>
 								)}
 							</Button>

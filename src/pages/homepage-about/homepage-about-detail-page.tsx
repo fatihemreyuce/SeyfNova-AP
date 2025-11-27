@@ -14,7 +14,7 @@ export default function HomepageAboutDetailPage() {
 
 	useEffect(() => {
 		if (error) {
-			toast.error("Failed to load homepage about data");
+			toast.error("Ana sayfa hakkında verileri yüklenirken hata oluştu");
 			navigate("/homepage-about");
 		}
 	}, [error, navigate]);
@@ -32,7 +32,7 @@ export default function HomepageAboutDetailPage() {
 			<div className="flex items-center justify-center min-h-[400px]">
 				<div className="flex flex-col items-center gap-4">
 					<Loader2 className="h-8 w-8 animate-spin text-primary" />
-					<p className="text-muted-foreground">Loading...</p>
+					<p className="text-muted-foreground">Yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -42,9 +42,9 @@ export default function HomepageAboutDetailPage() {
 		return (
 			<div className="flex items-center justify-center min-h-[400px]">
 				<div className="text-center">
-					<p className="text-muted-foreground">Homepage about not found</p>
+					<p className="text-muted-foreground">Ana sayfa hakkında içeriği bulunamadı</p>
 					<Button onClick={handleBack} className="mt-4">
-						Go Back
+						Geri Dön
 					</Button>
 				</div>
 			</div>
@@ -66,10 +66,10 @@ export default function HomepageAboutDetailPage() {
 					</Button>
 					<div>
 						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-							Homepage About Details
+							Ana Sayfa Hakkında Detayları
 						</h1>
 						<p className="text-muted-foreground mt-1">
-							View homepage about content (ID: {id})
+							Ana sayfa hakkında içeriğini görüntüle (ID: {id})
 						</p>
 					</div>
 				</div>
@@ -78,7 +78,7 @@ export default function HomepageAboutDetailPage() {
 					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 				>
 					<Pencil className="h-4 w-4 mr-2" />
-					Edit
+					Düzenle
 				</Button>
 			</div>
 
@@ -89,23 +89,23 @@ export default function HomepageAboutDetailPage() {
 					<CardHeader>
 						<CardTitle className="flex items-center gap-2">
 							<div className="h-2 w-2 rounded-full bg-primary" />
-							Left Section
+							Sol Bölüm
 						</CardTitle>
-						<CardDescription>Left side content information</CardDescription>
+						<CardDescription>Sol taraf içerik bilgileri</CardDescription>
 					</CardHeader>
 					<CardContent className="space-y-4">
 						<div className="space-y-2">
 							<Label className="text-sm font-semibold text-muted-foreground">
-								Title
+								Başlık
 							</Label>
-							<p className="text-base font-medium">{data.leftTitle || "N/A"}</p>
+							<p className="text-base font-medium">{data.leftTitle || "Yok"}</p>
 						</div>
 						<div className="space-y-2">
 							<Label className="text-sm font-semibold text-muted-foreground">
-								Description
+								Açıklama
 							</Label>
 							<p className="text-base text-muted-foreground whitespace-pre-wrap">
-								{data.leftDescription || "N/A"}
+								{data.leftDescription || "Yok"}
 							</p>
 						</div>
 					</CardContent>
@@ -116,23 +116,23 @@ export default function HomepageAboutDetailPage() {
 					<CardHeader>
 						<CardTitle className="flex items-center gap-2">
 							<div className="h-2 w-2 rounded-full bg-primary" />
-							Right Section
+							Sağ Bölüm
 						</CardTitle>
-						<CardDescription>Right side content information</CardDescription>
+						<CardDescription>Sağ taraf içerik bilgileri</CardDescription>
 					</CardHeader>
 					<CardContent className="space-y-4">
 						<div className="space-y-2">
 							<Label className="text-sm font-semibold text-muted-foreground">
-								Title
+								Başlık
 							</Label>
-							<p className="text-base font-medium">{data.rightTitle || "N/A"}</p>
+							<p className="text-base font-medium">{data.rightTitle || "Yok"}</p>
 						</div>
 						<div className="space-y-2">
 							<Label className="text-sm font-semibold text-muted-foreground">
-								Description
+								Açıklama
 							</Label>
 							<p className="text-base text-muted-foreground whitespace-pre-wrap">
-								{data.rightDescription || "N/A"}
+								{data.rightDescription || "Yok"}
 							</p>
 						</div>
 					</CardContent>
@@ -142,8 +142,8 @@ export default function HomepageAboutDetailPage() {
 			{/* Metadata Card */}
 			<Card className="shadow-lg">
 				<CardHeader>
-					<CardTitle>Metadata</CardTitle>
-					<CardDescription>Additional information</CardDescription>
+					<CardTitle>Meta Bilgiler</CardTitle>
+					<CardDescription>Ek bilgiler</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">

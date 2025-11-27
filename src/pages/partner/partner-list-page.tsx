@@ -109,10 +109,10 @@ export default function PartnerListPage() {
 					</Button>
 					<div>
 						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-							Partners
+							Ortaklar
 						</h1>
 						<p className="text-muted-foreground mt-1">
-							Manage your partners and their logos
+							Ortaklarınızı ve logolarını yönetin
 						</p>
 					</div>
 				</div>
@@ -121,7 +121,7 @@ export default function PartnerListPage() {
 					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 				>
 					<Plus className="h-4 w-4 mr-2" />
-					Create New
+					Yeni Oluştur
 				</Button>
 			</div>
 
@@ -130,7 +130,7 @@ export default function PartnerListPage() {
 				<div className="relative flex-1 max-w-sm">
 					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
-						placeholder="Search partners..."
+						placeholder="Ortaklarda ara..."
 						value={search}
 						onChange={(e) => {
 							setSearch(e.target.value);
@@ -148,15 +148,15 @@ export default function PartnerListPage() {
 				>
 					<SelectTrigger className="w-[220px] gap-2">
 						<ArrowUpDown className="h-4 w-4" />
-						<SelectValue placeholder="Sort by" />
+						<SelectValue placeholder="Sırala" />
 					</SelectTrigger>
 					<SelectContent>
-						<SelectItem value="id,asc">ID: Low to High</SelectItem>
-						<SelectItem value="id,desc">ID: High to Low</SelectItem>
-						<SelectItem value="name,asc">Name: A-Z</SelectItem>
-						<SelectItem value="name,desc">Name: Z-A</SelectItem>
-						<SelectItem value="orderIndex,asc">Order: Low to High</SelectItem>
-						<SelectItem value="orderIndex,desc">Order: High to Low</SelectItem>
+						<SelectItem value="id,asc">ID: Düşükten Yükseğe</SelectItem>
+						<SelectItem value="id,desc">ID: Yüksekten Düşüğe</SelectItem>
+						<SelectItem value="name,asc">İsim: A-Z</SelectItem>
+						<SelectItem value="name,desc">İsim: Z-A</SelectItem>
+						<SelectItem value="orderIndex,asc">Sıra: Düşükten Yükseğe</SelectItem>
+						<SelectItem value="orderIndex,desc">Sıra: Yüksekten Düşüğe</SelectItem>
 					</SelectContent>
 				</Select>
 				<Button
@@ -165,7 +165,7 @@ export default function PartnerListPage() {
 					className="gap-2"
 				>
 					<Settings className="h-4 w-4" />
-					Pagination
+					Sayfalama
 				</Button>
 			</div>
 
@@ -177,15 +177,15 @@ export default function PartnerListPage() {
 							<TableRow>
 								<TableHead>ID</TableHead>
 								<TableHead>Logo</TableHead>
-								<TableHead>Name</TableHead>
-								<TableHead>Order Index</TableHead>
-								<TableHead className="text-right">Actions</TableHead>
+								<TableHead>İsim</TableHead>
+								<TableHead>Sıra</TableHead>
+								<TableHead className="text-right">İşlemler</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
 							<TableRow>
 								<TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
-									Loading...
+									Yükleniyor...
 								</TableCell>
 							</TableRow>
 						</TableBody>
@@ -198,9 +198,9 @@ export default function PartnerListPage() {
 							<TableRow>
 								<TableHead>ID</TableHead>
 								<TableHead>Logo</TableHead>
-								<TableHead>Name</TableHead>
-								<TableHead>Order Index</TableHead>
-								<TableHead className="text-right">Actions</TableHead>
+								<TableHead>İsim</TableHead>
+								<TableHead>Sıra</TableHead>
+								<TableHead className="text-right">İşlemler</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
@@ -231,7 +231,7 @@ export default function PartnerListPage() {
 												size="icon"
 												onClick={() => navigate(`/partner/${item.id}`)}
 												className="h-8 w-8 hover:bg-primary/10"
-												title="View Details"
+												title="Detayları Görüntüle"
 											>
 												<Eye className="h-4 w-4" />
 											</Button>
@@ -240,7 +240,7 @@ export default function PartnerListPage() {
 												size="icon"
 												onClick={() => navigate(`/partner/edit/${item.id}`)}
 												className="h-8 w-8 hover:bg-primary/10"
-												title="Edit"
+												title="Düzenle"
 											>
 												<Pencil className="h-4 w-4" />
 											</Button>
@@ -249,7 +249,7 @@ export default function PartnerListPage() {
 												size="icon"
 												onClick={() => handleDeleteClick(item)}
 												className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive"
-												title="Delete"
+												title="Sil"
 											>
 												<Trash2 className="h-4 w-4" />
 											</Button>
@@ -267,11 +267,11 @@ export default function PartnerListPage() {
 							<Handshake className="h-12 w-12 text-muted-foreground/50" />
 						</EmptyMedia>
 						<EmptyHeader>
-							<EmptyTitle>No partners found</EmptyTitle>
+							<EmptyTitle>Partner bulunamadı</EmptyTitle>
 							<EmptyDescription>
 								{search
-									? "No results match your search criteria. Try adjusting your search terms."
-									: "Get started by creating a new partner."}
+									? "Arama kriterlerinize uygun sonuç bulunamadı. Arama terimlerinizi değiştirmeyi deneyin."
+									: "Yeni bir partner oluşturarak başlayın."}
 							</EmptyDescription>
 						</EmptyHeader>
 						{!search && (
@@ -280,7 +280,7 @@ export default function PartnerListPage() {
 								className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 							>
 								<Plus className="h-4 w-4 mr-2" />
-								Create Partner
+								Partner Oluştur
 							</Button>
 						)}
 					</Empty>
@@ -291,9 +291,9 @@ export default function PartnerListPage() {
 			{data && data.totalPages > 0 && (
 				<div className="flex items-center justify-between">
 					<div className="text-sm text-muted-foreground">
-						Showing {data.content.length > 0 ? page * size + 1 : 0} to{" "}
-						{Math.min((page + 1) * size, data.totalElements)} of{" "}
-						{data.totalElements} results
+						{data.content.length > 0 ? page * size + 1 : 0} - {" "}
+						{Math.min((page + 1) * size, data.totalElements)} / {" "}
+						{data.totalElements} sonuç
 					</div>
 					<div className="flex items-center gap-2">
 						<Button
@@ -305,7 +305,7 @@ export default function PartnerListPage() {
 							<ChevronLeft className="h-4 w-4" />
 						</Button>
 						<span className="text-sm font-medium">
-							Page {page + 1} of {data.totalPages}
+							Sayfa {page + 1} / {data.totalPages}
 						</span>
 						<Button
 							variant="outline"
@@ -322,11 +322,11 @@ export default function PartnerListPage() {
 			{/* Delete Confirmation Modal */}
 			<DeleteModal
 				open={isDeleteDialogOpen}
-				title="Delete Partner"
-				description="This action cannot be undone. This will permanently delete the partner."
+				title="Partneri Sil"
+				description="Bu işlem geri alınamaz. Bu partner kalıcı olarak silinecektir."
 				itemName={deletingItemName}
-				confirmText="Delete"
-				cancelText="Cancel"
+				confirmText="Sil"
+				cancelText="İptal"
 				onConfirm={handleDelete}
 				onCancel={() => {
 					setIsDeleteDialogOpen(false);

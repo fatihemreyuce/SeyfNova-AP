@@ -16,11 +16,11 @@ export const useCreateNotification = () => {
     return useMutation({
         mutationFn: (request: NotificationRequest) => createNotification(request),
         onSuccess: () => {
-            toast.success("Notification created successfully");
+            toast.success("Bildirim başarıyla oluşturuldu");
             queryClient.invalidateQueries({ queryKey: ["notifications"] });
         },
         onError: () => {
-            toast.error("Failed to create notification");
+            toast.error("Bildirim oluşturulurken hata oluştu");
         },
     });
 }
@@ -30,11 +30,11 @@ export const useUpdateNotification = () => {
     return useMutation({
         mutationFn: ({ id, request }: { id: string, request: NotificationRequest }) => updateNotification(id, request),
         onSuccess: () => {
-            toast.success("Notification updated successfully");
+            toast.success("Bildirim başarıyla güncellendi");
             queryClient.invalidateQueries({ queryKey: ["notifications"] });
         },
         onError: () => {
-            toast.error("Failed to update notification");
+            toast.error("Bildirim güncellenirken hata oluştu");
         },
     });
 }
@@ -44,7 +44,7 @@ export const useDeleteNotification = () => {
     return useMutation({
         mutationFn: (id: string) => deleteNotification(id),
         onSuccess: () => {
-            toast.success("Notification deleted successfully");
+            toast.success("Bildirim başarıyla silindi");
             queryClient.invalidateQueries({ queryKey: ["notifications"] });
         },
     });
@@ -62,11 +62,11 @@ export const useSendNotification = () => {
     return useMutation({
         mutationFn: (request: NotificationRequest) => sendNotification(request),
         onSuccess: () => {
-            toast.success("Notification sent successfully");
+            toast.success("Bildirim başarıyla gönderildi");
             queryClient.invalidateQueries({ queryKey: ["notifications"] });
         },
         onError: () => {
-            toast.error("Failed to send notification");
+            toast.error("Bildirim gönderilirken hata oluştu");
         },
     });
 }

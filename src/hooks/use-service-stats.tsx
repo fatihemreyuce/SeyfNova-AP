@@ -20,11 +20,11 @@ export const useCreateServiceStats = () => {
     return useMutation({
         mutationFn: (request: ServiceStatsRequest) => createServiceStats(request),
         onSuccess: () => {
-            toast.success("Service stats created successfully");
+            toast.success("Hizmet istatistiği başarıyla oluşturuldu");
             queryClient.invalidateQueries({ queryKey: ["service-stats"] });
         },
         onError: () => {
-            toast.error("Failed to create service stats");
+            toast.error("Hizmet istatistiği oluşturulurken hata oluştu");
         },
     });
 }
@@ -34,11 +34,11 @@ export const useUpdateServiceStats = () => {
     return useMutation({
         mutationFn: ({ id, request }: { id: number; request: ServiceStatsRequest }) => updateServiceStats(id, request),
         onSuccess: () => {
-            toast.success("Service stats updated successfully");
+            toast.success("Hizmet istatistiği başarıyla güncellendi");
             queryClient.invalidateQueries({ queryKey: ["service-stats"] });
         },
         onError: () => {
-            toast.error("Failed to update service stats");
+            toast.error("Hizmet istatistiği güncellenirken hata oluştu");
         },
     });
 }
@@ -48,11 +48,11 @@ export const useDeleteServiceStats = () => {
     return useMutation({
         mutationFn: (id: number) => deleteServiceStats(id),
         onSuccess: () => {
-            toast.success("Service stats deleted successfully");
+            toast.success("Hizmet istatistiği başarıyla silindi");
             queryClient.invalidateQueries({ queryKey: ["service-stats"] });
         },
         onError: () => {
-            toast.error("Failed to delete service stats");
+            toast.error("Hizmet istatistiği silinirken hata oluştu");
         },
     });
 }

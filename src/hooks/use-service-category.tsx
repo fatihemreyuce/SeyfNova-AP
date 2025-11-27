@@ -15,11 +15,11 @@ export const useCreateServiceCategory = () => {
 	return useMutation({
 		mutationFn: (request: ServiceCategoryRequest) => createServiceCategory(request),
 		onSuccess: () => {
-			toast.success("Service category created successfully");
+			toast.success("Hizmet kategorisi başarıyla oluşturuldu");
 			queryClient.invalidateQueries({ queryKey: ["service-categories"] });
 		},
 		onError: () => {
-			toast.error("Failed to create service category");
+			toast.error("Hizmet kategorisi oluşturulurken hata oluştu");
 		},
 	});
 };
@@ -29,11 +29,11 @@ export const useUpdateServiceCategory = () => {
 	return useMutation({
 		mutationFn: ({ id, request }: { id: number; request: ServiceCategoryRequest }) => updateServiceCategory(id, request),
 		onSuccess: () => {
-			toast.success("Service category updated successfully");
+			toast.success("Hizmet kategorisi başarıyla güncellendi");
 			queryClient.invalidateQueries({ queryKey: ["service-categories"] });
 		},
 		onError: () => {
-			toast.error("Failed to update service category");
+			toast.error("Hizmet kategorisi güncellenirken hata oluştu");
 		},
 	});
 };
@@ -43,11 +43,11 @@ export const useDeleteServiceCategory = () => {
 	return useMutation({
 		mutationFn: (id: number) => deleteServiceCategory(id),
 		onSuccess: () => {
-			toast.success("Service category deleted successfully");
+			toast.success("Hizmet kategorisi başarıyla silindi");
 			queryClient.invalidateQueries({ queryKey: ["service-categories"] });
 		},
 		onError: () => {
-			toast.error("Failed to delete service category");
+			toast.error("Hizmet kategorisi silinirken hata oluştu");
 		},
 	});
 };

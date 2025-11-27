@@ -133,7 +133,7 @@ const popularIcons = [
 			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-4">
 					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Loading service stat data...</p>
+					<p className="text-muted-foreground text-lg">Hizmet istatistiği verileri yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -147,14 +147,14 @@ const popularIcons = [
 						<div className="p-4 rounded-full bg-destructive/10 w-fit mx-auto">
 							<Info className="h-8 w-8 text-destructive" />
 						</div>
-						<p className="text-lg font-semibold text-foreground">Service stat not found</p>
-						<p className="text-sm text-muted-foreground">The service statistic you're looking for doesn't exist or has been removed.</p>
+						<p className="text-lg font-semibold text-foreground">Hizmet istatistiği bulunamadı</p>
+						<p className="text-sm text-muted-foreground">Aradığınız hizmet istatistiği mevcut değil veya kaldırılmış.</p>
 						<Button 
 							onClick={() => navigate("/service-stats")} 
 							className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 						>
 							<ArrowLeft className="h-4 w-4 mr-2" />
-							Go Back
+							Geri Dön
 						</Button>
 					</CardContent>
 				</Card>
@@ -185,10 +185,10 @@ const popularIcons = [
 							</div>
 							<div>
 								<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-									Edit Service Stat
+									Hizmet İstatistiği Düzenle
 								</h1>
 								<p className="text-muted-foreground mt-1.5 text-base">
-									Update service statistic (ID: {id})
+									Hizmet istatistiğini güncelle (ID: {id})
 								</p>
 							</div>
 						</div>
@@ -208,10 +208,10 @@ const popularIcons = [
 								</div>
 								<div className="flex-1">
 									<CardTitle className="text-2xl font-semibold mb-2">
-										Service Stat Details
+										Hizmet İstatistiği Detayları
 									</CardTitle>
 									<CardDescription className="text-base">
-										Update the information below to modify this service stat
+										Bu hizmet istatistiğini değiştirmek için aşağıdaki bilgileri güncelleyin
 									</CardDescription>
 								</div>
 							</div>
@@ -221,7 +221,7 @@ const popularIcons = [
 							{/* Icon Selection */}
 							<div className="space-y-3">
 								<Label htmlFor="icon" className="text-base font-medium flex items-center gap-2">
-									<span>Icon</span>
+									<span>İkon</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Select value={icon} onValueChange={setIcon}>
@@ -235,7 +235,7 @@ const popularIcons = [
 													{renderIcon(icon)}
 												</div>
 											)}
-											<SelectValue placeholder="Select an icon" className="text-base" />
+											<SelectValue placeholder="Bir ikon seçin" className="text-base" />
 										</div>
 									</SelectTrigger>
 									<SelectContent className="max-h-[300px]">
@@ -262,7 +262,7 @@ const popularIcons = [
 								</Select>
 								<p className="text-sm text-muted-foreground flex items-center gap-1.5">
 									<span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
-									Choose an icon to represent this statistic
+									Bu istatistiği temsil etmek için bir ikon seçin
 								</p>
 							</div>
 
@@ -272,12 +272,12 @@ const popularIcons = [
 							{/* Title */}
 							<div className="space-y-3">
 								<Label htmlFor="title" className="text-base font-medium flex items-center gap-2">
-									<span>Title</span>
+									<span>Başlık</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="title"
-									placeholder="e.g., Happy Customers"
+									placeholder="Örn: Mutlu Müşteriler"
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
 									required
@@ -292,13 +292,13 @@ const popularIcons = [
 							{/* Number Value */}
 							<div className="space-y-3">
 								<Label htmlFor="numberValue" className="text-base font-medium flex items-center gap-2">
-									<span>Number Value</span>
+									<span>Sayısal Değer</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="numberValue"
 									type="number"
-									placeholder="e.g., 1000"
+									placeholder="Örn: 1000"
 									value={numberValue}
 									onChange={(e) => {
 										const value = e.target.value;
@@ -311,7 +311,7 @@ const popularIcons = [
 								/>
 								<p className="text-sm text-muted-foreground flex items-center gap-1.5">
 									<span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
-									Enter a positive number
+									Pozitif bir sayı girin
 								</p>
 							</div>
 						</CardContent>
@@ -324,7 +324,7 @@ const popularIcons = [
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -334,12 +334,12 @@ const popularIcons = [
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Updating...
+										Güncelleniyor...
 									</>
 								) : (
 									<>
 										<Check className="h-4 w-4 mr-2" />
-										Update Service Stat
+										Hizmet İstatistiğini Güncelle
 									</>
 								)}
 							</Button>

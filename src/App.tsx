@@ -49,6 +49,10 @@ import UsefulInformationListPage from "./pages/useful-information/useful-informa
 import UsefulInformationCreatePage from "./pages/useful-information/useful-information-create-page";
 import UsefulInformationEditPage from "./pages/useful-information/useful-information-edit-page";
 import UsefulInformationDetailPage from "./pages/useful-information/useful-information-detail-page";
+import SettingsListPage from "./pages/settings/settings-list-page";
+import SettingsCreatePage from "./pages/settings/settings-create-page";
+import SettingsEditPage from "./pages/settings/settings-edit-page";
+import SettingsDetailPage from "./pages/settings/settings-detail-page";
 
 
 function App() {
@@ -116,6 +120,11 @@ function App() {
 								<Route path="/useful-information/edit/:id" element={<UsefulInformationEditPage />} />
 								<Route path="/useful-information" element={<UsefulInformationListPage />} />
 								<Route path="/useful-information/:id" element={<UsefulInformationDetailPage />} />
+								{/* Settings Routes */}
+								<Route path="/settings/create" element={<SettingsCreatePage />} />
+								<Route path="/settings/edit/:id" element={<SettingsEditPage />} />
+								<Route path="/settings" element={<SettingsListPage />} />
+								<Route path="/settings/:id" element={<SettingsDetailPage />} />
 							</Route>
 						</Route>
 					</Routes>

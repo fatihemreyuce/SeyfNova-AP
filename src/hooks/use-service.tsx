@@ -15,11 +15,11 @@ export const useCreateService = () => {
     return useMutation({
         mutationFn: (request: ServiceRequest) => createService(request),
         onSuccess: () => {
-            toast.success("Service created successfully");
+            toast.success("Hizmet başarıyla oluşturuldu");
             queryClient.invalidateQueries({ queryKey: ["services"] });
         },
         onError: () => {
-            toast.error("Failed to create service");
+            toast.error("Hizmet oluşturulurken hata oluştu");
         },
     });
 }
@@ -29,11 +29,11 @@ export const useUpdateService = () => {
     return useMutation({
         mutationFn: ({ id, request }: { id: number; request: ServiceRequest }) => updateService(id, request),
         onSuccess: () => {
-            toast.success("Service updated successfully");
+            toast.success("Hizmet başarıyla güncellendi");
             queryClient.invalidateQueries({ queryKey: ["services"] });
         },
         onError: () => {
-            toast.error("Failed to update service");
+            toast.error("Hizmet güncellenirken hata oluştu");
         },
     });
 }
@@ -43,11 +43,11 @@ export const useDeleteService = () => {
     return useMutation({
         mutationFn: (id: number) => deleteService(id),
         onSuccess: () => {
-            toast.success("Service deleted successfully");
+            toast.success("Hizmet başarıyla silindi");
             queryClient.invalidateQueries({ queryKey: ["services"] });
         },
         onError: () => {
-            toast.error("Failed to delete service");
+            toast.error("Hizmet silinirken hata oluştu");
         },
     });
 }

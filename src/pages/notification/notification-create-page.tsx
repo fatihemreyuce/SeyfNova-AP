@@ -62,10 +62,10 @@ export default function NotificationCreatePage() {
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Create Notification
+								Bildirim Oluştur
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Add a new notification
+								Yeni bir bildirim ekle
 							</p>
 						</div>
 					</div>
@@ -77,10 +77,10 @@ export default function NotificationCreatePage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								Notification Details
+								Bildirim Detayları
 							</CardTitle>
 							<CardDescription className="text-base">
-								Fill in the fields below to create a new notification
+								Yeni bir bildirim oluşturmak için aşağıdaki alanları doldurun
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
@@ -90,12 +90,12 @@ export default function NotificationCreatePage() {
 									htmlFor="title"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Title</span>
+									<span>Başlık</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="title"
-									placeholder="e.g., Important Announcement"
+									placeholder="örn., Önemli Duyuru"
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
 									disabled={isSubmitting}
@@ -109,12 +109,12 @@ export default function NotificationCreatePage() {
 									htmlFor="content"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Content</span>
+									<span>İçerik</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
 									id="content"
-									placeholder="Enter the notification content..."
+									placeholder="Bildirim içeriğini girin..."
 									value={content}
 									onChange={(e) => setContent(e.target.value)}
 									disabled={isSubmitting}
@@ -130,7 +130,7 @@ export default function NotificationCreatePage() {
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -140,12 +140,12 @@ export default function NotificationCreatePage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Creating...
+										Oluşturuluyor...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Create Notification
+										Bildirim Oluştur
 									</>
 								)}
 							</Button>

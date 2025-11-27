@@ -92,10 +92,10 @@ export default function ReferenceCreatePage() {
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Create Reference
+								Referans Oluştur
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Add a new client reference
+								Yeni bir müşteri referansı ekleyin
 							</p>
 						</div>
 					</div>
@@ -107,10 +107,10 @@ export default function ReferenceCreatePage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								Reference Details
+								Referans Detayları
 							</CardTitle>
 							<CardDescription className="text-base">
-								Fill in the fields below to create a new reference
+								Yeni bir referans oluşturmak için aşağıdaki alanları doldurun
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
@@ -142,9 +142,9 @@ export default function ReferenceCreatePage() {
 												<Upload className="h-6 w-6 text-primary" />
 											</div>
 											<div>
-												<p className="text-sm font-medium">Click to upload logo</p>
+												<p className="text-sm font-medium">Logo yüklemek için tıklayın</p>
 												<p className="text-xs text-muted-foreground mt-1">
-													PNG, JPG, SVG up to 5MB
+													PNG, JPG, SVG, 5MB'a kadar
 												</p>
 											</div>
 										</label>
@@ -154,7 +154,7 @@ export default function ReferenceCreatePage() {
 										<div className="relative w-full h-48 rounded-lg overflow-hidden border border-border/50 bg-muted flex items-center justify-center">
 											<img
 												src={logoPreview}
-												alt="Logo preview"
+												alt="Logo Önizleme"
 												className="max-h-full max-w-full object-contain"
 											/>
 											<Button
@@ -184,7 +184,7 @@ export default function ReferenceCreatePage() {
 											disabled={isSubmitting}
 										>
 											<Upload className="h-4 w-4 mr-2" />
-											Change Logo
+											Logoyu Değiştir
 										</Button>
 									</div>
 								)}
@@ -196,12 +196,12 @@ export default function ReferenceCreatePage() {
 									htmlFor="name"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Name</span>
+									<span>İsim</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="name"
-									placeholder="e.g., Acme Corporation"
+									placeholder="Örn: Acme Corporation"
 									value={name}
 									onChange={(e) => setName(e.target.value)}
 									disabled={isSubmitting}
@@ -215,12 +215,12 @@ export default function ReferenceCreatePage() {
 									htmlFor="description"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Description</span>
+									<span>Açıklama</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
 									id="description"
-									placeholder="Provide a description of the reference..."
+									placeholder="Referans için bir açıklama verin..."
 									value={description}
 									onChange={(e) => setDescription(e.target.value)}
 									disabled={isSubmitting}
@@ -234,13 +234,13 @@ export default function ReferenceCreatePage() {
 									htmlFor="websiteUrl"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Website URL</span>
+									<span>Web Sitesi URL</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="websiteUrl"
 									type="url"
-									placeholder="e.g., https://example.com"
+									placeholder="Örn: https://example.com"
 									value={websiteUrl}
 									onChange={(e) => setWebsiteUrl(e.target.value)}
 									disabled={isSubmitting}
@@ -254,14 +254,14 @@ export default function ReferenceCreatePage() {
 									htmlFor="orderIndex"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Order Index</span>
+									<span>Sıra</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="orderIndex"
 									type="number"
 									min="0"
-									placeholder="e.g., 1"
+									placeholder="Örn: 1"
 									value={orderIndex}
 									onChange={(e) => {
 										const value = e.target.value;
@@ -271,7 +271,7 @@ export default function ReferenceCreatePage() {
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
 								<p className="text-sm text-muted-foreground">
-									Lower numbers appear earlier in reference lists
+									Düşük sayılar referans listelerinde daha önce görünür
 								</p>
 							</div>
 						</CardContent>
@@ -283,7 +283,7 @@ export default function ReferenceCreatePage() {
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -293,12 +293,12 @@ export default function ReferenceCreatePage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Creating...
+										Oluşturuluyor...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Create Reference
+										Referans Oluştur
 									</>
 								)}
 							</Button>

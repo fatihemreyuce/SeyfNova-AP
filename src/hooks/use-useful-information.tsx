@@ -16,11 +16,11 @@ export const useCreateUsefulInformation = () => {
     return useMutation({
         mutationFn: (request: UsefulInformationRequest) => createUsefulInformation(request),
         onSuccess: () => {
-            toast.success("Useful information created successfully");
+            toast.success("Faydalı bilgi başarıyla oluşturuldu");
             queryClient.invalidateQueries({ queryKey: ["useful-information"] });
         },
         onError: () => {
-            toast.error("Failed to create useful information");
+            toast.error("Faydalı bilgi oluşturulurken hata oluştu");
         },
     });
 }
@@ -30,11 +30,11 @@ export const useDeleteUsefulInformation = () => {
     return useMutation({
         mutationFn: (id: number) => deleteUsefulInformation(id),
         onSuccess: () => {
-            toast.success("Useful information deleted successfully");
+            toast.success("Faydalı bilgi başarıyla silindi");
             queryClient.invalidateQueries({ queryKey: ["useful-information"] });
         },
         onError: () => {
-            toast.error("Failed to delete useful information");
+            toast.error("Faydalı bilgi silinirken hata oluştu");
         },
     });
 }
@@ -44,11 +44,11 @@ export const useUpdateUsefulInformation = () => {
     return useMutation({
         mutationFn: ({ id, request }: { id: number; request: UsefulInformationRequest }) => updateUsefulInformation(id, request),
         onSuccess: () => {
-            toast.success("Useful information updated successfully");
+            toast.success("Faydalı bilgi başarıyla güncellendi");
             queryClient.invalidateQueries({ queryKey: ["useful-information"] });
         },
         onError: () => {
-            toast.error("Failed to update useful information");
+            toast.error("Faydalı bilgi güncellenirken hata oluştu");
         },
     });
 }

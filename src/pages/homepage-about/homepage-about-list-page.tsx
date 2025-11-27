@@ -111,10 +111,10 @@ export default function HomepageAboutListPage() {
 					</Button>
 					<div>
 						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-							Homepage About
+							Ana Sayfa Hakkında
 						</h1>
 						<p className="text-muted-foreground mt-1">
-							Manage homepage about content
+							Ana sayfa hakkında içeriğini yönetin
 						</p>
 					</div>
 				</div>
@@ -123,7 +123,7 @@ export default function HomepageAboutListPage() {
 					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 				>
 					<Plus className="h-4 w-4 mr-2" />
-					Create New
+					Yeni Oluştur
 				</Button>
 			</div>
 
@@ -132,7 +132,7 @@ export default function HomepageAboutListPage() {
 				<div className="relative flex-1 max-w-sm">
 					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
-						placeholder="Search..."
+						placeholder="Ara..."
 						value={search}
 						onChange={(e) => {
 							setSearch(e.target.value);
@@ -150,15 +150,15 @@ export default function HomepageAboutListPage() {
 				>
 					<SelectTrigger className="w-[180px] gap-2">
 						<ArrowUpDown className="h-4 w-4" />
-						<SelectValue placeholder="Sort by" />
+						<SelectValue placeholder="Sırala" />
 					</SelectTrigger>
 					<SelectContent>
-						<SelectItem value="id,asc">ID: Low to High</SelectItem>
-						<SelectItem value="id,desc">ID: High to Low</SelectItem>
-						<SelectItem value="leftTitle,asc">Left Title: A-Z</SelectItem>
-						<SelectItem value="leftTitle,desc">Left Title: Z-A</SelectItem>
-						<SelectItem value="rightTitle,asc">Right Title: A-Z</SelectItem>
-						<SelectItem value="rightTitle,desc">Right Title: Z-A</SelectItem>
+						<SelectItem value="id,asc">ID: Düşükten Yükseğe</SelectItem>
+						<SelectItem value="id,desc">ID: Yüksekten Düşüğe</SelectItem>
+						<SelectItem value="leftTitle,asc">Sol Başlık: A-Z</SelectItem>
+						<SelectItem value="leftTitle,desc">Sol Başlık: Z-A</SelectItem>
+						<SelectItem value="rightTitle,asc">Sağ Başlık: A-Z</SelectItem>
+						<SelectItem value="rightTitle,desc">Sağ Başlık: Z-A</SelectItem>
 					</SelectContent>
 				</Select>
 				<Button
@@ -167,7 +167,7 @@ export default function HomepageAboutListPage() {
 					className="gap-2"
 				>
 					<Settings className="h-4 w-4" />
-					Pagination
+					Sayfalama
 				</Button>
 			</div>
 
@@ -178,17 +178,17 @@ export default function HomepageAboutListPage() {
 						<TableHeader>
 							<TableRow>
 								<TableHead>ID</TableHead>
-								<TableHead>Left Title</TableHead>
-								<TableHead>Left Description</TableHead>
-								<TableHead>Right Title</TableHead>
-								<TableHead>Right Description</TableHead>
-								<TableHead className="text-right">Actions</TableHead>
+								<TableHead>Sol Başlık</TableHead>
+								<TableHead>Sol Açıklama</TableHead>
+								<TableHead>Sağ Başlık</TableHead>
+								<TableHead>Sağ Açıklama</TableHead>
+								<TableHead className="text-right">İşlemler</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
 							<TableRow>
 								<TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-									Loading...
+									Yükleniyor...
 								</TableCell>
 							</TableRow>
 						</TableBody>
@@ -200,11 +200,11 @@ export default function HomepageAboutListPage() {
 						<TableHeader>
 							<TableRow>
 								<TableHead>ID</TableHead>
-								<TableHead>Left Title</TableHead>
-								<TableHead>Left Description</TableHead>
-								<TableHead>Right Title</TableHead>
-								<TableHead>Right Description</TableHead>
-								<TableHead className="text-right">Actions</TableHead>
+								<TableHead>Sol Başlık</TableHead>
+								<TableHead>Sol Açıklama</TableHead>
+								<TableHead>Sağ Başlık</TableHead>
+								<TableHead>Sağ Açıklama</TableHead>
+								<TableHead className="text-right">İşlemler</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
@@ -230,7 +230,7 @@ export default function HomepageAboutListPage() {
 												size="icon"
 												onClick={() => navigate(`/homepage-about/${item.id}`)}
 												className="h-8 w-8 hover:bg-primary/10"
-												title="View Details"
+												title="Detayları Görüntüle"
 											>
 												<Eye className="h-4 w-4" />
 											</Button>
@@ -239,7 +239,7 @@ export default function HomepageAboutListPage() {
 												size="icon"
 												onClick={() => navigate(`/homepage-about/edit/${item.id}`)}
 												className="h-8 w-8 hover:bg-primary/10"
-												title="Edit"
+												title="Düzenle"
 											>
 												<Pencil className="h-4 w-4" />
 											</Button>
@@ -248,7 +248,7 @@ export default function HomepageAboutListPage() {
 												size="icon"
 												onClick={() => handleDeleteClick(item)}
 												className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive"
-												title="Delete"
+												title="Sil"
 											>
 												<Trash2 className="h-4 w-4" />
 											</Button>
@@ -266,11 +266,11 @@ export default function HomepageAboutListPage() {
 							<FileText className="h-12 w-12 text-muted-foreground/50" />
 						</EmptyMedia>
 						<EmptyHeader>
-							<EmptyTitle>No homepage about found</EmptyTitle>
+							<EmptyTitle>Ana sayfa hakkında bulunamadı</EmptyTitle>
 							<EmptyDescription>
 								{search
-									? "No results match your search criteria. Try adjusting your search terms."
-									: "Get started by creating a new homepage about content."}
+									? "Arama kriterlerinize uygun sonuç bulunamadı. Arama terimlerinizi değiştirmeyi deneyin."
+									: "Yeni bir ana sayfa hakkında içeriği oluşturarak başlayın."}
 							</EmptyDescription>
 						</EmptyHeader>
 						{!search && (
@@ -279,7 +279,7 @@ export default function HomepageAboutListPage() {
 								className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 							>
 								<Plus className="h-4 w-4 mr-2" />
-								Create Homepage About
+								Ana Sayfa Hakkında Oluştur
 							</Button>
 						)}
 					</Empty>
@@ -290,9 +290,9 @@ export default function HomepageAboutListPage() {
 			{data && data.totalPages > 0 && (
 				<div className="flex items-center justify-between">
 					<div className="text-sm text-muted-foreground">
-						Showing {data.content.length > 0 ? page * size + 1 : 0} to{" "}
-						{Math.min((page + 1) * size, data.totalElements)} of{" "}
-						{data.totalElements} results
+						{data.content.length > 0 ? page * size + 1 : 0} - {" "}
+						{Math.min((page + 1) * size, data.totalElements)} / {" "}
+						{data.totalElements} sonuç
 					</div>
 					<div className="flex items-center gap-2">
 						<Button
@@ -304,7 +304,7 @@ export default function HomepageAboutListPage() {
 							<ChevronLeft className="h-4 w-4" />
 						</Button>
 						<span className="text-sm font-medium">
-							Page {page + 1} of {data.totalPages}
+							Sayfa {page + 1} / {data.totalPages}
 						</span>
 						<Button
 							variant="outline"
@@ -321,11 +321,11 @@ export default function HomepageAboutListPage() {
 			{/* Delete Confirmation Modal */}
 			<DeleteModal
 				open={isDeleteDialogOpen}
-				title="Delete Homepage About"
-				description="This action cannot be undone. This will permanently delete the homepage about content."
+				title="Ana Sayfa Hakkında'yı Sil"
+				description="Bu işlem geri alınamaz. Bu ana sayfa hakkında içeriği kalıcı olarak silinecektir."
 				itemName={deletingItemName}
-				confirmText="Delete"
-				cancelText="Cancel"
+				confirmText="Sil"
+				cancelText="İptal"
 				onConfirm={handleDelete}
 				onCancel={() => {
 					setIsDeleteDialogOpen(false);

@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import DarkModeToggle from "@/components/dark-mode-toggle";
 import { useLoginState } from "@/hooks/use-login-state";
-import { LayoutDashboard, LogOut, FileText, BarChart3, Briefcase, Image as ImageIcon, Handshake, FolderTree, Award, Newspaper, Bell, Users, Info } from "lucide-react";
+import { LayoutDashboard, LogOut, FileText, BarChart3, Briefcase, Image as ImageIcon, Handshake, FolderTree, Award, Newspaper, Bell, Users, Info, Settings } from "lucide-react";
 
 interface NavItem {
 	to: string;
@@ -14,74 +14,80 @@ interface NavItem {
 const navigationItems: NavItem[] = [
 	{
 		to: "/",
-		label: "Dashboard",
+		label: "Kontrol Paneli",
 		icon: LayoutDashboard,
 		end: true,
 	},
 	{
 		to: "/homepage-about",
-		label: "Homepage About",
+		label: "Ana Sayfa Hakkında",
 		icon: FileText,
 		end: false,
 	},
 	{
 		to: "/service-stats",
-		label: "Service Stats",
+		label: "Hizmet İstatistikleri",
 		icon: BarChart3,
 		end: false,
 	},
 	{
 		to: "/service",
-		label: "Services",
+		label: "Hizmetler",
 		icon: Briefcase,
 		end: false,
 	},
 	{
 		to: "/service-category",
-		label: "Service Categories",
+		label: "Hizmet Kategorileri",
 		icon: FolderTree,
 		end: false,
 	},
 	{
 		to: "/slider",
-		label: "Sliders",
+		label: "Sliderlar",
 		icon: ImageIcon,
 		end: false,
 	},
 	{
 		to: "/partner",
-		label: "Partners",
+		label: "Ortaklar",
 		icon: Handshake,
 		end: false,
 	},
 	{
 		to: "/reference",
-		label: "References",
+		label: "Referanslar",
 		icon: Award,
 		end: false,
 	},
 	{
 		to: "/circular",
-		label: "Circulars",
+		label: "Genelgeler",
 		icon: Newspaper,
 		end: false,
 	},
 	{
 		to: "/notification",
-		label: "Notifications",
+		label: "Bildirimler",
 		icon: Bell,
 		end: false,
 	},
 	{
 		to: "/notification-subscriber",
-		label: "Subscribers",
+		label: "Aboneler",
 		icon: Users,
 		end: false,
 	},
 	{
 		to: "/useful-information",
-		label: "Useful Information",
+		label: "Faydalı Bilgiler",
 		icon: Info,
+		end: false,
+	},
+	{
+		to: "/settings",
+		label: "Ayarlar",
+		icon: Settings,
 		end: false,
 	},
 ];
@@ -166,7 +172,7 @@ export default function Sidebar() {
 					aria-busy={isLoading}
 				>
 					<LogOut className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
-					<span>{isLoading ? "Logging out..." : "Logout"}</span>
+					<span>{isLoading ? "Çıkış yapılıyor..." : "Çıkış"}</span>
 				</Button>
 			</div>
 		</aside>

@@ -66,10 +66,10 @@ export default function ServiceCreatePage() {
 				</Button>
 				<div>
 					<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-						Create Service
+						Hizmet Oluştur
 					</h1>
 					<p className="text-muted-foreground mt-1">
-						Add a new service to your catalog
+						Kataloğunuza yeni bir hizmet ekleyin
 					</p>
 				</div>
 			</div>
@@ -82,9 +82,9 @@ export default function ServiceCreatePage() {
 							<Briefcase className="h-5 w-5 text-primary-foreground" />
 						</div>
 						<div>
-							<CardTitle className="text-xl">Service Information</CardTitle>
+							<CardTitle className="text-xl">Hizmet Bilgileri</CardTitle>
 							<CardDescription>
-								Fill in the details to create a new service
+								Yeni bir hizmet oluşturmak için detayları doldurun
 							</CardDescription>
 						</div>
 					</div>
@@ -93,12 +93,12 @@ export default function ServiceCreatePage() {
 					<form onSubmit={handleSubmit} className="space-y-6">
 						{/* Category ID */}
 						<div className="space-y-2">
-							<Label htmlFor="categoryId">Category ID *</Label>
+							<Label htmlFor="categoryId">Kategori ID *</Label>
 							<Input
 								id="categoryId"
 								type="number"
 								min="0"
-								placeholder="e.g., 1"
+								placeholder="Örn: 1"
 								value={categoryId}
 								onChange={(e) => {
 									const value = e.target.value;
@@ -109,16 +109,16 @@ export default function ServiceCreatePage() {
 								className="h-11"
 							/>
 							<p className="text-xs text-muted-foreground">
-								Enter the category ID for this service
+								Bu hizmet için kategori ID'sini girin
 							</p>
 						</div>
 
 						{/* Title */}
 						<div className="space-y-2">
-							<Label htmlFor="title">Title *</Label>
+							<Label htmlFor="title">Başlık *</Label>
 							<Input
 								id="title"
-								placeholder="e.g., Web Development"
+								placeholder="Örn: Web Geliştirme"
 								value={title}
 								onChange={(e) => setTitle(e.target.value)}
 								required
@@ -129,10 +129,10 @@ export default function ServiceCreatePage() {
 
 						{/* Description */}
 						<div className="space-y-2">
-							<Label htmlFor="description">Description *</Label>
+							<Label htmlFor="description">Açıklama *</Label>
 							<Textarea
 								id="description"
-								placeholder="Enter a detailed description..."
+								placeholder="Detaylı bir açıklama girin..."
 								value={description}
 								onChange={(e) => setDescription(e.target.value)}
 								required
@@ -144,12 +144,12 @@ export default function ServiceCreatePage() {
 
 						{/* Order Index */}
 						<div className="space-y-2">
-							<Label htmlFor="orderIndex">Order Index *</Label>
+							<Label htmlFor="orderIndex">Sıra *</Label>
 							<Input
 								id="orderIndex"
 								type="number"
 								min="0"
-								placeholder="e.g., 1"
+								placeholder="Örn: 1"
 								value={orderIndex}
 								onChange={(e) => {
 									const value = e.target.value;
@@ -160,7 +160,7 @@ export default function ServiceCreatePage() {
 								className="h-11"
 							/>
 							<p className="text-xs text-muted-foreground">
-								Lower numbers appear first in the list
+								Düşük sayılar listede daha önce görünür
 							</p>
 						</div>
 
@@ -172,7 +172,7 @@ export default function ServiceCreatePage() {
 								onClick={handleCancel}
 								disabled={isSubmitting}
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -182,12 +182,12 @@ export default function ServiceCreatePage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-										Creating...
+										Oluşturuluyor...
 									</>
 								) : (
 									<>
 										<Save className="mr-2 h-4 w-4" />
-										Create Service
+										Hizmet Oluştur
 									</>
 								)}
 							</Button>

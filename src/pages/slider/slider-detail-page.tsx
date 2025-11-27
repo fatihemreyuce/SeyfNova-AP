@@ -14,7 +14,7 @@ export default function SliderDetailPage() {
 
 	useEffect(() => {
 		if (error) {
-			toast.error("Failed to load slider data");
+			toast.error("Slider verileri yüklenirken hata oluştu");
 			navigate("/slider");
 		}
 	}, [error, navigate]);
@@ -24,7 +24,7 @@ export default function SliderDetailPage() {
 			<div className="flex items-center justify-center min-h-[400px]">
 				<div className="text-center space-y-4">
 					<Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-					<p className="text-muted-foreground">Loading slider data...</p>
+					<p className="text-muted-foreground">Slider verileri yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -49,10 +49,10 @@ export default function SliderDetailPage() {
 					</Button>
 					<div>
 						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-							Slider Details
+							Slider Detayları
 						</h1>
 						<p className="text-muted-foreground mt-1">
-							View detailed information about this slider
+							Bu slider hakkında detaylı bilgi görüntüle
 						</p>
 					</div>
 				</div>
@@ -61,7 +61,7 @@ export default function SliderDetailPage() {
 					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 				>
 					<Edit className="h-4 w-4 mr-2" />
-					Edit Slider
+					Slider Düzenle
 				</Button>
 			</div>
 
@@ -89,7 +89,7 @@ export default function SliderDetailPage() {
 
 					{/* Image */}
 					<div className="space-y-2">
-						<label className="text-sm font-medium text-muted-foreground">Image</label>
+						<label className="text-sm font-medium text-muted-foreground">Resim</label>
 						{normalizeImageUrl(data.imageUrl) ? (
 							<div className="relative w-full max-w-2xl rounded-lg overflow-hidden border border-border/50">
 								<img
@@ -102,7 +102,7 @@ export default function SliderDetailPage() {
 							<div className="flex items-center justify-center h-48 rounded-lg border border-border/50 bg-muted/50">
 								<div className="text-center space-y-2">
 									<ImageIcon className="h-12 w-12 text-muted-foreground mx-auto" />
-									<p className="text-sm text-muted-foreground">No image available</p>
+									<p className="text-sm text-muted-foreground">Resim mevcut değil</p>
 								</div>
 							</div>
 						)}
@@ -110,13 +110,13 @@ export default function SliderDetailPage() {
 
 					{/* Title */}
 					<div className="space-y-2">
-						<label className="text-sm font-medium text-muted-foreground">Title</label>
+						<label className="text-sm font-medium text-muted-foreground">Başlık</label>
 						<div className="text-base font-semibold">{data.title}</div>
 					</div>
 
 					{/* Description */}
 					<div className="space-y-2">
-						<label className="text-sm font-medium text-muted-foreground">Description</label>
+						<label className="text-sm font-medium text-muted-foreground">Açıklama</label>
 						<div className="text-base whitespace-pre-wrap bg-muted/50 rounded-lg p-4 border border-border/50">
 							{data.description}
 						</div>
@@ -124,7 +124,7 @@ export default function SliderDetailPage() {
 
 					{/* Order Index */}
 					<div className="space-y-2">
-						<label className="text-sm font-medium text-muted-foreground">Order Index</label>
+						<label className="text-sm font-medium text-muted-foreground">Sıralama</label>
 						<div className="text-base">{data.orderIndex}</div>
 					</div>
 				</CardContent>

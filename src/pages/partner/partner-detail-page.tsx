@@ -14,7 +14,7 @@ export default function PartnerDetailPage() {
 
 	useEffect(() => {
 		if (error) {
-			toast.error("Failed to load partner data");
+			toast.error("Partner verileri yüklenirken hata oluştu");
 			navigate("/partner");
 		}
 	}, [error, navigate]);
@@ -24,7 +24,7 @@ export default function PartnerDetailPage() {
 			<div className="flex items-center justify-center min-h-[400px]">
 				<div className="text-center space-y-4">
 					<Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-					<p className="text-muted-foreground">Loading partner data...</p>
+					<p className="text-muted-foreground">Partner verileri yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -49,10 +49,10 @@ export default function PartnerDetailPage() {
 					</Button>
 					<div>
 						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-							Partner Details
+							Partner Detayları
 						</h1>
 						<p className="text-muted-foreground mt-1">
-							View detailed information about this partner
+							Bu partner hakkında detaylı bilgi görüntüle
 						</p>
 					</div>
 				</div>
@@ -61,7 +61,7 @@ export default function PartnerDetailPage() {
 					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 				>
 					<Edit className="h-4 w-4 mr-2" />
-					Edit Partner
+					Partner Düzenle
 				</Button>
 			</div>
 
@@ -102,7 +102,7 @@ export default function PartnerDetailPage() {
 							<div className="flex items-center justify-center h-40 rounded-lg border border-border/50 bg-muted/50">
 								<div className="text-center space-y-2">
 									<Handshake className="h-12 w-12 text-muted-foreground mx-auto" />
-									<p className="text-sm text-muted-foreground">No logo available</p>
+									<p className="text-sm text-muted-foreground">Logo mevcut değil</p>
 								</div>
 							</div>
 						)}
@@ -110,13 +110,13 @@ export default function PartnerDetailPage() {
 
 					{/* Name */}
 					<div className="space-y-2">
-						<label className="text-sm font-medium text-muted-foreground">Name</label>
+						<label className="text-sm font-medium text-muted-foreground">İsim</label>
 						<div className="text-base font-semibold">{data.name}</div>
 					</div>
 
 					{/* Order Index */}
 					<div className="space-y-2">
-						<label className="text-sm font-medium text-muted-foreground">Order Index</label>
+						<label className="text-sm font-medium text-muted-foreground">Sıralama</label>
 						<div className="text-base">{data.orderIndex}</div>
 					</div>
 				</CardContent>

@@ -69,7 +69,7 @@ export default function ServiceCategoryEditPage() {
 			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-4">
 					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Loading service category data...</p>
+					<p className="text-muted-foreground text-lg">Hizmet kategorisi verileri yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -94,10 +94,10 @@ export default function ServiceCategoryEditPage() {
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Edit Service Category
+								Hizmet Kategorisi Düzenle
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Update service category information (ID: {id})
+								Hizmet kategorisi bilgilerini güncelle (ID: {id})
 							</p>
 						</div>
 					</div>
@@ -109,10 +109,10 @@ export default function ServiceCategoryEditPage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								Service Category Details
+								Hizmet Kategorisi Detayları
 							</CardTitle>
 							<CardDescription className="text-base">
-								Update the fields below to modify this service category
+								Bu hizmet kategorisini değiştirmek için aşağıdaki alanları güncelleyin
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
@@ -122,12 +122,12 @@ export default function ServiceCategoryEditPage() {
 									htmlFor="name"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Name</span>
+									<span>İsim</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="name"
-									placeholder="e.g., Web Development"
+									placeholder="Örn: Web Geliştirme"
 									value={name}
 									onChange={(e) => setName(e.target.value)}
 									disabled={isSubmitting}
@@ -141,12 +141,12 @@ export default function ServiceCategoryEditPage() {
 									htmlFor="description"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Description</span>
+									<span>Açıklama</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
 									id="description"
-									placeholder="Provide a clear description of the service category..."
+									placeholder="Hizmet kategorisi için net bir açıklama verin..."
 									value={description}
 									onChange={(e) => setDescription(e.target.value)}
 									disabled={isSubmitting}
@@ -160,14 +160,14 @@ export default function ServiceCategoryEditPage() {
 									htmlFor="orderIndex"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Order Index</span>
+									<span>Sıra</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="orderIndex"
 									type="number"
 									min="0"
-									placeholder="e.g., 1"
+									placeholder="Örn: 1"
 									value={orderIndex}
 									onChange={(e) => {
 										const value = e.target.value;
@@ -177,7 +177,7 @@ export default function ServiceCategoryEditPage() {
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
 								<p className="text-sm text-muted-foreground">
-									Lower numbers appear earlier in category lists
+									Düşük sayılar kategori listelerinde daha önce görünür
 								</p>
 							</div>
 						</CardContent>
@@ -189,7 +189,7 @@ export default function ServiceCategoryEditPage() {
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -199,12 +199,12 @@ export default function ServiceCategoryEditPage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Updating...
+										Güncelleniyor...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Update Service Category
+										Hizmet Kategorisini Güncelle
 									</>
 								)}
 							</Button>

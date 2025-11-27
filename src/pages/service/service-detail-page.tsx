@@ -48,10 +48,10 @@ export default function ServiceDetailPage() {
 					</Button>
 					<div>
 						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-							Service Details
+							Hizmet Detayları
 						</h1>
 						<p className="text-muted-foreground mt-1">
-							View detailed information about this service
+							Bu hizmet hakkında detaylı bilgi görüntüle
 						</p>
 					</div>
 				</div>
@@ -60,7 +60,7 @@ export default function ServiceDetailPage() {
 					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 				>
 					<Edit className="h-4 w-4 mr-2" />
-					Edit Service
+					Hizmeti Düzenle
 				</Button>
 			</div>
 
@@ -74,7 +74,7 @@ export default function ServiceDetailPage() {
 						<div>
 							<CardTitle className="text-xl">{data.title}</CardTitle>
 							<CardDescription>
-								Service ID: {data.id}
+								Hizmet ID: {data.id}
 							</CardDescription>
 						</div>
 					</div>
@@ -88,19 +88,19 @@ export default function ServiceDetailPage() {
 
 					{/* Category ID */}
 					<div className="space-y-2">
-						<label className="text-sm font-medium text-muted-foreground">Category ID</label>
+						<label className="text-sm font-medium text-muted-foreground">Kategori ID</label>
 						<div className="text-base">{data.categoryId}</div>
 					</div>
 
 					{/* Title */}
 					<div className="space-y-2">
-						<label className="text-sm font-medium text-muted-foreground">Title</label>
+						<label className="text-sm font-medium text-muted-foreground">Başlık</label>
 						<div className="text-base font-semibold">{data.title}</div>
 					</div>
 
 					{/* Description */}
 					<div className="space-y-2">
-						<label className="text-sm font-medium text-muted-foreground">Description</label>
+						<label className="text-sm font-medium text-muted-foreground">Açıklama</label>
 						<div className="text-base whitespace-pre-wrap bg-muted/50 rounded-lg p-4 border border-border/50">
 							{data.description}
 						</div>
@@ -108,7 +108,7 @@ export default function ServiceDetailPage() {
 
 					{/* Order Index */}
 					<div className="space-y-2">
-						<label className="text-sm font-medium text-muted-foreground">Order Index</label>
+						<label className="text-sm font-medium text-muted-foreground">Sıra</label>
 						<div className="text-base">{data.orderIndex}</div>
 					</div>
 				</CardContent>

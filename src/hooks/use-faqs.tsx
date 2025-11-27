@@ -15,11 +15,11 @@ export const useCreateFaq = () => {
     return useMutation({
         mutationFn: (request: FaqRequest) => createFaq(request),
         onSuccess: () => {
-            toast.success("Faq created successfully");
+            toast.success("SSS başarıyla oluşturuldu");
             queryClient.invalidateQueries({ queryKey: ["faqs"] });
         },
         onError: () => {
-            toast.error("Failed to create faq");
+            toast.error("SSS oluşturulurken hata oluştu");
         },
     });
 }
@@ -29,11 +29,11 @@ export const useUpdateFaq = () => {
     return useMutation({
         mutationFn: ({ id, request }: { id: number; request: FaqRequest }) => updateFaq(id, request),
         onSuccess: () => {
-            toast.success("Faq updated successfully");
+            toast.success("SSS başarıyla güncellendi");
             queryClient.invalidateQueries({ queryKey: ["faqs"] });
         },
         onError: () => {
-            toast.error("Failed to update faq");
+            toast.error("SSS güncellenirken hata oluştu");
         },
     });
 }
@@ -43,11 +43,11 @@ export const useDeleteFaq = () => {
     return useMutation({
         mutationFn: (id: number) => deleteFaq(id),
         onSuccess: () => {
-            toast.success("Faq deleted successfully");
+            toast.success("SSS başarıyla silindi");
             queryClient.invalidateQueries({ queryKey: ["faqs"] });
         },
         onError: () => {
-            toast.error("Failed to delete faq");
+            toast.error("SSS silinirken hata oluştu");
         },
     });
 }

@@ -72,10 +72,10 @@ export default function NotificationSubscriberCreatePage() {
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Create Subscriber
+								Abone Oluştur
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Add a new notification subscriber
+								Yeni bir bildirim abonesi ekleyin
 							</p>
 						</div>
 					</div>
@@ -87,10 +87,10 @@ export default function NotificationSubscriberCreatePage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								Subscriber Details
+								Abone Detayları
 							</CardTitle>
 							<CardDescription className="text-base">
-								Fill in the fields below to create a new notification subscriber
+								Yeni bir bildirim abonesi oluşturmak için aşağıdaki alanları doldurun
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-6 px-8 pb-8">
@@ -101,13 +101,13 @@ export default function NotificationSubscriberCreatePage() {
 									className="text-base font-medium flex items-center gap-2"
 								>
 									<Mail className="h-4 w-4 text-primary/70" />
-									<span>Email</span>
+									<span>E-posta</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="email"
 									type="email"
-									placeholder="e.g., john.doe@example.com"
+									placeholder="Örn: john.doe@example.com"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									disabled={isSubmitting}
@@ -122,12 +122,12 @@ export default function NotificationSubscriberCreatePage() {
 									className="text-base font-medium flex items-center gap-2"
 								>
 									<User className="h-4 w-4 text-primary/70" />
-									<span>Name</span>
+									<span>İsim</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="name"
-									placeholder="e.g., John"
+									placeholder="Örn: Ahmet"
 									value={name}
 									onChange={(e) => setName(e.target.value)}
 									disabled={isSubmitting}
@@ -142,12 +142,12 @@ export default function NotificationSubscriberCreatePage() {
 									className="text-base font-medium flex items-center gap-2"
 								>
 									<User className="h-4 w-4 text-primary/70" />
-									<span>Surname</span>
+									<span>Soyisim</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="surname"
-									placeholder="e.g., Doe"
+									placeholder="Örn: Yılmaz"
 									value={surname}
 									onChange={(e) => setSurname(e.target.value)}
 									disabled={isSubmitting}
@@ -162,12 +162,12 @@ export default function NotificationSubscriberCreatePage() {
 									className="text-base font-medium flex items-center gap-2"
 								>
 									<Building2 className="h-4 w-4 text-primary/70" />
-									<span>Company Name</span>
+									<span>Şirket Adı</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="companyName"
-									placeholder="e.g., Acme Corporation"
+									placeholder="Örn: Acme Corporation"
 									value={companyName}
 									onChange={(e) => setCompanyName(e.target.value)}
 									disabled={isSubmitting}
@@ -182,12 +182,12 @@ export default function NotificationSubscriberCreatePage() {
 									className="text-base font-medium flex items-center gap-2"
 								>
 									<Briefcase className="h-4 w-4 text-primary/70" />
-									<span>Title</span>
+									<span>Ünvan</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="title"
-									placeholder="e.g., Software Engineer"
+									placeholder="Örn: Yazılım Mühendisi"
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
 									disabled={isSubmitting}
@@ -203,7 +203,7 @@ export default function NotificationSubscriberCreatePage() {
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -213,12 +213,12 @@ export default function NotificationSubscriberCreatePage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Creating...
+										Oluşturuluyor...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Create Subscriber
+										Abone Oluştur
 									</>
 								)}
 							</Button>

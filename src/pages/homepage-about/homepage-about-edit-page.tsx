@@ -64,7 +64,7 @@ export default function HomepageAboutEditPage() {
 			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-4">
 					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Loading homepage about data...</p>
+					<p className="text-muted-foreground text-lg">Ana sayfa hakkında verileri yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -78,14 +78,14 @@ export default function HomepageAboutEditPage() {
 						<div className="p-4 rounded-full bg-destructive/10 w-fit mx-auto">
 							<Info className="h-8 w-8 text-destructive" />
 						</div>
-						<p className="text-lg font-semibold text-foreground">Homepage about not found</p>
-						<p className="text-sm text-muted-foreground">The homepage about entry you're looking for doesn't exist or has been removed.</p>
+						<p className="text-lg font-semibold text-foreground">Ana sayfa hakkında bulunamadı</p>
+						<p className="text-sm text-muted-foreground">Aradığınız ana sayfa hakkında girişi mevcut değil veya kaldırılmış.</p>
 						<Button 
 							onClick={handleCancel} 
 							className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 						>
 							<ArrowLeft className="h-4 w-4 mr-2" />
-							Go Back
+							Geri Dön
 						</Button>
 					</CardContent>
 				</Card>
@@ -120,10 +120,10 @@ export default function HomepageAboutEditPage() {
 							</div>
 							<div>
 								<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-									Edit Homepage About
+									Ana Sayfa Hakkında Düzenle
 								</h1>
 								<p className="text-muted-foreground mt-1.5 text-base">
-									Update homepage about content (ID: {id})
+									Ana sayfa hakkında içeriğini güncelle (ID: {id})
 								</p>
 							</div>
 						</div>
@@ -143,10 +143,10 @@ export default function HomepageAboutEditPage() {
 								</div>
 								<div className="flex-1">
 									<CardTitle className="text-2xl font-semibold mb-2">
-										Homepage About Information
+										Ana Sayfa Hakkında Bilgileri
 									</CardTitle>
 									<CardDescription className="text-base">
-										Update the details below to modify this homepage about entry
+										Bu ana sayfa hakkında girişini değiştirmek için aşağıdaki detayları güncelleyin
 									</CardDescription>
 								</div>
 							</div>
@@ -157,13 +157,13 @@ export default function HomepageAboutEditPage() {
 								{/* Left Side */}
 								<div className="space-y-6">
 									<div className="pb-4 border-b border-border/50">
-										<h3 className="text-lg font-semibold text-foreground/90 mb-1">Left Section</h3>
-										<p className="text-sm text-muted-foreground">Content for the left side</p>
+										<h3 className="text-lg font-semibold text-foreground/90 mb-1">Sol Bölüm</h3>
+										<p className="text-sm text-muted-foreground">Sol taraf için içerik</p>
 									</div>
 									
 									<div className="space-y-3">
 										<Label htmlFor="leftTitle" className="text-base font-medium flex items-center gap-2">
-											<span>Left Title</span>
+											<span>Sol Başlık</span>
 											<span className="text-destructive">*</span>
 										</Label>
 										<Input
@@ -172,7 +172,7 @@ export default function HomepageAboutEditPage() {
 											onChange={(e) =>
 												setFormData({ ...formData, leftTitle: e.target.value })
 											}
-											placeholder="Enter left title"
+											placeholder="Sol başlığı girin"
 											required
 											disabled={isSubmitting}
 											className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
@@ -181,7 +181,7 @@ export default function HomepageAboutEditPage() {
 									
 									<div className="space-y-3">
 										<Label htmlFor="leftDescription" className="text-base font-medium flex items-center gap-2">
-											<span>Left Description</span>
+											<span>Sol Açıklama</span>
 											<span className="text-destructive">*</span>
 										</Label>
 										<Textarea
@@ -193,7 +193,7 @@ export default function HomepageAboutEditPage() {
 													leftDescription: e.target.value,
 												})
 											}
-											placeholder="Enter left description"
+											placeholder="Sol açıklamayı girin"
 											rows={6}
 											required
 											disabled={isSubmitting}
@@ -205,13 +205,13 @@ export default function HomepageAboutEditPage() {
 								{/* Right Side */}
 								<div className="space-y-6">
 									<div className="pb-4 border-b border-border/50">
-										<h3 className="text-lg font-semibold text-foreground/90 mb-1">Right Section</h3>
-										<p className="text-sm text-muted-foreground">Content for the right side</p>
+										<h3 className="text-lg font-semibold text-foreground/90 mb-1">Sağ Bölüm</h3>
+										<p className="text-sm text-muted-foreground">Sağ taraf için içerik</p>
 									</div>
 									
 									<div className="space-y-3">
 										<Label htmlFor="rightTitle" className="text-base font-medium flex items-center gap-2">
-											<span>Right Title</span>
+											<span>Sağ Başlık</span>
 											<span className="text-destructive">*</span>
 										</Label>
 										<Input
@@ -220,7 +220,7 @@ export default function HomepageAboutEditPage() {
 											onChange={(e) =>
 												setFormData({ ...formData, rightTitle: e.target.value })
 											}
-											placeholder="Enter right title"
+											placeholder="Sağ başlığı girin"
 											required
 											disabled={isSubmitting}
 											className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
@@ -229,7 +229,7 @@ export default function HomepageAboutEditPage() {
 									
 									<div className="space-y-3">
 										<Label htmlFor="rightDescription" className="text-base font-medium flex items-center gap-2">
-											<span>Right Description</span>
+											<span>Sağ Açıklama</span>
 											<span className="text-destructive">*</span>
 										</Label>
 										<Textarea
@@ -241,7 +241,7 @@ export default function HomepageAboutEditPage() {
 													rightDescription: e.target.value,
 												})
 											}
-											placeholder="Enter right description"
+											placeholder="Sağ açıklamayı girin"
 											rows={6}
 											required
 											disabled={isSubmitting}
@@ -260,7 +260,7 @@ export default function HomepageAboutEditPage() {
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -270,12 +270,12 @@ export default function HomepageAboutEditPage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Updating...
+										Güncelleniyor...
 									</>
 								) : (
 									<>
 										<Check className="h-4 w-4 mr-2" />
-										Update Homepage About
+										Ana Sayfa Hakkında Güncelle
 									</>
 								)}
 							</Button>

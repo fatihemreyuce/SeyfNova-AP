@@ -35,7 +35,7 @@ export default function NotificationEditPage() {
 
 	useEffect(() => {
 		if (error) {
-			toast.error("Failed to load notification data");
+			toast.error("Bildirim verileri yüklenirken hata oluştu");
 			navigate("/notification");
 		}
 	}, [error, navigate]);
@@ -67,7 +67,7 @@ export default function NotificationEditPage() {
 			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-4">
 					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Loading notification data...</p>
+					<p className="text-muted-foreground text-lg">Bildirim verileri yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -92,10 +92,10 @@ export default function NotificationEditPage() {
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Edit Notification
+								Bildirimi Düzenle
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Update notification information (ID: {id})
+								Bildirim bilgilerini güncelle (ID: {id})
 							</p>
 						</div>
 					</div>
@@ -107,10 +107,10 @@ export default function NotificationEditPage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								Notification Details
+								Bildirim Detayları
 							</CardTitle>
 							<CardDescription className="text-base">
-								Update the fields below to modify this notification
+								Bu bildirimi değiştirmek için aşağıdaki alanları güncelleyin
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
@@ -120,12 +120,12 @@ export default function NotificationEditPage() {
 									htmlFor="title"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Title</span>
+									<span>Başlık</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="title"
-									placeholder="e.g., Important Announcement"
+									placeholder="örn., Önemli Duyuru"
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
 									disabled={isSubmitting}
@@ -139,12 +139,12 @@ export default function NotificationEditPage() {
 									htmlFor="content"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Content</span>
+									<span>İçerik</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
 									id="content"
-									placeholder="Enter the notification content..."
+									placeholder="Bildirim içeriğini girin..."
 									value={content}
 									onChange={(e) => setContent(e.target.value)}
 									disabled={isSubmitting}
@@ -160,7 +160,7 @@ export default function NotificationEditPage() {
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -170,12 +170,12 @@ export default function NotificationEditPage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Updating...
+										Güncelleniyor...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Update Notification
+										Bildirimi Güncelle
 									</>
 								)}
 							</Button>

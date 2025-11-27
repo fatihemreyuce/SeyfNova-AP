@@ -77,7 +77,7 @@ export default function ServiceEditPage() {
 			<div className="flex items-center justify-center min-h-[400px]">
 				<div className="text-center space-y-4">
 					<Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-					<p className="text-muted-foreground">Loading service data...</p>
+					<p className="text-muted-foreground">Hizmet verileri yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -97,10 +97,10 @@ export default function ServiceEditPage() {
 				</Button>
 				<div>
 					<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-						Edit Service
+						Hizmet Düzenle
 					</h1>
 					<p className="text-muted-foreground mt-1">
-						Update service information
+						Hizmet bilgilerini güncelle
 					</p>
 				</div>
 			</div>
@@ -113,9 +113,9 @@ export default function ServiceEditPage() {
 							<Briefcase className="h-5 w-5 text-primary-foreground" />
 						</div>
 						<div>
-							<CardTitle className="text-xl">Service Information</CardTitle>
+							<CardTitle className="text-xl">Hizmet Bilgileri</CardTitle>
 							<CardDescription>
-								Update the details of this service
+								Bu hizmetin detaylarını güncelleyin
 							</CardDescription>
 						</div>
 					</div>
@@ -124,12 +124,12 @@ export default function ServiceEditPage() {
 					<form onSubmit={handleSubmit} className="space-y-6">
 						{/* Category ID */}
 						<div className="space-y-2">
-							<Label htmlFor="categoryId">Category ID *</Label>
+							<Label htmlFor="categoryId">Kategori ID *</Label>
 							<Input
 								id="categoryId"
 								type="number"
 								min="0"
-								placeholder="e.g., 1"
+								placeholder="Örn: 1"
 								value={categoryId}
 								onChange={(e) => {
 									const value = e.target.value;
@@ -140,16 +140,16 @@ export default function ServiceEditPage() {
 								className="h-11"
 							/>
 							<p className="text-xs text-muted-foreground">
-								Enter the category ID for this service
+								Bu hizmet için kategori ID'sini girin
 							</p>
 						</div>
 
 						{/* Title */}
 						<div className="space-y-2">
-							<Label htmlFor="title">Title *</Label>
+							<Label htmlFor="title">Başlık *</Label>
 							<Input
 								id="title"
-								placeholder="e.g., Web Development"
+								placeholder="Örn: Web Geliştirme"
 								value={title}
 								onChange={(e) => setTitle(e.target.value)}
 								required
@@ -160,10 +160,10 @@ export default function ServiceEditPage() {
 
 						{/* Description */}
 						<div className="space-y-2">
-							<Label htmlFor="description">Description *</Label>
+							<Label htmlFor="description">Açıklama *</Label>
 							<Textarea
 								id="description"
-								placeholder="Enter a detailed description..."
+								placeholder="Detaylı bir açıklama girin..."
 								value={description}
 								onChange={(e) => setDescription(e.target.value)}
 								required
@@ -175,12 +175,12 @@ export default function ServiceEditPage() {
 
 						{/* Order Index */}
 						<div className="space-y-2">
-							<Label htmlFor="orderIndex">Order Index *</Label>
+							<Label htmlFor="orderIndex">Sıra *</Label>
 							<Input
 								id="orderIndex"
 								type="number"
 								min="0"
-								placeholder="e.g., 1"
+								placeholder="Örn: 1"
 								value={orderIndex}
 								onChange={(e) => {
 									const value = e.target.value;
@@ -191,7 +191,7 @@ export default function ServiceEditPage() {
 								className="h-11"
 							/>
 							<p className="text-xs text-muted-foreground">
-								Lower numbers appear first in the list
+								Düşük sayılar listede daha önce görünür
 							</p>
 						</div>
 
@@ -203,7 +203,7 @@ export default function ServiceEditPage() {
 								onClick={handleCancel}
 								disabled={updateMutation.isPending}
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -213,12 +213,12 @@ export default function ServiceEditPage() {
 								{updateMutation.isPending ? (
 									<>
 										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-										Updating...
+										Güncelleniyor...
 									</>
 								) : (
 									<>
 										<Save className="mr-2 h-4 w-4" />
-										Update Service
+										Hizmeti Güncelle
 									</>
 								)}
 							</Button>

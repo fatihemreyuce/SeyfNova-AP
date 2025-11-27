@@ -35,7 +35,7 @@ export default function NotificationSubscriberDetailPage() {
 			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-4">
 					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Loading subscriber details...</p>
+					<p className="text-muted-foreground text-lg">Abone detayları yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -49,16 +49,16 @@ export default function NotificationSubscriberDetailPage() {
 						<div className="p-4 rounded-full bg-destructive/10 w-fit mx-auto">
 							<Info className="h-8 w-8 text-destructive" />
 						</div>
-						<p className="text-lg font-semibold text-foreground">Subscriber not found</p>
+						<p className="text-lg font-semibold text-foreground">Abone bulunamadı</p>
 						<p className="text-sm text-muted-foreground">
-							The subscriber you're looking for doesn't exist or has been removed.
+							Aradığınız abone mevcut değil veya kaldırılmış.
 						</p>
 						<Button
 							onClick={() => navigate("/notification-subscriber")}
 							className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 						>
 							<ArrowLeft className="h-4 w-4 mr-2" />
-							Go Back
+							Geri Dön
 						</Button>
 					</CardContent>
 				</Card>
@@ -85,10 +85,10 @@ export default function NotificationSubscriberDetailPage() {
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Subscriber Details
+								Abone Detayları
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								View subscriber information (ID: {id})
+								Abone bilgilerini görüntüle (ID: {id})
 							</p>
 						</div>
 					</div>
@@ -99,10 +99,10 @@ export default function NotificationSubscriberDetailPage() {
 					<div className="h-1.5 bg-gradient-to-r from-primary via-primary/80 to-primary/60" />
 					<CardHeader className="pb-6 pt-8 px-8">
 						<CardTitle className="text-2xl font-semibold mb-2">
-							Subscriber Information
+							Abone Bilgileri
 						</CardTitle>
 						<CardDescription className="text-base">
-							Detailed information about this notification subscriber
+							Bu bildirim abonesi hakkında detaylı bilgi
 						</CardDescription>
 					</CardHeader>
 					<CardContent className="px-8 pb-8 space-y-8">
@@ -110,7 +110,7 @@ export default function NotificationSubscriberDetailPage() {
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
 								<User className="h-4 w-4 text-primary/70" />
-								<span>Name</span>
+								<span>İsim</span>
 							</Label>
 							<div className="p-4 rounded-xl bg-muted/50 border border-border/50">
 								<p className="text-lg font-semibold text-foreground">
@@ -126,7 +126,7 @@ export default function NotificationSubscriberDetailPage() {
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
 								<User className="h-4 w-4 text-primary/70" />
-								<span>Surname</span>
+								<span>Soyisim</span>
 							</Label>
 							<div className="p-4 rounded-xl bg-muted/50 border border-border/50">
 								<p className="text-lg font-semibold text-foreground">
@@ -142,7 +142,7 @@ export default function NotificationSubscriberDetailPage() {
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
 								<Mail className="h-4 w-4 text-primary/70" />
-								<span>Email</span>
+								<span>E-posta</span>
 							</Label>
 							<div className="p-4 rounded-xl bg-muted/50 border border-border/50">
 								<p className="text-base text-foreground">

@@ -90,7 +90,7 @@ export default function PartnerEditPage() {
 			<div className="flex items-center justify-center min-h-[400px]">
 				<div className="text-center space-y-4">
 					<Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-					<p className="text-muted-foreground">Loading partner data...</p>
+					<p className="text-muted-foreground">Partner verileri yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -110,10 +110,10 @@ export default function PartnerEditPage() {
 				</Button>
 				<div>
 					<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-						Edit Partner
+						Partner Düzenle
 					</h1>
 					<p className="text-muted-foreground mt-1">
-						Update partner information
+						Partner bilgilerini güncelle
 					</p>
 				</div>
 			</div>
@@ -126,9 +126,9 @@ export default function PartnerEditPage() {
 							<Handshake className="h-5 w-5 text-primary-foreground" />
 						</div>
 						<div>
-							<CardTitle className="text-xl">Partner Information</CardTitle>
+							<CardTitle className="text-xl">Partner Bilgileri</CardTitle>
 							<CardDescription>
-								Update the details of this partner
+								Bu partnerin detaylarını güncelleyin
 							</CardDescription>
 						</div>
 					</div>
@@ -156,9 +156,9 @@ export default function PartnerEditPage() {
 											<Upload className="h-6 w-6 text-primary" />
 										</div>
 										<div>
-											<p className="text-sm font-medium">Click to upload logo</p>
+											<p className="text-sm font-medium">Logo yüklemek için tıklayın</p>
 											<p className="text-xs text-muted-foreground mt-1">
-												PNG, JPG, SVG up to 5MB
+												PNG, JPG, SVG, 5MB'a kadar
 											</p>
 										</div>
 									</label>
@@ -169,7 +169,7 @@ export default function PartnerEditPage() {
 										{logoPreview ? (
 											<img
 												src={logoPreview}
-												alt="Logo preview"
+												alt="Logo Önizleme"
 												className="max-h-full max-w-full object-contain"
 											/>
 										) : (
@@ -202,7 +202,7 @@ export default function PartnerEditPage() {
 										disabled={updateMutation.isPending}
 									>
 										<Upload className="h-4 w-4 mr-2" />
-										Change Logo
+										Logoyu Değiştir
 									</Button>
 								</div>
 							)}
@@ -210,10 +210,10 @@ export default function PartnerEditPage() {
 
 						{/* Name */}
 						<div className="space-y-2">
-							<Label htmlFor="name">Name *</Label>
+							<Label htmlFor="name">İsim *</Label>
 							<Input
 								id="name"
-								placeholder="e.g., Acme Corp"
+								placeholder="Örn: Acme Corp"
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 								required
@@ -224,12 +224,12 @@ export default function PartnerEditPage() {
 
 						{/* Order Index */}
 						<div className="space-y-2">
-							<Label htmlFor="orderIndex">Order Index *</Label>
+							<Label htmlFor="orderIndex">Sıra *</Label>
 							<Input
 								id="orderIndex"
 								type="number"
 								min="0"
-								placeholder="e.g., 1"
+								placeholder="Örn: 1"
 								value={orderIndex}
 								onChange={(e) => {
 									const value = e.target.value;
@@ -240,7 +240,7 @@ export default function PartnerEditPage() {
 								className="h-11"
 							/>
 							<p className="text-xs text-muted-foreground">
-								Lower numbers appear earlier in partner lists
+								Düşük sayılar partner listelerinde daha önce görünür
 							</p>
 						</div>
 
@@ -252,7 +252,7 @@ export default function PartnerEditPage() {
 								onClick={handleCancel}
 								disabled={updateMutation.isPending}
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -262,12 +262,12 @@ export default function PartnerEditPage() {
 								{updateMutation.isPending ? (
 									<>
 										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-										Updating...
+										Güncelleniyor...
 									</>
 								) : (
 									<>
 										<Save className="mr-2 h-4 w-4" />
-										Update Partner
+										Partneri Güncelle
 									</>
 								)}
 							</Button>

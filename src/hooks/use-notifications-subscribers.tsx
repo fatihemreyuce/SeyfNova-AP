@@ -16,11 +16,11 @@ export const useCreateNotificationSubscriber = () => {
     return useMutation({
         mutationFn: (request: NotificationSubscriberRequest) => createNotificationSubscriber(request),
         onSuccess: () => {
-            toast.success("Notification subscriber created successfully");
+            toast.success("Bildirim abonesi başarıyla oluşturuldu");
             queryClient.invalidateQueries({ queryKey: ["notifications-subscribers"] });
         },
         onError: () => {
-            toast.error("Failed to create notification subscriber");
+            toast.error("Bildirim abonesi oluşturulurken hata oluştu");
         },
     });
 }
@@ -30,11 +30,11 @@ export const useDeleteNotificationSubscriber = () => {
     return useMutation({
         mutationFn: (id: number) => deleteNotificationSubscriber(id),
         onSuccess: () => {
-            toast.success("Notification subscriber deleted successfully");
+            toast.success("Bildirim abonesi başarıyla silindi");
             queryClient.invalidateQueries({ queryKey: ["notifications-subscribers"] });
         },
         onError: () => {
-            toast.error("Failed to delete notification subscriber");
+            toast.error("Bildirim abonesi silinirken hata oluştu");
         },
     });
 }

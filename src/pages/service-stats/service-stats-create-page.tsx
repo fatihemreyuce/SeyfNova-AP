@@ -112,10 +112,10 @@ export default function ServiceStatsCreatePage() {
 							</div>
 							<div>
 								<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-									Create Service Stat
+									Hizmet İstatistiği Oluştur
 								</h1>
 								<p className="text-muted-foreground mt-1.5 text-base">
-									Add a new service statistic to showcase your achievements
+									Başarılarınızı sergilemek için yeni bir hizmet istatistiği ekleyin
 								</p>
 							</div>
 						</div>
@@ -135,10 +135,10 @@ export default function ServiceStatsCreatePage() {
 								</div>
 								<div className="flex-1">
 									<CardTitle className="text-2xl font-semibold mb-2">
-										Service Stat Details
+										Hizmet İstatistiği Detayları
 									</CardTitle>
 									<CardDescription className="text-base">
-										Fill in the information below to create a new service statistic
+										Yeni bir hizmet istatistiği oluşturmak için aşağıdaki bilgileri doldurun
 									</CardDescription>
 								</div>
 							</div>
@@ -148,7 +148,7 @@ export default function ServiceStatsCreatePage() {
 							{/* Icon Selection */}
 							<div className="space-y-3">
 								<Label htmlFor="icon" className="text-base font-medium flex items-center gap-2">
-									<span>Icon</span>
+									<span>İkon</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Select value={icon} onValueChange={setIcon}>
@@ -162,7 +162,7 @@ export default function ServiceStatsCreatePage() {
 													{renderIcon(icon)}
 												</div>
 											)}
-											<SelectValue placeholder="Select an icon" className="text-base" />
+											<SelectValue placeholder="Bir ikon seçin" className="text-base" />
 										</div>
 									</SelectTrigger>
 									<SelectContent className="max-h-[300px]">
@@ -189,7 +189,7 @@ export default function ServiceStatsCreatePage() {
 								</Select>
 								<p className="text-sm text-muted-foreground flex items-center gap-1.5">
 									<span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
-									Choose an icon to represent this statistic
+									Bu istatistiği temsil etmek için bir ikon seçin
 								</p>
 							</div>
 
@@ -199,12 +199,12 @@ export default function ServiceStatsCreatePage() {
 							{/* Title */}
 							<div className="space-y-3">
 								<Label htmlFor="title" className="text-base font-medium flex items-center gap-2">
-									<span>Title</span>
+									<span>Başlık</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="title"
-									placeholder="e.g., Happy Customers"
+									placeholder="Örn: Mutlu Müşteriler"
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
 									required
@@ -219,13 +219,13 @@ export default function ServiceStatsCreatePage() {
 							{/* Number Value */}
 							<div className="space-y-3">
 								<Label htmlFor="numberValue" className="text-base font-medium flex items-center gap-2">
-									<span>Number Value</span>
+									<span>Sayısal Değer</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="numberValue"
 									type="number"
-									placeholder="e.g., 1000"
+									placeholder="Örn: 1000"
 									value={numberValue}
 									onChange={(e) => {
 										const value = e.target.value;
@@ -238,7 +238,7 @@ export default function ServiceStatsCreatePage() {
 								/>
 								<p className="text-sm text-muted-foreground flex items-center gap-1.5">
 									<span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
-									Enter a positive number
+									Pozitif bir sayı girin
 								</p>
 							</div>
 						</CardContent>
@@ -251,7 +251,7 @@ export default function ServiceStatsCreatePage() {
 								disabled={isLoading}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -261,12 +261,12 @@ export default function ServiceStatsCreatePage() {
 								{isLoading ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Creating...
+										Oluşturuluyor...
 									</>
 								) : (
 									<>
 										<Check className="h-4 w-4 mr-2" />
-										Create Service Stat
+										Hizmet İstatistiği Oluştur
 									</>
 								)}
 							</Button>

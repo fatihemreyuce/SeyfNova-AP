@@ -83,10 +83,10 @@ export default function SliderCreatePage() {
 				</Button>
 				<div>
 					<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-						Create Slider
+						Slider Oluştur
 					</h1>
 					<p className="text-muted-foreground mt-1">
-						Add a new slider to your collection
+						Koleksiyonunuza yeni bir slider ekleyin
 					</p>
 				</div>
 			</div>
@@ -99,9 +99,9 @@ export default function SliderCreatePage() {
 							<ImageIcon className="h-5 w-5 text-primary-foreground" />
 						</div>
 						<div>
-							<CardTitle className="text-xl">Slider Information</CardTitle>
+							<CardTitle className="text-xl">Slider Bilgileri</CardTitle>
 							<CardDescription>
-								Fill in the details to create a new slider
+								Yeni bir slider oluşturmak için detayları doldurun
 							</CardDescription>
 						</div>
 					</div>
@@ -110,7 +110,7 @@ export default function SliderCreatePage() {
 					<form onSubmit={handleSubmit} className="space-y-6">
 						{/* Image Upload */}
 						<div className="space-y-2">
-							<Label htmlFor="image">Image *</Label>
+							<Label htmlFor="image">Resim *</Label>
 							{!imagePreview ? (
 								<div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors">
 									<input
@@ -130,9 +130,9 @@ export default function SliderCreatePage() {
 											<Upload className="h-6 w-6 text-primary" />
 										</div>
 										<div>
-											<p className="text-sm font-medium">Click to upload image</p>
+											<p className="text-sm font-medium">Resim yüklemek için tıklayın</p>
 											<p className="text-xs text-muted-foreground mt-1">
-												PNG, JPG, GIF up to 10MB
+												PNG, JPG, GIF, 10MB'a kadar
 											</p>
 										</div>
 									</label>
@@ -142,7 +142,7 @@ export default function SliderCreatePage() {
 									<div className="relative w-full h-64 rounded-lg overflow-hidden border border-border/50">
 										<img
 											src={imagePreview}
-											alt="Preview"
+											alt="Önizleme"
 											className="w-full h-full object-cover"
 										/>
 										<Button
@@ -172,7 +172,7 @@ export default function SliderCreatePage() {
 										disabled={isSubmitting}
 									>
 										<Upload className="h-4 w-4 mr-2" />
-										Change Image
+										Resmi Değiştir
 									</Button>
 								</div>
 							)}
@@ -180,10 +180,10 @@ export default function SliderCreatePage() {
 
 						{/* Title */}
 						<div className="space-y-2">
-							<Label htmlFor="title">Title *</Label>
+							<Label htmlFor="title">Başlık *</Label>
 							<Input
 								id="title"
-								placeholder="e.g., Welcome to Our Service"
+								placeholder="Örn: Hizmetimize Hoş Geldiniz"
 								value={title}
 								onChange={(e) => setTitle(e.target.value)}
 								required
@@ -194,10 +194,10 @@ export default function SliderCreatePage() {
 
 						{/* Description */}
 						<div className="space-y-2">
-							<Label htmlFor="description">Description *</Label>
+							<Label htmlFor="description">Açıklama *</Label>
 							<Textarea
 								id="description"
-								placeholder="Enter a detailed description..."
+								placeholder="Detaylı bir açıklama girin..."
 								value={description}
 								onChange={(e) => setDescription(e.target.value)}
 								required
@@ -209,12 +209,12 @@ export default function SliderCreatePage() {
 
 						{/* Order Index */}
 						<div className="space-y-2">
-							<Label htmlFor="orderIndex">Order Index *</Label>
+							<Label htmlFor="orderIndex">Sıra *</Label>
 							<Input
 								id="orderIndex"
 								type="number"
 								min="0"
-								placeholder="e.g., 1"
+								placeholder="Örn: 1"
 								value={orderIndex}
 								onChange={(e) => {
 									const value = e.target.value;
@@ -225,7 +225,7 @@ export default function SliderCreatePage() {
 								className="h-11"
 							/>
 							<p className="text-xs text-muted-foreground">
-								Lower numbers appear first in the list
+								Düşük sayılar listede daha önce görünür
 							</p>
 						</div>
 
@@ -237,7 +237,7 @@ export default function SliderCreatePage() {
 								onClick={handleCancel}
 								disabled={isSubmitting}
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -247,12 +247,12 @@ export default function SliderCreatePage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-										Creating...
+										Oluşturuluyor...
 									</>
 								) : (
 									<>
 										<Save className="mr-2 h-4 w-4" />
-										Create Slider
+										Slider Oluştur
 									</>
 								)}
 							</Button>

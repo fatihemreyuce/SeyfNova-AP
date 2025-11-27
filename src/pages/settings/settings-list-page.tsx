@@ -26,7 +26,10 @@ import {
 } from "@/components/ui/empty";
 import { DeleteModal } from "@/components/ui/delete-modal";
 import { PaginationModal } from "@/components/ui/pagination-modal";
-import { useServiceCategories, useDeleteServiceCategory } from "@/hooks/use-service-category";
+import {
+	useSettings,
+	useDeleteSettings,
+} from "@/hooks/use-settings";
 import {
 	Plus,
 	Pencil,
@@ -38,29 +41,29 @@ import {
 	Settings,
 	ArrowLeft,
 	ArrowUpDown,
-	FolderTree,
-	Loader2,
+	Settings as SettingsIcon,
 } from "lucide-react";
+import { normalizeImageUrl } from "@/utils/image-url";
 
-export default function ServiceCategoryListPage() {
+export default function SettingsListPage() {
 	const navigate = useNavigate();
-
+	
 	const [search, setSearch] = useState("");
 	const [page, setPage] = useState(0);
 	const [size, setSize] = useState(10);
 	const [sort, setSort] = useState("id,desc");
-
+	
 	const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 	const [isPaginationModalOpen, setIsPaginationModalOpen] = useState(false);
 	const [deletingId, setDeletingId] = useState<number | null>(null);
 	const [deletingItemName, setDeletingItemName] = useState<string>("");
 
-	const { data, isLoading } = useServiceCategories(search, page, size, sort);
-	const deleteMutation = useDeleteServiceCategory();
+	const { data, isLoading } = useSettings(search, page, size, sort);
+	const deleteMutation = useDeleteSettings();
 
 	const handleDeleteClick = (item: any) => {
 		setDeletingId(item.id);
-		setDeletingItemName(item.name || `Service Category #${item.id}`);
+		setDeletingItemName(`Settings #${item.id}`);
 		setIsDeleteDialogOpen(true);
 	};
 
@@ -71,23 +74,27 @@ export default function ServiceCategoryListPage() {
 			setIsDeleteDialogOpen(false);
 			setDeletingId(null);
 			setDeletingItemName("");
-		} catch {
-			// handled in mutation
+		} catch (error) {
+			// Error handled by mutation
 		}
 	};
 
 	const handlePaginationApply = (newPage: number, newSize: number) => {
-		setPage(newPage - 1);
+		setPage(newPage - 1); // Backend 0-based, UI 1-based
 		setSize(newSize);
 		setIsPaginationModalOpen(false);
 	};
 
 	const handlePreviousPage = () => {
-		if (page > 0) setPage(page - 1);
+		if (page > 0) {
+			setPage(page - 1);
+		}
 	};
 
 	const handleNextPage = () => {
-		if (data && page < data.totalPages - 1) setPage(page + 1);
+		if (data && page < data.totalPages - 1) {
+			setPage(page + 1);
+		}
 	};
 
 	return (
@@ -105,15 +112,15 @@ export default function ServiceCategoryListPage() {
 					</Button>
 					<div>
 						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-							Hizmet Kategorileri
+							Ayarlar
 						</h1>
 						<p className="text-muted-foreground mt-1">
-							Hizmet kategorilerini yönetin
+							Site ayarlarınızı yönetin
 						</p>
 					</div>
 				</div>
 				<Button
-					onClick={() => navigate("/service-category/create")}
+					onClick={() => navigate("/settings/create")}
 					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 				>
 					<Plus className="h-4 w-4 mr-2" />
@@ -121,16 +128,16 @@ export default function ServiceCategoryListPage() {
 				</Button>
 			</div>
 
-			{/* Search & Filters */}
+			{/* Search and Filters */}
 			<div className="flex items-center gap-4">
 				<div className="relative flex-1 max-w-sm">
 					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
-						placeholder="Kategorilerde ara..."
+						placeholder="Ara..."
 						value={search}
 						onChange={(e) => {
 							setSearch(e.target.value);
-							setPage(0);
+							setPage(0); // Reset to first page on search
 						}}
 						className="pl-10"
 					/>
@@ -139,20 +146,20 @@ export default function ServiceCategoryListPage() {
 					value={sort}
 					onValueChange={(value) => {
 						setSort(value);
-						setPage(0);
+						setPage(0); // Reset to first page on sort change
 					}}
 				>
-					<SelectTrigger className="w-[220px] gap-2">
+					<SelectTrigger className="w-[180px] gap-2">
 						<ArrowUpDown className="h-4 w-4" />
 						<SelectValue placeholder="Sırala" />
 					</SelectTrigger>
 					<SelectContent>
 						<SelectItem value="id,asc">ID: Düşükten Yükseğe</SelectItem>
 						<SelectItem value="id,desc">ID: Yüksekten Düşüğe</SelectItem>
-						<SelectItem value="name,asc">İsim: A-Z</SelectItem>
-						<SelectItem value="name,desc">İsim: Z-A</SelectItem>
-						<SelectItem value="orderIndex,asc">Sıra: Düşükten Yükseğe</SelectItem>
-						<SelectItem value="orderIndex,desc">Sıra: Yüksekten Düşüğe</SelectItem>
+						<SelectItem value="email,asc">E-posta: A-Z</SelectItem>
+						<SelectItem value="email,desc">E-posta: Z-A</SelectItem>
+						<SelectItem value="phoneNumber,asc">Telefon: A-Z</SelectItem>
+						<SelectItem value="phoneNumber,desc">Telefon: Z-A</SelectItem>
 					</SelectContent>
 				</Select>
 				<Button
@@ -172,19 +179,17 @@ export default function ServiceCategoryListPage() {
 						<TableHeader>
 							<TableRow>
 								<TableHead>ID</TableHead>
-								<TableHead>İsim</TableHead>
-								<TableHead>Açıklama</TableHead>
-								<TableHead>Sıra</TableHead>
+								<TableHead>Logo</TableHead>
+								<TableHead>Email</TableHead>
+								<TableHead>Phone</TableHead>
+								<TableHead>Address</TableHead>
 								<TableHead className="text-right">İşlemler</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
 							<TableRow>
-								<TableCell colSpan={5} className="text-center py-8">
-									<div className="flex items-center justify-center gap-2 text-muted-foreground">
-										<Loader2 className="h-4 w-4 animate-spin" />
-										Yükleniyor...
-									</div>
+								<TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+									Yükleniyor...
 								</TableCell>
 							</TableRow>
 						</TableBody>
@@ -196,9 +201,10 @@ export default function ServiceCategoryListPage() {
 						<TableHeader>
 							<TableRow>
 								<TableHead>ID</TableHead>
-								<TableHead>İsim</TableHead>
-								<TableHead>Açıklama</TableHead>
-								<TableHead>Sıra</TableHead>
+								<TableHead>Logo</TableHead>
+								<TableHead>Email</TableHead>
+								<TableHead>Phone</TableHead>
+								<TableHead>Address</TableHead>
 								<TableHead className="text-right">İşlemler</TableHead>
 							</TableRow>
 						</TableHeader>
@@ -206,26 +212,34 @@ export default function ServiceCategoryListPage() {
 							{data.content.map((item) => (
 								<TableRow key={item.id}>
 									<TableCell className="font-medium">{item.id}</TableCell>
-									<TableCell className="max-w-[300px]">
-										<div className="flex items-start gap-2">
-											<FolderTree className="h-4 w-4 mt-1 text-primary/70" />
-											<div className="font-medium line-clamp-2">
-												{item.name}
+									<TableCell>
+										{normalizeImageUrl(item.siteLogoUrl) ? (
+											<img
+												src={normalizeImageUrl(item.siteLogoUrl)}
+												alt="Site Logo"
+												className="h-12 w-12 object-contain rounded-md border border-border/50 bg-white p-1"
+											/>
+										) : (
+											<div className="h-12 w-12 rounded-md border border-border/50 bg-muted flex items-center justify-center">
+												<SettingsIcon className="h-5 w-5 text-muted-foreground" />
 											</div>
-										</div>
+										)}
 									</TableCell>
-									<TableCell className="max-w-[400px]">
-										<div className="text-sm text-muted-foreground line-clamp-2">
-											{item.description}
-										</div>
+									<TableCell className="max-w-[200px] truncate font-medium">
+										{item.email}
 									</TableCell>
-									<TableCell>{item.orderIndex}</TableCell>
+									<TableCell className="max-w-[150px] truncate">
+										{item.phoneNumber}
+									</TableCell>
+									<TableCell className="max-w-[300px] truncate">
+										{item.address}
+									</TableCell>
 									<TableCell className="text-right">
 										<div className="flex items-center justify-end gap-2">
 											<Button
 												variant="ghost"
 												size="icon"
-												onClick={() => navigate(`/service-category/${item.id}`)}
+												onClick={() => navigate(`/settings/${item.id}`)}
 												className="h-8 w-8 hover:bg-primary/10"
 												title="Detayları Görüntüle"
 											>
@@ -234,7 +248,7 @@ export default function ServiceCategoryListPage() {
 											<Button
 												variant="ghost"
 												size="icon"
-												onClick={() => navigate(`/service-category/edit/${item.id}`)}
+												onClick={() => navigate(`/settings/edit/${item.id}`)}
 												className="h-8 w-8 hover:bg-primary/10"
 												title="Düzenle"
 											>
@@ -260,23 +274,23 @@ export default function ServiceCategoryListPage() {
 				<div className="border rounded-lg bg-card shadow-sm">
 					<Empty className="min-h-[400px] border-0">
 						<EmptyMedia variant="icon">
-							<FolderTree className="h-12 w-12 text-muted-foreground/50" />
+							<SettingsIcon className="h-12 w-12 text-muted-foreground/50" />
 						</EmptyMedia>
 						<EmptyHeader>
-							<EmptyTitle>Hizmet kategorisi bulunamadı</EmptyTitle>
+							<EmptyTitle>Ayarlar bulunamadı</EmptyTitle>
 							<EmptyDescription>
 								{search
 									? "Arama kriterlerinize uygun sonuç bulunamadı. Arama terimlerinizi değiştirmeyi deneyin."
-									: "Yeni bir hizmet kategorisi oluşturarak başlayın."}
+									: "Yeni bir ayar kaydı oluşturarak başlayın."}
 							</EmptyDescription>
 						</EmptyHeader>
 						{!search && (
 							<Button
-								onClick={() => navigate("/service-category/create")}
+								onClick={() => navigate("/settings/create")}
 								className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 							>
 								<Plus className="h-4 w-4 mr-2" />
-								Hizmet Kategorisi Oluştur
+								Ayar Oluştur
 							</Button>
 						)}
 					</Empty>
@@ -315,11 +329,11 @@ export default function ServiceCategoryListPage() {
 				</div>
 			)}
 
-			{/* Delete Modal */}
+			{/* Delete Confirmation Modal */}
 			<DeleteModal
 				open={isDeleteDialogOpen}
-				title="Hizmet Kategorisini Sil"
-				description="Bu işlem geri alınamaz. Bu hizmet kategorisi kalıcı olarak silinecektir."
+				title="Ayarı Sil"
+				description="Bu işlem geri alınamaz. Bu ayar kaydı kalıcı olarak silinecektir."
 				itemName={deletingItemName}
 				confirmText="Sil"
 				cancelText="İptal"

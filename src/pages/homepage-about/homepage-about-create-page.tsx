@@ -61,10 +61,10 @@ export default function HomepageAboutCreatePage() {
 							</div>
 							<div>
 								<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-									Create Homepage About
+									Ana Sayfa Hakkında Oluştur
 								</h1>
 								<p className="text-muted-foreground mt-1.5 text-base">
-									Add new homepage about content to showcase your information
+									Bilgilerinizi sergilemek için yeni ana sayfa hakkında içeriği ekleyin
 								</p>
 							</div>
 						</div>
@@ -84,10 +84,10 @@ export default function HomepageAboutCreatePage() {
 								</div>
 								<div className="flex-1">
 									<CardTitle className="text-2xl font-semibold mb-2">
-										Homepage About Information
+										Ana Sayfa Hakkında Bilgileri
 									</CardTitle>
 									<CardDescription className="text-base">
-										Fill in the details below to create a new homepage about entry
+										Yeni bir ana sayfa hakkında girişi oluşturmak için aşağıdaki detayları doldurun
 									</CardDescription>
 								</div>
 							</div>
@@ -98,13 +98,13 @@ export default function HomepageAboutCreatePage() {
 								{/* Left Side */}
 								<div className="space-y-6">
 									<div className="pb-4 border-b border-border/50">
-										<h3 className="text-lg font-semibold text-foreground/90 mb-1">Left Section</h3>
-										<p className="text-sm text-muted-foreground">Content for the left side</p>
+										<h3 className="text-lg font-semibold text-foreground/90 mb-1">Sol Bölüm</h3>
+										<p className="text-sm text-muted-foreground">Sol taraf için içerik</p>
 									</div>
 									
 									<div className="space-y-3">
 										<Label htmlFor="leftTitle" className="text-base font-medium flex items-center gap-2">
-											<span>Left Title</span>
+											<span>Sol Başlık</span>
 											<span className="text-destructive">*</span>
 										</Label>
 										<Input
@@ -113,7 +113,7 @@ export default function HomepageAboutCreatePage() {
 											onChange={(e) =>
 												setFormData({ ...formData, leftTitle: e.target.value })
 											}
-											placeholder="Enter left title"
+											placeholder="Sol başlığı girin"
 											required
 											disabled={isLoading}
 											className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
@@ -122,7 +122,7 @@ export default function HomepageAboutCreatePage() {
 									
 									<div className="space-y-3">
 										<Label htmlFor="leftDescription" className="text-base font-medium flex items-center gap-2">
-											<span>Left Description</span>
+											<span>Sol Açıklama</span>
 											<span className="text-destructive">*</span>
 										</Label>
 										<Textarea
@@ -134,7 +134,7 @@ export default function HomepageAboutCreatePage() {
 													leftDescription: e.target.value,
 												})
 											}
-											placeholder="Enter left description"
+											placeholder="Sol açıklamayı girin"
 											rows={6}
 											required
 											disabled={isLoading}
@@ -146,13 +146,13 @@ export default function HomepageAboutCreatePage() {
 								{/* Right Side */}
 								<div className="space-y-6">
 									<div className="pb-4 border-b border-border/50">
-										<h3 className="text-lg font-semibold text-foreground/90 mb-1">Right Section</h3>
-										<p className="text-sm text-muted-foreground">Content for the right side</p>
+										<h3 className="text-lg font-semibold text-foreground/90 mb-1">Sağ Bölüm</h3>
+										<p className="text-sm text-muted-foreground">Sağ taraf için içerik</p>
 									</div>
 									
 									<div className="space-y-3">
 										<Label htmlFor="rightTitle" className="text-base font-medium flex items-center gap-2">
-											<span>Right Title</span>
+											<span>Sağ Başlık</span>
 											<span className="text-destructive">*</span>
 										</Label>
 										<Input
@@ -161,7 +161,7 @@ export default function HomepageAboutCreatePage() {
 											onChange={(e) =>
 												setFormData({ ...formData, rightTitle: e.target.value })
 											}
-											placeholder="Enter right title"
+											placeholder="Sağ başlığı girin"
 											required
 											disabled={isLoading}
 											className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
@@ -170,7 +170,7 @@ export default function HomepageAboutCreatePage() {
 									
 									<div className="space-y-3">
 										<Label htmlFor="rightDescription" className="text-base font-medium flex items-center gap-2">
-											<span>Right Description</span>
+											<span>Sağ Açıklama</span>
 											<span className="text-destructive">*</span>
 										</Label>
 										<Textarea
@@ -182,7 +182,7 @@ export default function HomepageAboutCreatePage() {
 													rightDescription: e.target.value,
 												})
 											}
-											placeholder="Enter right description"
+											placeholder="Sağ açıklamayı girin"
 											rows={6}
 											required
 											disabled={isLoading}
@@ -201,7 +201,7 @@ export default function HomepageAboutCreatePage() {
 								disabled={isLoading}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -211,12 +211,12 @@ export default function HomepageAboutCreatePage() {
 								{isLoading ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Creating...
+										Oluşturuluyor...
 									</>
 								) : (
 									<>
 										<Check className="h-4 w-4 mr-2" />
-										Create Homepage About
+										Ana Sayfa Hakkında Oluştur
 									</>
 								)}
 							</Button>

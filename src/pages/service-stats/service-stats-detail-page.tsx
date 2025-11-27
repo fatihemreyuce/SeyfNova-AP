@@ -37,7 +37,7 @@ export default function ServiceStatsDetailPage() {
 			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-4">
 					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Loading service stat details...</p>
+					<p className="text-muted-foreground text-lg">Hizmet istatistiği detayları yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -51,14 +51,14 @@ export default function ServiceStatsDetailPage() {
 						<div className="p-4 rounded-full bg-destructive/10 w-fit mx-auto">
 							<Info className="h-8 w-8 text-destructive" />
 						</div>
-						<p className="text-lg font-semibold text-foreground">Service stat not found</p>
-						<p className="text-sm text-muted-foreground">The service statistic you're looking for doesn't exist or has been removed.</p>
+						<p className="text-lg font-semibold text-foreground">Hizmet istatistiği bulunamadı</p>
+						<p className="text-sm text-muted-foreground">Aradığınız hizmet istatistiği mevcut değil veya kaldırılmış.</p>
 						<Button 
 							onClick={() => navigate("/service-stats")} 
 							className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 						>
 							<ArrowLeft className="h-4 w-4 mr-2" />
-							Go Back
+							Geri Dön
 						</Button>
 					</CardContent>
 				</Card>
@@ -86,10 +86,10 @@ export default function ServiceStatsDetailPage() {
 							</div>
 							<div>
 								<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-									Service Stat Details
+									Hizmet İstatistiği Detayları
 								</h1>
 								<p className="text-muted-foreground mt-1.5 text-base">
-									View service statistic information (ID: {id})
+									Hizmet istatistiği bilgilerini görüntüle (ID: {id})
 								</p>
 							</div>
 						</div>
@@ -99,7 +99,7 @@ export default function ServiceStatsDetailPage() {
 						className="h-11 px-6 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
 					>
 						<Pencil className="h-4 w-4 mr-2" />
-						Edit
+						Düzenle
 					</Button>
 				</div>
 
@@ -115,10 +115,10 @@ export default function ServiceStatsDetailPage() {
 							</div>
 							<div className="flex-1">
 								<CardTitle className="text-2xl font-semibold mb-2">
-									Service Stat Information
+									Hizmet İstatistiği Bilgileri
 								</CardTitle>
 								<CardDescription className="text-base">
-									Detailed information about this service statistic
+									Bu hizmet istatistiği hakkında detaylı bilgi
 								</CardDescription>
 							</div>
 						</div>
@@ -128,7 +128,7 @@ export default function ServiceStatsDetailPage() {
 						{/* Icon */}
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
-								<span>Icon</span>
+								<span>İkon</span>
 							</Label>
 							<div className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 border border-border/50">
 								<div className="flex items-center justify-center h-20 w-20 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary border-2 border-primary/20 shadow-lg shadow-primary/10">
@@ -138,7 +138,7 @@ export default function ServiceStatsDetailPage() {
 								</div>
 								<div className="flex-1">
 									<p className="font-mono text-sm font-semibold text-foreground mb-1">
-										Icon Name
+										İkon Adı
 									</p>
 									<p className="font-mono text-xs text-muted-foreground bg-background/50 px-3 py-1.5 rounded-md border border-border/50 inline-block">
 										{data.iconName}
@@ -153,7 +153,7 @@ export default function ServiceStatsDetailPage() {
 						{/* Title */}
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
-								<span>Title</span>
+								<span>Başlık</span>
 							</Label>
 							<div className="p-4 rounded-xl bg-muted/50 border border-border/50">
 								<p className="text-lg font-semibold text-foreground">{data.title}</p>
@@ -166,7 +166,7 @@ export default function ServiceStatsDetailPage() {
 						{/* Number Value */}
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
-								<span>Number Value</span>
+								<span>Sayısal Değer</span>
 							</Label>
 							<div className="p-6 rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10 border-2 border-primary/20 shadow-lg shadow-primary/10">
 								<p className="text-5xl font-bold bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">

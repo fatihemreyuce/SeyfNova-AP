@@ -140,10 +140,10 @@ export default function NotificationListPage() {
 					</Button>
 					<div>
 						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-							Notifications
+							Bildirimler
 						</h1>
 						<p className="text-muted-foreground mt-1">
-							Manage notifications and announcements
+							Bildirimleri ve duyuruları yönetin
 						</p>
 					</div>
 				</div>
@@ -152,7 +152,7 @@ export default function NotificationListPage() {
 					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 				>
 					<Plus className="h-4 w-4 mr-2" />
-					Create New
+					Yeni Oluştur
 				</Button>
 			</div>
 
@@ -161,7 +161,7 @@ export default function NotificationListPage() {
 				<div className="relative flex-1 max-w-sm">
 					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
-						placeholder="Search notifications..."
+						placeholder="Bildirimlerde ara..."
 						value={search}
 						onChange={(e) => {
 							setSearch(e.target.value);
@@ -179,13 +179,13 @@ export default function NotificationListPage() {
 				>
 					<SelectTrigger className="w-[220px] gap-2">
 						<ArrowUpDown className="h-4 w-4" />
-						<SelectValue placeholder="Sort by" />
+						<SelectValue placeholder="Sırala" />
 					</SelectTrigger>
 					<SelectContent>
-						<SelectItem value="id,asc">ID: Low to High</SelectItem>
-						<SelectItem value="id,desc">ID: High to Low</SelectItem>
-						<SelectItem value="title,asc">Title: A-Z</SelectItem>
-						<SelectItem value="title,desc">Title: Z-A</SelectItem>
+						<SelectItem value="id,asc">ID: Düşükten Yükseğe</SelectItem>
+						<SelectItem value="id,desc">ID: Yüksekten Düşüğe</SelectItem>
+						<SelectItem value="title,asc">Başlık: A-Z</SelectItem>
+						<SelectItem value="title,desc">Başlık: Z-A</SelectItem>
 					</SelectContent>
 				</Select>
 				<Button
@@ -194,7 +194,7 @@ export default function NotificationListPage() {
 					className="gap-2"
 				>
 					<Settings className="h-4 w-4" />
-					Pagination
+					Sayfalama
 				</Button>
 			</div>
 
@@ -205,9 +205,9 @@ export default function NotificationListPage() {
 						<TableHeader>
 							<TableRow>
 								<TableHead>ID</TableHead>
-								<TableHead>Title</TableHead>
-								<TableHead>Content</TableHead>
-								<TableHead className="text-right">Actions</TableHead>
+								<TableHead>Başlık</TableHead>
+								<TableHead>İçerik</TableHead>
+								<TableHead className="text-right">İşlemler</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
@@ -215,7 +215,7 @@ export default function NotificationListPage() {
 								<TableCell colSpan={4} className="text-center py-8">
 									<div className="flex items-center justify-center gap-2 text-muted-foreground">
 										<Loader2 className="h-4 w-4 animate-spin" />
-										Loading...
+										Yükleniyor...
 									</div>
 								</TableCell>
 							</TableRow>
@@ -228,9 +228,9 @@ export default function NotificationListPage() {
 						<TableHeader>
 							<TableRow>
 								<TableHead>ID</TableHead>
-								<TableHead>Title</TableHead>
-								<TableHead>Content</TableHead>
-								<TableHead className="text-right">Actions</TableHead>
+								<TableHead>Başlık</TableHead>
+								<TableHead>İçerik</TableHead>
+								<TableHead className="text-right">İşlemler</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
@@ -257,7 +257,7 @@ export default function NotificationListPage() {
 												size="icon"
 												onClick={() => navigate(`/notification/${item.id}`)}
 												className="h-8 w-8 hover:bg-primary/10"
-												title="View Details"
+												title="Detayları Görüntüle"
 											>
 												<Eye className="h-4 w-4" />
 											</Button>
@@ -266,7 +266,7 @@ export default function NotificationListPage() {
 												size="icon"
 												onClick={() => handleSendClick(item)}
 												className="h-8 w-8 hover:bg-green-500/10 hover:text-green-600 dark:hover:text-green-400"
-												title="Send Notification"
+												title="Bildirim Gönder"
 											>
 												<Send className="h-4 w-4" />
 											</Button>
@@ -275,7 +275,7 @@ export default function NotificationListPage() {
 												size="icon"
 												onClick={() => navigate(`/notification/edit/${item.id}`)}
 												className="h-8 w-8 hover:bg-primary/10"
-												title="Edit"
+												title="Düzenle"
 											>
 												<Pencil className="h-4 w-4" />
 											</Button>
@@ -284,7 +284,7 @@ export default function NotificationListPage() {
 												size="icon"
 												onClick={() => handleDeleteClick(item)}
 												className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive"
-												title="Delete"
+												title="Sil"
 											>
 												<Trash2 className="h-4 w-4" />
 											</Button>
@@ -302,11 +302,11 @@ export default function NotificationListPage() {
 							<Bell className="h-12 w-12 text-muted-foreground/50" />
 						</EmptyMedia>
 						<EmptyHeader>
-							<EmptyTitle>No notifications found</EmptyTitle>
+							<EmptyTitle>Bildirim bulunamadı</EmptyTitle>
 							<EmptyDescription>
 								{search
-									? "No results match your search criteria. Try adjusting your search terms."
-									: "Get started by creating a new notification."}
+									? "Arama kriterlerinize uygun sonuç bulunamadı. Arama terimlerinizi değiştirmeyi deneyin."
+									: "Yeni bir bildirim oluşturarak başlayın."}
 							</EmptyDescription>
 						</EmptyHeader>
 						{!search && (
@@ -315,7 +315,7 @@ export default function NotificationListPage() {
 								className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 							>
 								<Plus className="h-4 w-4 mr-2" />
-								Create Notification
+								Bildirim Oluştur
 							</Button>
 						)}
 					</Empty>
@@ -326,9 +326,9 @@ export default function NotificationListPage() {
 			{data && data.totalPages > 0 && (
 				<div className="flex items-center justify-between">
 					<div className="text-sm text-muted-foreground">
-						Showing {data.content.length > 0 ? page * size + 1 : 0} to{" "}
-						{Math.min((page + 1) * size, data.totalElements)} of{" "}
-						{data.totalElements} results
+						{data.content.length > 0 ? page * size + 1 : 0} - {" "}
+						{Math.min((page + 1) * size, data.totalElements)} / {" "}
+						{data.totalElements} sonuç
 					</div>
 					<div className="flex items-center gap-2">
 						<Button
@@ -340,7 +340,7 @@ export default function NotificationListPage() {
 							<ChevronLeft className="h-4 w-4" />
 						</Button>
 						<span className="text-sm font-medium">
-							Page {page + 1} of {data.totalPages}
+							Sayfa {page + 1} / {data.totalPages}
 						</span>
 						<Button
 							variant="outline"
@@ -357,11 +357,11 @@ export default function NotificationListPage() {
 			{/* Delete Modal */}
 			<DeleteModal
 				open={isDeleteDialogOpen}
-				title="Delete Notification"
-				description="This action cannot be undone. This will permanently delete the notification."
+				title="Bildirimi Sil"
+				description="Bu işlem geri alınamaz. Bu bildirim kalıcı olarak silinecektir."
 				itemName={deletingItemName}
-				confirmText="Delete"
-				cancelText="Cancel"
+				confirmText="Sil"
+				cancelText="İptal"
 				onConfirm={handleDelete}
 				onCancel={() => {
 					setIsDeleteDialogOpen(false);
@@ -375,9 +375,9 @@ export default function NotificationListPage() {
 			<Dialog open={isSendDialogOpen} onOpenChange={setIsSendDialogOpen}>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>Send Notification</DialogTitle>
+						<DialogTitle>Bildirim Gönder</DialogTitle>
 						<DialogDescription>
-							Are you sure you want to send this notification? It will be sent to all users.
+							Bu bildirimi göndermek istediğinizden emin misiniz? Tüm kullanıcılara gönderilecektir.
 							{sendingNotification && (
 								<div className="mt-4 p-3 rounded-lg bg-muted/50 border border-border/50">
 									<p className="font-medium text-sm mb-1">{sendingNotification.title}</p>
@@ -394,7 +394,7 @@ export default function NotificationListPage() {
 							onClick={() => setIsSendDialogOpen(false)}
 							disabled={sendMutation.isPending}
 						>
-							Cancel
+							İptal
 						</Button>
 						<Button
 							onClick={handleSend}
@@ -404,12 +404,12 @@ export default function NotificationListPage() {
 							{sendMutation.isPending ? (
 								<>
 									<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-									Sending...
+									Gönderiliyor...
 								</>
 							) : (
 								<>
 									<Send className="h-4 w-4 mr-2" />
-									Send
+									Gönder
 								</>
 							)}
 						</Button>

@@ -126,10 +126,10 @@ export default function ServiceStatsListPage() {
 					</Button>
 					<div>
 						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-							Service Stats
+							Hizmet İstatistikleri
 						</h1>
 						<p className="text-muted-foreground mt-1">
-							Manage service statistics
+							Hizmet istatistiklerini yönetin
 						</p>
 					</div>
 				</div>
@@ -138,7 +138,7 @@ export default function ServiceStatsListPage() {
 					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 				>
 					<Plus className="h-4 w-4 mr-2" />
-					Create New
+					Yeni Oluştur
 				</Button>
 			</div>
 
@@ -147,7 +147,7 @@ export default function ServiceStatsListPage() {
 				<div className="relative flex-1 max-w-sm">
 					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
-						placeholder="Search..."
+						placeholder="Ara..."
 						value={search}
 						onChange={(e) => {
 							setSearch(e.target.value);
@@ -165,15 +165,15 @@ export default function ServiceStatsListPage() {
 				>
 					<SelectTrigger className="w-[180px] gap-2">
 						<ArrowUpDown className="h-4 w-4" />
-						<SelectValue placeholder="Sort by" />
+						<SelectValue placeholder="Sırala" />
 					</SelectTrigger>
 					<SelectContent>
-						<SelectItem value="id,asc">ID: Low to High</SelectItem>
-						<SelectItem value="id,desc">ID: High to Low</SelectItem>
-						<SelectItem value="title,asc">Title: A-Z</SelectItem>
-						<SelectItem value="title,desc">Title: Z-A</SelectItem>
-						<SelectItem value="numberValue,asc">Value: Low to High</SelectItem>
-						<SelectItem value="numberValue,desc">Value: High to Low</SelectItem>
+						<SelectItem value="id,asc">ID: Düşükten Yükseğe</SelectItem>
+						<SelectItem value="id,desc">ID: Yüksekten Düşüğe</SelectItem>
+						<SelectItem value="title,asc">Başlık: A-Z</SelectItem>
+						<SelectItem value="title,desc">Başlık: Z-A</SelectItem>
+						<SelectItem value="numberValue,asc">Değer: Düşükten Yükseğe</SelectItem>
+						<SelectItem value="numberValue,desc">Değer: Yüksekten Düşüğe</SelectItem>
 					</SelectContent>
 				</Select>
 				<Button
@@ -182,7 +182,7 @@ export default function ServiceStatsListPage() {
 					className="gap-2"
 				>
 					<Settings className="h-4 w-4" />
-					Pagination
+					Sayfalama
 				</Button>
 			</div>
 
@@ -193,10 +193,10 @@ export default function ServiceStatsListPage() {
 						<TableHeader>
 							<TableRow>
 								<TableHead>ID</TableHead>
-								<TableHead>Icon</TableHead>
-								<TableHead>Title</TableHead>
-								<TableHead>Number Value</TableHead>
-								<TableHead className="text-right">Actions</TableHead>
+								<TableHead>İkon</TableHead>
+								<TableHead>Başlık</TableHead>
+								<TableHead>Sayısal Değer</TableHead>
+								<TableHead className="text-right">İşlemler</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
@@ -204,7 +204,7 @@ export default function ServiceStatsListPage() {
 								<TableCell colSpan={5} className="text-center py-8">
 									<div className="flex items-center justify-center gap-2 text-muted-foreground">
 										<Loader2 className="h-4 w-4 animate-spin" />
-										Loading...
+										Yükleniyor...
 									</div>
 								</TableCell>
 							</TableRow>
@@ -217,10 +217,10 @@ export default function ServiceStatsListPage() {
 						<TableHeader>
 							<TableRow>
 								<TableHead>ID</TableHead>
-								<TableHead>Icon</TableHead>
-								<TableHead>Title</TableHead>
-								<TableHead>Number Value</TableHead>
-								<TableHead className="text-right">Actions</TableHead>
+								<TableHead>İkon</TableHead>
+								<TableHead>Başlık</TableHead>
+								<TableHead>Sayısal Değer</TableHead>
+								<TableHead className="text-right">İşlemler</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
@@ -241,7 +241,7 @@ export default function ServiceStatsListPage() {
 												size="icon"
 												onClick={() => navigate(`/service-stats/${item.id}`)}
 												className="h-8 w-8 hover:bg-primary/10"
-												title="View Details"
+												title="Detayları Görüntüle"
 											>
 												<Eye className="h-4 w-4" />
 											</Button>
@@ -250,7 +250,7 @@ export default function ServiceStatsListPage() {
 												size="icon"
 												onClick={() => navigate(`/service-stats/edit/${item.id}`)}
 												className="h-8 w-8 hover:bg-primary/10"
-												title="Edit"
+												title="Düzenle"
 											>
 												<Pencil className="h-4 w-4" />
 											</Button>
@@ -259,7 +259,7 @@ export default function ServiceStatsListPage() {
 												size="icon"
 												onClick={() => handleDeleteClick(item)}
 												className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive"
-												title="Delete"
+												title="Sil"
 											>
 												<Trash2 className="h-4 w-4" />
 											</Button>
@@ -277,11 +277,11 @@ export default function ServiceStatsListPage() {
 							<BarChart3 className="h-12 w-12 text-muted-foreground/50" />
 						</EmptyMedia>
 						<EmptyHeader>
-							<EmptyTitle>No service stats found</EmptyTitle>
+							<EmptyTitle>Hizmet istatistiği bulunamadı</EmptyTitle>
 							<EmptyDescription>
 								{search
-									? "No results match your search criteria. Try adjusting your search terms."
-									: "Get started by creating a new service stat."}
+									? "Arama kriterlerinize uygun sonuç bulunamadı. Arama terimlerinizi değiştirmeyi deneyin."
+									: "Yeni bir hizmet istatistiği oluşturarak başlayın."}
 							</EmptyDescription>
 						</EmptyHeader>
 						{!search && (
@@ -290,7 +290,7 @@ export default function ServiceStatsListPage() {
 								className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
 							>
 								<Plus className="h-4 w-4 mr-2" />
-								Create Service Stat
+								Hizmet İstatistiği Oluştur
 							</Button>
 						)}
 					</Empty>
@@ -301,9 +301,9 @@ export default function ServiceStatsListPage() {
 			{data && data.totalPages > 0 && (
 				<div className="flex items-center justify-between">
 					<div className="text-sm text-muted-foreground">
-						Showing {data.content.length > 0 ? page * size + 1 : 0} to{" "}
-						{Math.min((page + 1) * size, data.totalElements)} of{" "}
-						{data.totalElements} results
+						{data.content.length > 0 ? page * size + 1 : 0} - {" "}
+						{Math.min((page + 1) * size, data.totalElements)} / {" "}
+						{data.totalElements} sonuç
 					</div>
 					<div className="flex items-center gap-2">
 						<Button
@@ -315,7 +315,7 @@ export default function ServiceStatsListPage() {
 							<ChevronLeft className="h-4 w-4" />
 						</Button>
 						<span className="text-sm font-medium">
-							Page {page + 1} of {data.totalPages}
+							Sayfa {page + 1} / {data.totalPages}
 						</span>
 						<Button
 							variant="outline"
@@ -332,11 +332,11 @@ export default function ServiceStatsListPage() {
 			{/* Delete Confirmation Modal */}
 			<DeleteModal
 				open={isDeleteDialogOpen}
-				title="Delete Service Stat"
-				description="This action cannot be undone. This will permanently delete the service stat."
+				title="Hizmet İstatistiğini Sil"
+				description="Bu işlem geri alınamaz. Bu hizmet istatistiği kalıcı olarak silinecektir."
 				itemName={deletingItemName}
-				confirmText="Delete"
-				cancelText="Cancel"
+				confirmText="Sil"
+				cancelText="İptal"
 				onConfirm={handleDelete}
 				onCancel={() => {
 					setIsDeleteDialogOpen(false);

@@ -15,11 +15,11 @@ export const useCreateReference = () => {
 	return useMutation({
 		mutationFn: (request: ReferenceRequest) => createReference(request),
 		onSuccess: () => {
-			toast.success("Reference created successfully");
+			toast.success("Referans başarıyla oluşturuldu");
 			queryClient.invalidateQueries({ queryKey: ["references"] });
 		},
 		onError: () => {
-			toast.error("Failed to create reference");
+			toast.error("Referans oluşturulurken hata oluştu");
 		},
 	});
 };
@@ -29,11 +29,11 @@ export const useUpdateReference = () => {
 	return useMutation({
 		mutationFn: ({ id, request }: { id: number; request: ReferenceRequest }) => updateReference(id, request),
 		onSuccess: () => {
-			toast.success("Reference updated successfully");
+			toast.success("Referans başarıyla güncellendi");
 			queryClient.invalidateQueries({ queryKey: ["references"] });
 		},
 		onError: () => {
-			toast.error("Failed to update reference");
+			toast.error("Referans güncellenirken hata oluştu");
 		},
 	});
 };
@@ -43,11 +43,11 @@ export const useDeleteReference = () => {
 	return useMutation({
 		mutationFn: (id: number) => deleteReference(id),
 		onSuccess: () => {
-			toast.success("Reference deleted successfully");
+			toast.success("Referans başarıyla silindi");
 			queryClient.invalidateQueries({ queryKey: ["references"] });
 		},
 		onError: () => {
-			toast.error("Failed to delete reference");
+			toast.error("Referans silinirken hata oluştu");
 		},
 	});
 };

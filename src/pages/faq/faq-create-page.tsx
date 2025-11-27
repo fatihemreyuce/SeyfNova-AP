@@ -63,10 +63,10 @@ export default function FaqCreatePage() {
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Create FAQ
+								SSS Oluştur
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Add a new frequently asked question and its answer
+								Yeni bir sık sorulan soru ve cevabı ekleyin
 							</p>
 						</div>
 					</div>
@@ -78,10 +78,10 @@ export default function FaqCreatePage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								FAQ Details
+								SSS Detayları
 							</CardTitle>
 							<CardDescription className="text-base">
-								Fill in the fields below to create a new FAQ entry
+								Yeni bir SSS girişi oluşturmak için aşağıdaki alanları doldurun
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
@@ -91,12 +91,12 @@ export default function FaqCreatePage() {
 									htmlFor="question"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Question</span>
+									<span>Soru</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="question"
-									placeholder="e.g., How can I contact support?"
+									placeholder="Örn: Destek ekibiyle nasıl iletişime geçebilirim?"
 									value={question}
 									onChange={(e) => setQuestion(e.target.value)}
 									disabled={isSubmitting}
@@ -110,12 +110,12 @@ export default function FaqCreatePage() {
 									htmlFor="answer"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Answer</span>
+									<span>Cevap</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
 									id="answer"
-									placeholder="Provide a clear and concise answer..."
+									placeholder="Net ve özlü bir cevap verin..."
 									value={answer}
 									onChange={(e) => setAnswer(e.target.value)}
 									disabled={isSubmitting}
@@ -129,14 +129,14 @@ export default function FaqCreatePage() {
 									htmlFor="orderIndex"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Order Index</span>
+									<span>Sıra</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="orderIndex"
 									type="number"
 									min="0"
-									placeholder="e.g., 1"
+									placeholder="Örn: 1"
 									value={orderIndex}
 									onChange={(e) => {
 										const value = e.target.value;
@@ -146,7 +146,7 @@ export default function FaqCreatePage() {
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
 								<p className="text-sm text-muted-foreground">
-									Lower numbers appear earlier in FAQ lists
+									Düşük sayılar SSS listelerinde daha önce görünür
 								</p>
 							</div>
 						</CardContent>
@@ -158,7 +158,7 @@ export default function FaqCreatePage() {
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -168,12 +168,12 @@ export default function FaqCreatePage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Creating...
+										Oluşturuluyor...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Create FAQ
+										SSS Oluştur
 									</>
 								)}
 							</Button>

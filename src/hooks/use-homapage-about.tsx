@@ -21,11 +21,11 @@ export const useCreateHomePageAbout = () => {
     return useMutation({
         mutationFn: (request: HomePageAboutRequest) => createHomePageAbout(request),
         onSuccess: () => {
-            toast.success("Home page about created successfully");
+            toast.success("Ana sayfa hakkında başarıyla oluşturuldu");
             queryClient.invalidateQueries({ queryKey: ["homepage-about"] });
         },
         onError: () => {
-            toast.error("Failed to create home page about");
+            toast.error("Ana sayfa hakkında oluşturulurken hata oluştu");
         },
     });
 }
@@ -35,11 +35,11 @@ export const useUpdateHomePageAbout = () => {
     return useMutation({
         mutationFn: ({ id, request }: { id: number; request: HomePageAboutRequest }) => updateHomePageAbout(id, request),
         onSuccess: () => {
-            toast.success("Home page about updated successfully");
+            toast.success("Ana sayfa hakkında başarıyla güncellendi");
             queryClient.invalidateQueries({ queryKey: ["homepage-about"] });
         },
         onError: () => {
-            toast.error("Failed to update home page about");
+            toast.error("Ana sayfa hakkında güncellenirken hata oluştu");
         },
     });
 }
@@ -49,11 +49,11 @@ export const useDeleteHomePageAbout = () => {
     return useMutation({
         mutationFn: (id: number) => deleteHomePageAbout(id),
         onSuccess: () => {
-            toast.success("Home page about deleted successfully");
+            toast.success("Ana sayfa hakkında başarıyla silindi");
             queryClient.invalidateQueries({ queryKey: ["homepage-about"] });
         },
         onError: () => {
-            toast.error("Failed to delete home page about");
+            toast.error("Ana sayfa hakkında silinirken hata oluştu");
         },
     });
 }

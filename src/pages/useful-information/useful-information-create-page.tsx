@@ -81,10 +81,10 @@ export default function UsefulInformationCreatePage() {
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Create Useful Information
+								Faydalı Bilgi Oluştur
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Add a new useful information document
+								Yeni bir faydalı bilgi belgesi ekleyin
 							</p>
 						</div>
 					</div>
@@ -96,10 +96,10 @@ export default function UsefulInformationCreatePage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								Useful Information Details
+								Faydalı Bilgi Detayları
 							</CardTitle>
 							<CardDescription className="text-base">
-								Fill in the fields below to create a new useful information document
+								Yeni bir faydalı bilgi belgesi oluşturmak için aşağıdaki alanları doldurun
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
@@ -109,7 +109,7 @@ export default function UsefulInformationCreatePage() {
 									htmlFor="file"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>File</span>
+									<span>Dosya</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								{!file ? (
@@ -117,7 +117,7 @@ export default function UsefulInformationCreatePage() {
 										<input
 											type="file"
 											id="file"
-											accept=".pdf,.doc,.docx,.txt"
+											accept=".pdf,.doc,.docx"
 											onChange={handleFileChange}
 											className="hidden"
 											required
@@ -131,9 +131,9 @@ export default function UsefulInformationCreatePage() {
 												<Upload className="h-6 w-6 text-primary" />
 											</div>
 											<div>
-												<p className="text-sm font-medium">Click to upload file</p>
+												<p className="text-sm font-medium">Dosya yüklemek için tıklayın</p>
 												<p className="text-xs text-muted-foreground mt-1">
-													PDF, DOC, DOCX, TXT up to 10MB
+													PDF, DOC, DOCX, 10MB'a kadar
 												</p>
 											</div>
 										</label>
@@ -164,7 +164,7 @@ export default function UsefulInformationCreatePage() {
 										<input
 											type="file"
 											id="file"
-											accept=".pdf,.doc,.docx,.txt"
+											accept=".pdf,.doc,.docx"
 											onChange={handleFileChange}
 											className="hidden"
 											disabled={isSubmitting}
@@ -177,7 +177,7 @@ export default function UsefulInformationCreatePage() {
 											disabled={isSubmitting}
 										>
 											<Upload className="h-4 w-4 mr-2" />
-											Change File
+											Dosyayı Değiştir
 										</Button>
 									</div>
 								)}
@@ -189,12 +189,12 @@ export default function UsefulInformationCreatePage() {
 									htmlFor="title"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Title</span>
+									<span>Başlık</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="title"
-									placeholder="e.g., User Guide 2024"
+									placeholder="Örn: Kullanıcı Kılavuzu 2024"
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
 									disabled={isSubmitting}
@@ -208,12 +208,12 @@ export default function UsefulInformationCreatePage() {
 									htmlFor="description"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Description</span>
+									<span>Açıklama</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
 									id="description"
-									placeholder="Provide a description of the useful information..."
+									placeholder="Faydalı bilgi için bir açıklama verin..."
 									value={description}
 									onChange={(e) => setDescription(e.target.value)}
 									disabled={isSubmitting}
@@ -229,7 +229,7 @@ export default function UsefulInformationCreatePage() {
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -239,12 +239,12 @@ export default function UsefulInformationCreatePage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Creating...
+										Oluşturuluyor...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Create Useful Information
+										Faydalı Bilgi Oluştur
 									</>
 								)}
 							</Button>

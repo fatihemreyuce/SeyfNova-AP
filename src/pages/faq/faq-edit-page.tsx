@@ -69,7 +69,7 @@ export default function FaqEditPage() {
 			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-4">
 					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Loading FAQ data...</p>
+					<p className="text-muted-foreground text-lg">SSS verileri yükleniyor...</p>
 				</div>
 			</div>
 		);
@@ -94,10 +94,10 @@ export default function FaqEditPage() {
 						</div>
 						<div>
 							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-								Edit FAQ
+								SSS Düzenle
 							</h1>
 							<p className="text-muted-foreground mt-1.5 text-base">
-								Update FAQ information (ID: {id})
+								SSS bilgilerini güncelle (ID: {id})
 							</p>
 						</div>
 					</div>
@@ -109,10 +109,10 @@ export default function FaqEditPage() {
 					<form onSubmit={handleSubmit}>
 						<CardHeader className="pb-6 pt-8 px-8">
 							<CardTitle className="text-2xl font-semibold mb-2">
-								FAQ Details
+								SSS Detayları
 							</CardTitle>
 							<CardDescription className="text-base">
-								Update the fields below to modify this FAQ entry
+								Bu SSS girişini değiştirmek için aşağıdaki alanları güncelleyin
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-8 px-8 pb-8">
@@ -122,12 +122,12 @@ export default function FaqEditPage() {
 									htmlFor="question"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Question</span>
+									<span>Soru</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="question"
-									placeholder="e.g., How can I contact support?"
+									placeholder="Örn: Destekle nasıl iletişime geçebilirim?"
 									value={question}
 									onChange={(e) => setQuestion(e.target.value)}
 									disabled={isSubmitting}
@@ -141,12 +141,12 @@ export default function FaqEditPage() {
 									htmlFor="answer"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Answer</span>
+									<span>Cevap</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Textarea
 									id="answer"
-									placeholder="Provide a clear and concise answer..."
+									placeholder="Açık ve öz bir cevap sağlayın..."
 									value={answer}
 									onChange={(e) => setAnswer(e.target.value)}
 									disabled={isSubmitting}
@@ -160,14 +160,14 @@ export default function FaqEditPage() {
 									htmlFor="orderIndex"
 									className="text-base font-medium flex items-center gap-2"
 								>
-									<span>Order Index</span>
+									<span>Sıra Numarası</span>
 									<span className="text-destructive">*</span>
 								</Label>
 								<Input
 									id="orderIndex"
 									type="number"
 									min="0"
-									placeholder="e.g., 1"
+									placeholder="Örn: 1"
 									value={orderIndex}
 									onChange={(e) => {
 										const value = e.target.value;
@@ -177,7 +177,7 @@ export default function FaqEditPage() {
 									className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
 								/>
 								<p className="text-sm text-muted-foreground">
-									Lower numbers appear earlier in FAQ lists
+									Düşük sayılar SSS listelerinde daha erken görünür
 								</p>
 							</div>
 						</CardContent>
@@ -189,7 +189,7 @@ export default function FaqEditPage() {
 								disabled={isSubmitting}
 								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
 							>
-								Cancel
+								İptal
 							</Button>
 							<Button
 								type="submit"
@@ -199,12 +199,12 @@ export default function FaqEditPage() {
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Updating...
+										Güncelleniyor...
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Update FAQ
+										SSS'yi Güncelle
 									</>
 								)}
 							</Button>

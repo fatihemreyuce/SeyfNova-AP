@@ -15,11 +15,11 @@ export const useCreateCircular = () => {
 	return useMutation({
 		mutationFn: (request: CircularRequest) => createCircular(request),
 		onSuccess: () => {
-			toast.success("Circular created successfully");
+			toast.success("Genelge başarıyla oluşturuldu");
 			queryClient.invalidateQueries({ queryKey: ["circulars"] });
 		},
 		onError: () => {
-			toast.error("Failed to create circular");
+			toast.error("Genelge oluşturulurken hata oluştu");
 		},
 	});
 };
@@ -29,11 +29,11 @@ export const useUpdateCircular = () => {
 	return useMutation({
 		mutationFn: ({ id, request }: { id: number; request: CircularRequest }) => updateCircular(id, request),
 		onSuccess: () => {
-			toast.success("Circular updated successfully");
+			toast.success("Genelge başarıyla güncellendi");
 			queryClient.invalidateQueries({ queryKey: ["circulars"] });
 		},
 		onError: () => {
-			toast.error("Failed to update circular");
+			toast.error("Genelge güncellenirken hata oluştu");
 		},
 	});
 };
@@ -43,11 +43,11 @@ export const useDeleteCircular = () => {
 	return useMutation({
 		mutationFn: (id: number) => deleteCircular(id),
 		onSuccess: () => {
-			toast.success("Circular deleted successfully");
+			toast.success("Genelge başarıyla silindi");
 			queryClient.invalidateQueries({ queryKey: ["circulars"] });
 		},
 		onError: () => {
-			toast.error("Failed to delete circular");
+			toast.error("Genelge silinirken hata oluştu");
 		},
 	});
 };
