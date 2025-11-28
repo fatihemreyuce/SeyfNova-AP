@@ -12,10 +12,11 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateSettings, useGetSettingsById } from "@/hooks/use-settings";
 import type { SettingsRequest } from "@/types/settings.types";
 import { normalizeImageUrl } from "@/utils/image-url";
-import { ArrowLeft, Settings, Loader2, Save, Upload, X, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Settings, Save, Upload, X, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 
 export default function SettingsEditPage() {
@@ -124,10 +125,45 @@ export default function SettingsEditPage() {
 
 	if (isLoading) {
 		return (
-			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
-				<div className="flex flex-col items-center gap-4">
-					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Ayar verileri yükleniyor...</p>
+			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
+				<div className="max-w-4xl mx-auto space-y-8">
+					<div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+						<Skeleton className="h-10 w-10 rounded-full" />
+						<div className="flex items-center gap-3">
+							<Skeleton className="h-12 w-12 rounded-lg" />
+							<div className="space-y-2">
+								<Skeleton className="h-8 w-32" />
+								<Skeleton className="h-4 w-40" />
+							</div>
+						</div>
+					</div>
+					<Card className="border-2 border-border/60 shadow-2xl shadow-primary/5 bg-card/50 backdrop-blur-sm overflow-hidden">
+						<Skeleton className="h-1.5 w-full" />
+						<CardHeader className="pb-6 pt-8 px-4 sm:px-8">
+							<Skeleton className="h-7 w-48 mb-2" />
+							<Skeleton className="h-4 w-64" />
+						</CardHeader>
+						<CardContent className="px-4 sm:px-8 pb-8 space-y-8">
+							<div className="space-y-2">
+								<Skeleton className="h-4 w-24" />
+								<Skeleton className="h-40 w-full max-w-xs rounded-lg" />
+							</div>
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+								{Array.from({ length: 10 }).map((_, index) => (
+									<div key={index} className="space-y-3">
+										<Skeleton className="h-5 w-32" />
+										<Skeleton className="h-10 w-full" />
+									</div>
+								))}
+							</div>
+						</CardContent>
+						<CardFooter className="px-4 sm:px-8 pb-8 pt-6">
+							<div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-4 w-full">
+								<Skeleton className="h-11 w-24" />
+								<Skeleton className="h-11 w-32" />
+							</div>
+						</CardFooter>
+					</Card>
 				</div>
 			</div>
 		);

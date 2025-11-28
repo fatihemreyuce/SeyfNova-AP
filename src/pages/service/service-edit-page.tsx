@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateService, useGetServiceById } from "@/hooks/use-service";
 import type { ServiceRequest } from "@/types/service.types";
-import { ArrowLeft, Save, Loader2, Briefcase } from "lucide-react";
+import { ArrowLeft, Save, Briefcase } from "lucide-react";
 import { toast } from "sonner";
 
 export default function ServiceEditPage() {
@@ -74,11 +75,46 @@ export default function ServiceEditPage() {
 
 	if (isLoading) {
 		return (
-			<div className="flex items-center justify-center min-h-[400px]">
-				<div className="text-center space-y-4">
-					<Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-					<p className="text-muted-foreground">Hizmet verileri yükleniyor...</p>
+			<div className="space-y-6">
+				{/* Header Skeleton */}
+				<div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+					<div className="flex items-center gap-4">
+						<Skeleton className="h-9 w-9 rounded" />
+						<div className="space-y-2">
+							<Skeleton className="h-8 w-48" />
+							<Skeleton className="h-4 w-64" />
+						</div>
+					</div>
 				</div>
+
+				{/* Form Card Skeleton */}
+				<Card className="shadow-lg border-border/50">
+					<CardHeader className="border-b border-border/50">
+						<div className="flex items-center gap-3">
+							<Skeleton className="h-10 w-10 rounded-lg" />
+							<div className="space-y-2">
+								<Skeleton className="h-6 w-48" />
+								<Skeleton className="h-4 w-64" />
+							</div>
+						</div>
+					</CardHeader>
+					<CardContent className="pt-6 space-y-6">
+						{Array.from({ length: 4 }).map((_, index) => (
+							<div key={index} className="space-y-2">
+								<Skeleton className="h-4 w-24" />
+								<Skeleton className="h-10 w-full" />
+							</div>
+						))}
+						<div className="space-y-2">
+							<Skeleton className="h-4 w-24" />
+							<Skeleton className="h-32 w-full" />
+						</div>
+						<div className="flex items-center justify-end gap-3 pt-4 border-t">
+							<Skeleton className="h-10 w-20" />
+							<Skeleton className="h-10 w-24" />
+						</div>
+					</CardContent>
+				</Card>
 			</div>
 		);
 	}

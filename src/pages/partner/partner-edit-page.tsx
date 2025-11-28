@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdatePartner, useGetPartnerById } from "@/hooks/use-partners";
 import type { PartnerRequest } from "@/types/partners.types";
 import { normalizeImageUrl } from "@/utils/image-url";
-import { ArrowLeft, Save, Loader2, Image as ImageIcon, Upload, X, Handshake } from "lucide-react";
+import { ArrowLeft, Save, Image as ImageIcon, Upload, X, Handshake } from "lucide-react";
 import { toast } from "sonner";
 
 export default function PartnerEditPage() {
@@ -87,11 +88,41 @@ export default function PartnerEditPage() {
 
 	if (isLoading) {
 		return (
-			<div className="flex items-center justify-center min-h-[400px]">
-				<div className="text-center space-y-4">
-					<Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-					<p className="text-muted-foreground">Partner verileri yükleniyor...</p>
+			<div className="space-y-6">
+				<div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+					<Skeleton className="h-9 w-9 rounded" />
+					<div className="space-y-2">
+						<Skeleton className="h-8 w-48" />
+						<Skeleton className="h-4 w-64" />
+					</div>
 				</div>
+				<Card className="shadow-lg border-border/50">
+					<CardHeader className="border-b border-border/50">
+						<div className="flex items-center gap-3">
+							<Skeleton className="h-10 w-10 rounded-lg" />
+							<div className="space-y-2">
+								<Skeleton className="h-6 w-48" />
+								<Skeleton className="h-4 w-64" />
+							</div>
+						</div>
+					</CardHeader>
+					<CardContent className="pt-6 space-y-6">
+						<div className="space-y-2">
+							<Skeleton className="h-4 w-24" />
+							<Skeleton className="h-40 w-full max-w-xs rounded-lg" />
+						</div>
+						{Array.from({ length: 2 }).map((_, index) => (
+							<div key={index} className="space-y-2">
+								<Skeleton className="h-4 w-24" />
+								<Skeleton className="h-10 w-full" />
+							</div>
+						))}
+						<div className="flex items-center justify-end gap-3 pt-4 border-t">
+							<Skeleton className="h-10 w-20" />
+							<Skeleton className="h-10 w-24" />
+						</div>
+					</CardContent>
+				</Card>
 			</div>
 		);
 	}

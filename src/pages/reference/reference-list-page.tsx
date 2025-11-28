@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/empty";
 import { DeleteModal } from "@/components/ui/delete-modal";
 import { PaginationModal } from "@/components/ui/pagination-modal";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useReferences, useDeleteReference } from "@/hooks/use-references";
 import { normalizeImageUrl } from "@/utils/image-url";
 import {
@@ -186,14 +187,35 @@ export default function ReferenceListPage() {
 								</TableRow>
 							</TableHeader>
 							<TableBody>
-								<TableRow>
-									<TableCell colSpan={7} className="text-center py-8">
-										<div className="flex items-center justify-center gap-2 text-muted-foreground">
-											<Loader2 className="h-4 w-4 animate-spin" />
-											Yükleniyor...
-										</div>
-									</TableCell>
-								</TableRow>
+								{Array.from({ length: 5 }).map((_, index) => (
+									<TableRow key={index}>
+										<TableCell className="hidden md:table-cell">
+											<Skeleton className="h-4 w-12" />
+										</TableCell>
+										<TableCell>
+											<Skeleton className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg" />
+										</TableCell>
+										<TableCell>
+											<Skeleton className="h-4 w-32" />
+										</TableCell>
+										<TableCell className="hidden md:table-cell">
+											<Skeleton className="h-4 w-48" />
+										</TableCell>
+										<TableCell className="hidden lg:table-cell">
+											<Skeleton className="h-4 w-40" />
+										</TableCell>
+										<TableCell className="hidden sm:table-cell">
+											<Skeleton className="h-4 w-8" />
+										</TableCell>
+										<TableCell className="text-right">
+											<div className="flex items-center justify-end gap-2">
+												<Skeleton className="h-8 w-8 rounded" />
+												<Skeleton className="h-8 w-8 rounded" />
+												<Skeleton className="h-8 w-8 rounded" />
+											</div>
+										</TableCell>
+									</TableRow>
+								))}
 							</TableBody>
 						</Table>
 					</div>

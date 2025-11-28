@@ -3,8 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useGetServiceStatsById } from "@/hooks/use-service-stats";
-import { ArrowLeft, Loader2, Pencil, Sparkles, Info, TrendingUp } from "lucide-react";
+import { ArrowLeft, Pencil, Sparkles, Info, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 import * as LucideIcons from "lucide-react";
 
@@ -34,10 +35,36 @@ export default function ServiceStatsDetailPage() {
 
 	if (isLoading) {
 		return (
-			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center">
-				<div className="flex flex-col items-center gap-4">
-					<Loader2 className="h-10 w-10 animate-spin text-primary" />
-					<p className="text-muted-foreground text-lg">Hizmet istatistiği detayları yükleniyor...</p>
+			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
+				<div className="max-w-3xl mx-auto space-y-8">
+					<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+						<div className="flex items-center gap-4">
+							<Skeleton className="h-10 w-10 rounded-full" />
+							<div className="flex items-center gap-3">
+								<Skeleton className="h-12 w-12 rounded-lg" />
+								<div className="space-y-2">
+									<Skeleton className="h-8 w-48" />
+									<Skeleton className="h-4 w-56" />
+								</div>
+							</div>
+						</div>
+						<Skeleton className="h-11 w-24" />
+					</div>
+					<Card className="border-2 border-border/60 shadow-2xl shadow-primary/5 bg-card/50 backdrop-blur-sm overflow-hidden">
+						<Skeleton className="h-1.5 w-full" />
+						<CardHeader className="pb-6 pt-8 px-4 sm:px-8">
+							<Skeleton className="h-7 w-48 mb-2" />
+							<Skeleton className="h-4 w-64" />
+						</CardHeader>
+						<CardContent className="px-4 sm:px-8 pb-8 space-y-8">
+							{Array.from({ length: 3 }).map((_, index) => (
+								<div key={index} className="space-y-3">
+									<Skeleton className="h-5 w-32" />
+									<Skeleton className="h-24 w-full rounded-xl" />
+								</div>
+							))}
+						</CardContent>
+					</Card>
 				</div>
 			</div>
 		);

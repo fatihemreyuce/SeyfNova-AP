@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useGetContactById } from "@/hooks/use-contact";
-import { ArrowLeft, MessageSquare, Loader2, Phone, User, Mail } from "lucide-react";
+import { ArrowLeft, MessageSquare, Phone, User, Mail } from "lucide-react";
 import { toast } from "sonner";
 
 export default function ContactDetailPage() {
@@ -20,11 +21,49 @@ export default function ContactDetailPage() {
 
 	if (isLoading) {
 		return (
-			<div className="flex items-center justify-center min-h-[400px]">
-				<div className="text-center space-y-4">
-					<Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-					<p className="text-muted-foreground">İletişim mesajı verileri yükleniyor...</p>
+			<div className="space-y-6">
+				{/* Header Skeleton */}
+				<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+					<div className="flex items-center gap-4">
+						<Skeleton className="h-9 w-9 rounded" />
+						<div className="space-y-2">
+							<Skeleton className="h-8 w-56" />
+							<Skeleton className="h-4 w-72" />
+						</div>
+					</div>
 				</div>
+
+				{/* Card Skeleton */}
+				<Card className="shadow-lg border-border/50">
+					<CardHeader className="border-b border-border/50">
+						<div className="flex items-center gap-3">
+							<Skeleton className="h-10 w-10 rounded-lg" />
+							<div className="space-y-2">
+								<Skeleton className="h-6 w-48" />
+								<Skeleton className="h-4 w-32" />
+							</div>
+						</div>
+					</CardHeader>
+					<CardContent className="pt-6 space-y-6">
+						<Skeleton className="h-6 w-16" />
+						<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+							<div className="space-y-2">
+								<Skeleton className="h-4 w-16" />
+								<Skeleton className="h-6 w-full" />
+							</div>
+							<div className="space-y-2">
+								<Skeleton className="h-4 w-20" />
+								<Skeleton className="h-6 w-full" />
+							</div>
+						</div>
+						{Array.from({ length: 3 }).map((_, index) => (
+							<div key={index} className="space-y-2">
+								<Skeleton className="h-4 w-24" />
+								<Skeleton className="h-6 w-full" />
+							</div>
+						))}
+					</CardContent>
+				</Card>
 			</div>
 		);
 	}

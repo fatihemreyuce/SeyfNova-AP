@@ -26,10 +26,10 @@ interface DeleteModalProps {
 
 export function DeleteModal({
 	open,
-	title = "Delete Item",
-	description = "Are you sure you want to delete this item? This action cannot be undone.",
-	confirmText = "Delete",
-	cancelText = "Cancel",
+	title = "Öğeyi Sil",
+	description = "Bu öğeyi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+	confirmText = "Sil",
+	cancelText = "İptal",
 	itemName,
 	onConfirm,
 	onCancel,
@@ -73,7 +73,7 @@ export function DeleteModal({
 				<div className="space-y-3 py-4">
 					<div className="space-y-2">
 						<Label htmlFor="confirm-name" className="text-sm font-medium">
-							Type <span className="font-mono text-destructive font-semibold">"{itemName}"</span> to confirm deletion
+							Silmeyi onaylamak için <span className="font-mono text-destructive font-semibold">"{itemName}"</span> yazın
 						</Label>
 						<Input
 							id="confirm-name"
@@ -93,12 +93,12 @@ export function DeleteModal({
 						{typedName.trim() && !isMatch && (
 							<p className="text-xs text-destructive flex items-center gap-1">
 								<AlertTriangle className="h-3 w-3" />
-								The text you entered does not match. Please type "{itemName}" to confirm.
+								Girdiğiniz metin eşleşmiyor. Lütfen onaylamak için "{itemName}" yazın.
 							</p>
 						)}
 						{isMatch && (
 							<p className="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
-								✓ Text matches. You can proceed with deletion.
+								✓ Metin eşleşiyor. Silme işlemine devam edebilirsiniz.
 							</p>
 						)}
 					</div>
@@ -118,14 +118,14 @@ export function DeleteModal({
 						disabled={isDisabled}
 						className="min-w-[100px] bg-gradient-to-r from-destructive to-destructive/90 hover:from-destructive/90 hover:to-destructive/80 shadow-lg shadow-destructive/25 hover:shadow-destructive/40 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
 					>
-						{loading ? (
-							<>
-								<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-								Deleting...
-							</>
-						) : (
-							confirmText
-						)}
+					{loading ? (
+						<>
+							<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+							Siliniyor...
+						</>
+					) : (
+						confirmText
+					)}
 					</Button>
 				</DialogFooter>
 			</DialogContent>
