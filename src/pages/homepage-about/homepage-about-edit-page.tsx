@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateHomePageAbout, useGetHomePageAboutById } from "@/hooks/use-homapage-about";
 import type { HomePageAboutRequest } from "@/types/homepage.about.types";
-import { ArrowLeft, Save, Sparkles, FileText, Check, Info } from "lucide-react";
+import { ArrowLeft, Sparkles, FileText, Check, Info, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function HomepageAboutEditPage() {

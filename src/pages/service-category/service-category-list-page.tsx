@@ -40,7 +40,6 @@ import {
 	ArrowLeft,
 	ArrowUpDown,
 	FolderTree,
-	Loader2,
 } from "lucide-react";
 
 export default function ServiceCategoryListPage() {

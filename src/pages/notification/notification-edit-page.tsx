@@ -15,7 +15,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateNotification, useGetNotificationById } from "@/hooks/use-notifications";
 import type { NotificationRequest } from "@/types/notifications.types";
-import { ArrowLeft, Bell, Save } from "lucide-react";
+import { ArrowLeft, Bell, Save, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function NotificationEditPage() {

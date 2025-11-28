@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateOfficalPage, useOfficalPage } from "@/hooks/use-official-page";
 import type { OfficalPageRequest, OfficalPageDocumentRequest, QualificationRequest } from "@/types/offical.page.types";
-import { ArrowLeft, Save, FileText, Award, Plus, X, Trash2 } from "lucide-react";
+import { ArrowLeft, Save, FileText, Award, Plus, X, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function OfficialPageEditPage() {

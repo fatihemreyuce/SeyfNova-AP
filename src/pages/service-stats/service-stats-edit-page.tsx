@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateServiceStats, useGetServiceStatsById } from "@/hooks/use-service-stats";
-import { ArrowLeft, Save, Sparkles, TrendingUp, Check, Info } from "lucide-react";
+import { ArrowLeft, Sparkles, TrendingUp, Check, Info, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import * as LucideIcons from "lucide-react";
 import {

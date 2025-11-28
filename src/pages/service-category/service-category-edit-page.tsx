@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateServiceCategory, useGetServiceCategoryById } from "@/hooks/use-service-category";
-import { ArrowLeft, FolderTree, Save } from "lucide-react";
+import { ArrowLeft, FolderTree, Save, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function ServiceCategoryEditPage() {

@@ -43,7 +43,6 @@ import {
 	ArrowLeft,
 	ArrowUpDown,
 	BarChart3,
-	Loader2,
 } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 

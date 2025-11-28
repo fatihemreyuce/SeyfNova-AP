@@ -16,7 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateReference, useGetReferenceById } from "@/hooks/use-references";
 import type { ReferenceRequest } from "@/types/references.types";
 import { normalizeImageUrl } from "@/utils/image-url";
-import { ArrowLeft, Briefcase, Save, Upload, X } from "lucide-react";
+import { ArrowLeft, Briefcase, Save, Upload, X, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function ReferenceEditPage() {

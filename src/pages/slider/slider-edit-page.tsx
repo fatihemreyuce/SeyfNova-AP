@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateSlider, useGetSliderById } from "@/hooks/use-sliders";
 import { normalizeImageUrl } from "@/utils/image-url";
 import type { SliderRequest } from "@/types/sliders.types";
-import { ArrowLeft, Save, Image as ImageIcon, Upload, X } from "lucide-react";
+import { ArrowLeft, Save, Image as ImageIcon, Upload, X, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function SliderEditPage() {

@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdatePartner, useGetPartnerById } from "@/hooks/use-partners";
 import type { PartnerRequest } from "@/types/partners.types";
 import { normalizeImageUrl } from "@/utils/image-url";
-import { ArrowLeft, Save, Image as ImageIcon, Upload, X, Handshake } from "lucide-react";
+import { ArrowLeft, Save, Image as ImageIcon, Upload, X, Handshake, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function PartnerEditPage() {

@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateService, useGetServiceById } from "@/hooks/use-service";
 import type { ServiceRequest } from "@/types/service.types";
-import { ArrowLeft, Save, Briefcase } from "lucide-react";
+import { ArrowLeft, Save, Briefcase, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function ServiceEditPage() {

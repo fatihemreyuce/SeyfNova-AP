@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { useCreateSettings } from "@/hooks/use-settings";
 import type { SettingsRequest } from "@/types/settings.types";
-import { ArrowLeft, Settings, Loader2, Save, Upload, X, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Settings, Loader2, Save, Upload, X } from "lucide-react";
 
 export default function SettingsCreatePage() {
 	const navigate = useNavigate();

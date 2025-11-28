@@ -41,8 +41,6 @@ import {
 	ArrowLeft,
 	ArrowUpDown,
 	FileText,
-	Loader2,
-	Download,
 	Info,
 } from "lucide-react";
 

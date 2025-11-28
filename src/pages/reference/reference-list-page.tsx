@@ -41,7 +41,6 @@ import {
 	ArrowLeft,
 	ArrowUpDown,
 	Briefcase,
-	Loader2,
 	ExternalLink,
 } from "lucide-react";
 

@@ -16,7 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateSettings, useGetSettingsById } from "@/hooks/use-settings";
 import type { SettingsRequest } from "@/types/settings.types";
 import { normalizeImageUrl } from "@/utils/image-url";
-import { ArrowLeft, Settings, Save, Upload, X, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Settings, Save, Upload, X, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function SettingsEditPage() {

@@ -205,7 +205,7 @@ export default function OfficialPageDetailPage() {
 									</TableRow>
 								</TableHeader>
 								<TableBody>
-									{documents.map((doc) => (
+									{documents.map((doc: any) => (
 										<TableRow key={doc.id}>
 											<TableCell className="font-medium">{doc.id}</TableCell>
 											<TableCell>{doc.name}</TableCell>
@@ -291,7 +291,7 @@ export default function OfficialPageDetailPage() {
 									</TableRow>
 								</TableHeader>
 								<TableBody>
-									{qualifications.map((qual, index) => (
+									{qualifications.map((qual: any, index: number) => (
 										<TableRow key={index}>
 											<TableCell className="font-medium">{qual.orderNumber}</TableCell>
 											<TableCell>{qual.text}</TableCell>

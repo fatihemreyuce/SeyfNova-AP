@@ -39,7 +39,6 @@ import {
 	ArrowLeft,
 	ArrowUpDown,
 	Users,
-	Loader2,
 	Mail,
 	User,
 } from "lucide-react";

@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCreateHomePageAbout } from "@/hooks/use-homapage-about";
 import type { HomePageAboutRequest } from "@/types/homepage.about.types";
-import { ArrowLeft, Save, Sparkles, FileText, Loader2, Check } from "lucide-react";
+import { ArrowLeft, Sparkles, FileText, Loader2, Check } from "lucide-react";
 
 export default function HomepageAboutCreatePage() {
 	const navigate = useNavigate();

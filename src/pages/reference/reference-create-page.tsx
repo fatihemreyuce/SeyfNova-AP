@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { useCreateReference } from "@/hooks/use-references";
 import type { ReferenceRequest } from "@/types/references.types";
-import { ArrowLeft, Briefcase, Loader2, Save, Upload, X, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Briefcase, Loader2, Save, Upload, X } from "lucide-react";
 
 export default function ReferenceCreatePage() {
 	const navigate = useNavigate();

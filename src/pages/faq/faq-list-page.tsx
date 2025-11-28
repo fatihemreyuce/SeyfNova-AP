@@ -40,7 +40,6 @@ import {
 	ArrowLeft,
 	ArrowUpDown,
 	HelpCircle,
-	Loader2,
 } from "lucide-react";
 
 export default function FaqListPage() {

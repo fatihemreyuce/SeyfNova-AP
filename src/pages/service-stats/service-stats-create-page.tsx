@@ -52,12 +52,6 @@ export default function ServiceStatsCreatePage() {
 	const [title, setTitle] = useState("");
 	const [numberValue, setNumberValue] = useState<number | "">("");
 
-	// Helper function to convert icon string to File
-	const iconStringToFile = (iconName: string): File => {
-		const blob = new Blob([iconName], { type: 'text/plain' });
-		return new File([blob], iconName, { type: 'text/plain' });
-	};
-
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
@@ -67,7 +61,7 @@ export default function ServiceStatsCreatePage() {
 
 		try {
 			await createMutation.mutateAsync({
-				icon: iconStringToFile(icon),
+				icon: icon,
 				title,
 				numberValue: Number(numberValue),
 			});

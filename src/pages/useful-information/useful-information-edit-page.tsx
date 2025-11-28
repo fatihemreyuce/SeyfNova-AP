@@ -16,7 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateUsefulInformation, useGetUsefulInformationById } from "@/hooks/use-useful-information";
 import type { UsefulInformationRequest } from "@/types/useful.information.types";
 import { normalizeImageUrl } from "@/utils/image-url";
-import { ArrowLeft, Info, Save, Upload, X, Download, FileText } from "lucide-react";
+import { ArrowLeft, Info, Save, Upload, X, Download, FileText, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function UsefulInformationEditPage() {

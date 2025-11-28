@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateFaq, useGetFaqById } from "@/hooks/use-faqs";
-import { ArrowLeft, HelpCircle, Save } from "lucide-react";
+import { ArrowLeft, HelpCircle, Save, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function FaqEditPage() {

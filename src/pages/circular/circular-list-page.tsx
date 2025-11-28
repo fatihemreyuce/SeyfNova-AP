@@ -41,8 +41,6 @@ import {
 	ArrowLeft,
 	ArrowUpDown,
 	FileText,
-	Loader2,
-	Download,
 } from "lucide-react";
 
 export default function CircularListPage() {

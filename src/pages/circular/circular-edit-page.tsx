@@ -16,7 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateCircular, useGetCircularById } from "@/hooks/use-circulars";
 import type { CircularRequest } from "@/types/circulars.types";
 import { normalizeImageUrl } from "@/utils/image-url";
-import { ArrowLeft, FileText, Save, Upload, X, Download } from "lucide-react";
+import { ArrowLeft, FileText, Save, Upload, X, Download, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function CircularEditPage() {

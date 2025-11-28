@@ -12,7 +12,6 @@ import {
 	Users,
 	Eye,
 	TrendingUp,
-	TrendingDown,
 	BarChart3,
 	Target,
 	MessageSquare,
@@ -129,7 +128,7 @@ export default function DashboardPage() {
 			{/* Conversion Metrics */}
 			{dashboard.conversion && dashboard.conversion.length > 0 && (
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-					{dashboard.conversion.map((conv, index) => (
+					{dashboard.conversion.map((conv: any, index: number) => (
 						<Card key={index} className="shadow-lg border-border/50">
 							<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 								<CardTitle className="text-sm font-medium">Dönüşüm Oranı</CardTitle>
@@ -177,7 +176,7 @@ export default function DashboardPage() {
 										</TableRow>
 									</TableHeader>
 									<TableBody>
-										{dashboard.topPages.map((page, index) => (
+										{dashboard.topPages.map((page: any, index: number) => (
 											<TableRow key={index}>
 												<TableCell className="font-medium max-w-[200px] truncate">
 													{page.pagePath || "N/A"}
@@ -226,7 +225,7 @@ export default function DashboardPage() {
 										</TableRow>
 									</TableHeader>
 									<TableBody>
-										{dashboard.dailyStats.map((stat, index) => (
+										{dashboard.dailyStats.map((stat: any, index: number) => (
 											<TableRow key={index}>
 												<TableCell className="font-medium">
 													{stat.date
@@ -281,7 +280,7 @@ export default function DashboardPage() {
 					</CardHeader>
 					<CardContent>
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-							{dashboard.conversion.map((conv, index) => (
+							{dashboard.conversion.map((conv: any, index: number) => (
 								<div key={index} className="space-y-2">
 									<div className="flex items-center justify-between">
 										<span className="text-sm text-muted-foreground">Toplam Ziyaretçi</span>
