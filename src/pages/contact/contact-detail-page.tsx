@@ -36,7 +36,7 @@ export default function ContactDetailPage() {
 	return (
 		<div className="space-y-6">
 			{/* Header */}
-			<div className="flex items-center justify-between">
+			<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 				<div className="flex items-center gap-4">
 					<Button
 						variant="ghost"
@@ -47,10 +47,10 @@ export default function ContactDetailPage() {
 						<ArrowLeft className="h-4 w-4" />
 					</Button>
 					<div>
-						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
+						<h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
 							İletişim Mesajı Detayları
 						</h1>
-						<p className="text-muted-foreground mt-1">
+						<p className="text-sm sm:text-base text-muted-foreground mt-1">
 							Bu iletişim mesajı hakkında detaylı bilgi görüntüle
 						</p>
 					</div>

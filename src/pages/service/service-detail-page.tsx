@@ -36,7 +36,7 @@ export default function ServiceDetailPage() {
 	return (
 		<div className="space-y-6">
 			{/* Header */}
-			<div className="flex items-center justify-between">
+			<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 				<div className="flex items-center gap-4">
 					<Button
 						variant="ghost"
@@ -47,20 +47,21 @@ export default function ServiceDetailPage() {
 						<ArrowLeft className="h-4 w-4" />
 					</Button>
 					<div>
-						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
+						<h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
 							Hizmet Detayları
 						</h1>
-						<p className="text-muted-foreground mt-1">
+						<p className="text-sm sm:text-base text-muted-foreground mt-1">
 							Bu hizmet hakkında detaylı bilgi görüntüle
 						</p>
 					</div>
 				</div>
 				<Button
 					onClick={() => navigate(`/service/edit/${id}`)}
-					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
+					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25 w-full sm:w-auto"
 				>
-					<Edit className="h-4 w-4 mr-2" />
-					Hizmeti Düzenle
+					<Edit className="h-4 w-4 sm:mr-2" />
+					<span className="hidden sm:inline">Hizmeti Düzenle</span>
+					<span className="sm:hidden">Düzenle</span>
 				</Button>
 			</div>
 

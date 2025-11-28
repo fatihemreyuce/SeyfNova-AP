@@ -97,7 +97,7 @@ export default function PartnerListPage() {
 	return (
 		<div className="space-y-6">
 			{/* Header */}
-			<div className="flex items-center justify-between">
+			<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 				<div className="flex items-center gap-4">
 					<Button
 						variant="ghost"
@@ -108,26 +108,27 @@ export default function PartnerListPage() {
 						<ArrowLeft className="h-4 w-4" />
 					</Button>
 					<div>
-						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
+						<h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
 							Ortaklar
 						</h1>
-						<p className="text-muted-foreground mt-1">
+						<p className="text-sm sm:text-base text-muted-foreground mt-1">
 							Ortaklarınızı ve logolarını yönetin
 						</p>
 					</div>
 				</div>
 				<Button
 					onClick={() => navigate("/partner/create")}
-					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
+					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25 w-full sm:w-auto"
 				>
-					<Plus className="h-4 w-4 mr-2" />
-					Yeni Oluştur
+					<Plus className="h-4 w-4 sm:mr-2" />
+					<span className="hidden sm:inline">Yeni Oluştur</span>
+					<span className="sm:hidden">Yeni</span>
 				</Button>
 			</div>
 
 			{/* Search and Filters */}
-			<div className="flex items-center gap-4">
-				<div className="relative flex-1 max-w-sm">
+			<div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+				<div className="relative flex-1">
 					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
 						placeholder="Ortaklarda ara..."
@@ -146,7 +147,7 @@ export default function PartnerListPage() {
 						setPage(0); // Reset to first page on sort change
 					}}
 				>
-					<SelectTrigger className="w-[220px] gap-2">
+					<SelectTrigger className="w-full sm:w-[220px] gap-2">
 						<ArrowUpDown className="h-4 w-4" />
 						<SelectValue placeholder="Sırala" />
 					</SelectTrigger>
@@ -162,103 +163,108 @@ export default function PartnerListPage() {
 				<Button
 					variant="outline"
 					onClick={() => setIsPaginationModalOpen(true)}
-					className="gap-2"
+					className="gap-2 w-full sm:w-auto"
 				>
 					<Settings className="h-4 w-4" />
-					Sayfalama
+					<span className="hidden sm:inline">Sayfalama</span>
+					<span className="sm:hidden">Sayfa</span>
 				</Button>
 			</div>
 
 			{/* Table */}
 			{isLoading ? (
-				<div className="border rounded-lg bg-card shadow-sm">
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead>ID</TableHead>
-								<TableHead>Logo</TableHead>
-								<TableHead>İsim</TableHead>
-								<TableHead>Sıra</TableHead>
-								<TableHead className="text-right">İşlemler</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							<TableRow>
-								<TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
-									Yükleniyor...
-								</TableCell>
-							</TableRow>
-						</TableBody>
-					</Table>
-				</div>
-			) : data?.content && data.content.length > 0 ? (
-				<div className="border rounded-lg bg-card shadow-sm">
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead>ID</TableHead>
-								<TableHead>Logo</TableHead>
-								<TableHead>İsim</TableHead>
-								<TableHead>Sıra</TableHead>
-								<TableHead className="text-right">İşlemler</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							{data.content.map((item) => (
-								<TableRow key={item.id}>
-									<TableCell className="font-medium">{item.id}</TableCell>
-									<TableCell>
-										{normalizeImageUrl(item.logoUrl) ? (
-											<img
-												src={normalizeImageUrl(item.logoUrl)}
-												alt={item.name}
-												className="h-12 w-12 object-contain rounded-md border border-border/50 bg-white"
-											/>
-										) : (
-											<div className="h-12 w-12 rounded-md border border-border/50 bg-muted flex items-center justify-center">
-												<Handshake className="h-5 w-5 text-muted-foreground" />
-											</div>
-										)}
-									</TableCell>
-									<TableCell className="max-w-[260px] truncate font-medium">
-										{item.name}
-									</TableCell>
-									<TableCell>{item.orderIndex}</TableCell>
-									<TableCell className="text-right">
-										<div className="flex items-center justify-end gap-2">
-											<Button
-												variant="ghost"
-												size="icon"
-												onClick={() => navigate(`/partner/${item.id}`)}
-												className="h-8 w-8 hover:bg-primary/10"
-												title="Detayları Görüntüle"
-											>
-												<Eye className="h-4 w-4" />
-											</Button>
-											<Button
-												variant="ghost"
-												size="icon"
-												onClick={() => navigate(`/partner/edit/${item.id}`)}
-												className="h-8 w-8 hover:bg-primary/10"
-												title="Düzenle"
-											>
-												<Pencil className="h-4 w-4" />
-											</Button>
-											<Button
-												variant="ghost"
-												size="icon"
-												onClick={() => handleDeleteClick(item)}
-												className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive"
-												title="Sil"
-											>
-												<Trash2 className="h-4 w-4" />
-											</Button>
-										</div>
+				<div className="border rounded-lg bg-card shadow-sm overflow-x-auto -mx-4 sm:mx-0">
+					<div className="min-w-full inline-block align-middle">
+						<Table className="min-w-[600px]">
+							<TableHeader>
+								<TableRow>
+									<TableHead className="hidden md:table-cell">ID</TableHead>
+									<TableHead>Logo</TableHead>
+									<TableHead>İsim</TableHead>
+									<TableHead className="hidden sm:table-cell">Sıra</TableHead>
+									<TableHead className="text-right">İşlemler</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								<TableRow>
+									<TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+										Yükleniyor...
 									</TableCell>
 								</TableRow>
-							))}
-						</TableBody>
-					</Table>
+							</TableBody>
+						</Table>
+					</div>
+				</div>
+			) : data?.content && data.content.length > 0 ? (
+				<div className="border rounded-lg bg-card shadow-sm overflow-x-auto -mx-4 sm:mx-0">
+					<div className="min-w-full inline-block align-middle">
+						<Table className="min-w-[600px]">
+							<TableHeader>
+								<TableRow>
+									<TableHead className="hidden md:table-cell">ID</TableHead>
+									<TableHead>Logo</TableHead>
+									<TableHead>İsim</TableHead>
+									<TableHead className="hidden sm:table-cell">Sıra</TableHead>
+									<TableHead className="text-right">İşlemler</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{data.content.map((item) => (
+									<TableRow key={item.id}>
+										<TableCell className="hidden md:table-cell font-medium">{item.id}</TableCell>
+										<TableCell>
+											{normalizeImageUrl(item.logoUrl) ? (
+												<img
+													src={normalizeImageUrl(item.logoUrl)}
+													alt={item.name}
+													className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-md border border-border/50 bg-white"
+												/>
+											) : (
+												<div className="h-10 w-10 sm:h-12 sm:w-12 rounded-md border border-border/50 bg-muted flex items-center justify-center">
+													<Handshake className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
+												</div>
+											)}
+										</TableCell>
+										<TableCell className="max-w-[200px] sm:max-w-[260px] truncate font-medium text-sm sm:text-base">
+											{item.name}
+										</TableCell>
+										<TableCell className="hidden sm:table-cell">{item.orderIndex}</TableCell>
+										<TableCell className="text-right">
+											<div className="flex items-center justify-end gap-1 sm:gap-2">
+												<Button
+													variant="ghost"
+													size="icon"
+													onClick={() => navigate(`/partner/${item.id}`)}
+													className="h-8 w-8 hover:bg-primary/10"
+													title="Detayları Görüntüle"
+												>
+													<Eye className="h-4 w-4" />
+												</Button>
+												<Button
+													variant="ghost"
+													size="icon"
+													onClick={() => navigate(`/partner/edit/${item.id}`)}
+													className="h-8 w-8 hover:bg-primary/10"
+													title="Düzenle"
+												>
+													<Pencil className="h-4 w-4" />
+												</Button>
+												<Button
+													variant="ghost"
+													size="icon"
+													onClick={() => handleDeleteClick(item)}
+													className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive"
+													title="Sil"
+												>
+													<Trash2 className="h-4 w-4" />
+												</Button>
+											</div>
+										</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</div>
 				</div>
 			) : (
 				<div className="border rounded-lg bg-card shadow-sm">

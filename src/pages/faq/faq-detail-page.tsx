@@ -65,7 +65,7 @@ export default function FaqDetailPage() {
 		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
 			<div className="max-w-3xl mx-auto space-y-8">
 				{/* Header */}
-				<div className="flex items-center justify-between flex-wrap gap-4">
+				<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 					<div className="flex items-center gap-4">
 						<Button
 							variant="ghost"
@@ -80,10 +80,10 @@ export default function FaqDetailPage() {
 								<HelpCircle className="h-6 w-6 text-primary" />
 							</div>
 							<div>
-								<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
+								<h1 className="text-2xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
 									SSS Detayları
 								</h1>
-								<p className="text-muted-foreground mt-1.5 text-base">
+								<p className="text-muted-foreground mt-1.5 text-sm sm:text-base">
 									SSS bilgilerini görüntüle (ID: {id})
 								</p>
 							</div>
@@ -91,10 +91,11 @@ export default function FaqDetailPage() {
 					</div>
 					<Button
 						onClick={() => navigate(`/faq/edit/${id}`)}
-						className="h-11 px-6 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+						className="h-11 px-6 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
 					>
-						<Pencil className="h-4 w-4 mr-2" />
-						Düzenle
+						<Pencil className="h-4 w-4 sm:mr-2" />
+						<span className="hidden sm:inline">Düzenle</span>
+						<span className="sm:hidden">Düzenle</span>
 					</Button>
 				</div>
 

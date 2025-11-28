@@ -72,22 +72,24 @@ export default function SliderCreatePage() {
 	return (
 		<div className="space-y-6">
 			{/* Header */}
-			<div className="flex items-center gap-4">
-				<Button
-					variant="ghost"
-					size="icon"
-					onClick={handleCancel}
-					className="h-9 w-9"
-				>
-					<ArrowLeft className="h-4 w-4" />
-				</Button>
-				<div>
-					<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-						Slider Oluştur
-					</h1>
-					<p className="text-muted-foreground mt-1">
-						Koleksiyonunuza yeni bir slider ekleyin
-					</p>
+			<div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+				<div className="flex items-center gap-4">
+					<Button
+						variant="ghost"
+						size="icon"
+						onClick={handleCancel}
+						className="h-9 w-9"
+					>
+						<ArrowLeft className="h-4 w-4" />
+					</Button>
+					<div>
+						<h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
+							Slider Oluştur
+						</h1>
+						<p className="text-sm sm:text-base text-muted-foreground mt-1">
+							Koleksiyonunuza yeni bir slider ekleyin
+						</p>
+					</div>
 				</div>
 			</div>
 
@@ -230,19 +232,20 @@ export default function SliderCreatePage() {
 						</div>
 
 						{/* Form Actions */}
-						<div className="flex items-center justify-end gap-3 pt-4 border-t">
+						<div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-4 border-t">
 							<Button
 								type="button"
 								variant="outline"
 								onClick={handleCancel}
 								disabled={isSubmitting}
+								className="w-full sm:w-auto"
 							>
 								İptal
 							</Button>
 							<Button
 								type="submit"
 								disabled={isSubmitting}
-								className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
+								className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25 w-full sm:w-auto"
 							>
 								{isSubmitting ? (
 									<>

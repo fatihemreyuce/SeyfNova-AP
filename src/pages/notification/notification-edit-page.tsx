@@ -77,7 +77,7 @@ export default function NotificationEditPage() {
 		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
 			<div className="max-w-3xl mx-auto space-y-8">
 				{/* Header */}
-				<div className="flex items-center gap-4">
+				<div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
 					<Button
 						variant="ghost"
 						size="icon"
@@ -91,10 +91,10 @@ export default function NotificationEditPage() {
 							<Bell className="h-6 w-6 text-primary" />
 						</div>
 						<div>
-							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
+							<h1 className="text-2xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
 								Bildirimi Düzenle
 							</h1>
-							<p className="text-muted-foreground mt-1.5 text-base">
+							<p className="text-sm sm:text-base text-muted-foreground mt-1.5">
 								Bildirim bilgilerini güncelle (ID: {id})
 							</p>
 						</div>
@@ -105,15 +105,15 @@ export default function NotificationEditPage() {
 				<Card className="border-2 border-border/60 shadow-2xl shadow-primary/5 bg-card/50 backdrop-blur-sm overflow-hidden">
 					<div className="h-1.5 bg-gradient-to-r from-primary via-primary/80 to-primary/60" />
 					<form onSubmit={handleSubmit}>
-						<CardHeader className="pb-6 pt-8 px-8">
-							<CardTitle className="text-2xl font-semibold mb-2">
+						<CardHeader className="pb-6 pt-8 px-4 sm:px-8">
+							<CardTitle className="text-xl sm:text-2xl font-semibold mb-2">
 								Bildirim Detayları
 							</CardTitle>
-							<CardDescription className="text-base">
+							<CardDescription className="text-sm sm:text-base">
 								Bu bildirimi değiştirmek için aşağıdaki alanları güncelleyin
 							</CardDescription>
 						</CardHeader>
-						<CardContent className="space-y-8 px-8 pb-8">
+						<CardContent className="space-y-8 px-4 sm:px-8 pb-8">
 							{/* Title */}
 							<div className="space-y-3">
 								<Label
@@ -152,20 +152,20 @@ export default function NotificationEditPage() {
 								/>
 							</div>
 						</CardContent>
-						<CardFooter className="flex items-center justify-end gap-4 px-8 pb-8 pt-6 bg-muted/30 border-t border-border/50">
+						<CardFooter className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-4 px-4 sm:px-8 pb-8 pt-6 bg-muted/30 border-t border-border/50">
 							<Button
 								type="button"
 								variant="outline"
 								onClick={() => navigate("/notification")}
 								disabled={isSubmitting}
-								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
+								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200 w-full sm:w-auto"
 							>
 								İptal
 							</Button>
 							<Button
 								type="submit"
 								disabled={!isFormValid || isSubmitting}
-								className="h-11 px-8 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+								className="h-11 px-6 sm:px-8 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
 							>
 								{isSubmitting ? (
 									<>
@@ -175,7 +175,8 @@ export default function NotificationEditPage() {
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										Bildirimi Güncelle
+										<span className="hidden sm:inline">Bildirimi Güncelle</span>
+										<span className="sm:hidden">Güncelle</span>
 									</>
 								)}
 							</Button>

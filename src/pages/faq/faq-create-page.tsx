@@ -62,10 +62,10 @@ export default function FaqCreatePage() {
 							<HelpCircle className="h-6 w-6 text-primary" />
 						</div>
 						<div>
-							<h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
+							<h1 className="text-2xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
 								SSS Oluştur
 							</h1>
-							<p className="text-muted-foreground mt-1.5 text-base">
+							<p className="text-muted-foreground mt-1.5 text-sm sm:text-base">
 								Yeni bir sık sorulan soru ve cevabı ekleyin
 							</p>
 						</div>
@@ -150,30 +150,32 @@ export default function FaqCreatePage() {
 								</p>
 							</div>
 						</CardContent>
-						<CardFooter className="flex items-center justify-end gap-4 px-8 pb-8 pt-6 bg-muted/30 border-t border-border/50">
+						<CardFooter className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3 sm:gap-4 px-8 pb-8 pt-6 bg-muted/30 border-t border-border/50">
 							<Button
 								type="button"
 								variant="outline"
 								onClick={() => navigate("/faq")}
 								disabled={isSubmitting}
-								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
+								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200 w-full sm:w-auto"
 							>
 								İptal
 							</Button>
 							<Button
 								type="submit"
 								disabled={!isFormValid || isSubmitting}
-								className="h-11 px-8 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+								className="h-11 px-8 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
 							>
 								{isSubmitting ? (
 									<>
 										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Oluşturuluyor...
+										<span className="hidden sm:inline">Oluşturuluyor...</span>
+										<span className="sm:hidden">Yükleniyor...</span>
 									</>
 								) : (
 									<>
 										<Save className="h-4 w-4 mr-2" />
-										SSS Oluştur
+										<span className="hidden sm:inline">SSS Oluştur</span>
+										<span className="sm:hidden">Oluştur</span>
 									</>
 								)}
 							</Button>

@@ -95,7 +95,7 @@ export default function ReferenceListPage() {
 	return (
 		<div className="space-y-6">
 			{/* Header */}
-			<div className="flex items-center justify-between">
+			<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 				<div className="flex items-center gap-4">
 					<Button
 						variant="ghost"
@@ -106,26 +106,27 @@ export default function ReferenceListPage() {
 						<ArrowLeft className="h-4 w-4" />
 					</Button>
 					<div>
-						<h1 className="text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
+						<h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
 							Referanslar
 						</h1>
-						<p className="text-muted-foreground mt-1">
+						<p className="text-sm sm:text-base text-muted-foreground mt-1">
 							Müşteri referanslarını ve portföylerini yönetin
 						</p>
 					</div>
 				</div>
 				<Button
 					onClick={() => navigate("/reference/create")}
-					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
+					className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25 w-full sm:w-auto"
 				>
-					<Plus className="h-4 w-4 mr-2" />
-					Yeni Oluştur
+					<Plus className="h-4 w-4 sm:mr-2" />
+					<span className="hidden sm:inline">Yeni Oluştur</span>
+					<span className="sm:hidden">Yeni</span>
 				</Button>
 			</div>
 
 			{/* Search & Filters */}
-			<div className="flex items-center gap-4">
-				<div className="relative flex-1 max-w-sm">
+			<div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+				<div className="relative flex-1">
 					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
 						placeholder="Referanslarda ara..."
@@ -144,7 +145,7 @@ export default function ReferenceListPage() {
 						setPage(0);
 					}}
 				>
-					<SelectTrigger className="w-[220px] gap-2">
+					<SelectTrigger className="w-full sm:w-[220px] gap-2">
 						<ArrowUpDown className="h-4 w-4" />
 						<SelectValue placeholder="Sırala" />
 					</SelectTrigger>
@@ -160,137 +161,142 @@ export default function ReferenceListPage() {
 				<Button
 					variant="outline"
 					onClick={() => setIsPaginationModalOpen(true)}
-					className="gap-2"
+					className="gap-2 w-full sm:w-auto"
 				>
 					<Settings className="h-4 w-4" />
-					Sayfalama
+					<span className="hidden sm:inline">Sayfalama</span>
+					<span className="sm:hidden">Sayfa</span>
 				</Button>
 			</div>
 
 			{/* Table */}
 			{isLoading ? (
-				<div className="border rounded-lg bg-card shadow-sm">
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead>ID</TableHead>
-								<TableHead>Logo</TableHead>
-								<TableHead>İsim</TableHead>
-								<TableHead>Açıklama</TableHead>
-								<TableHead>Web Sitesi</TableHead>
-								<TableHead>Sıra</TableHead>
-								<TableHead className="text-right">İşlemler</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							<TableRow>
-								<TableCell colSpan={7} className="text-center py-8">
-									<div className="flex items-center justify-center gap-2 text-muted-foreground">
-										<Loader2 className="h-4 w-4 animate-spin" />
-										Yükleniyor...
-									</div>
-								</TableCell>
-							</TableRow>
-						</TableBody>
-					</Table>
-				</div>
-			) : data?.content && data.content.length > 0 ? (
-				<div className="border rounded-lg bg-card shadow-sm">
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead>ID</TableHead>
-								<TableHead>Logo</TableHead>
-								<TableHead>İsim</TableHead>
-								<TableHead>Açıklama</TableHead>
-								<TableHead>Web Sitesi</TableHead>
-								<TableHead>Sıra</TableHead>
-								<TableHead className="text-right">İşlemler</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							{data.content.map((item) => (
-								<TableRow key={item.id}>
-									<TableCell className="font-medium">{item.id}</TableCell>
-									<TableCell>
-										{normalizeImageUrl(item.logoUrl) ? (
-											<div className="w-12 h-12 rounded-lg overflow-hidden border border-border/50 bg-muted flex items-center justify-center">
-												<img
-													src={normalizeImageUrl(item.logoUrl)}
-													alt={item.name}
-													className="w-full h-full object-cover"
-												/>
-											</div>
-										) : (
-											<div className="w-12 h-12 rounded-lg border border-border/50 bg-muted flex items-center justify-center">
-												<Briefcase className="h-5 w-5 text-muted-foreground" />
-											</div>
-										)}
-									</TableCell>
-									<TableCell className="max-w-[200px]">
-										<div className="flex items-start gap-2">
-											<Briefcase className="h-4 w-4 mt-1 text-primary/70" />
-											<div className="font-medium line-clamp-2">
-												{item.name}
-											</div>
-										</div>
-									</TableCell>
-									<TableCell className="max-w-[300px]">
-										<div className="text-sm text-muted-foreground line-clamp-2">
-											{item.description}
-										</div>
-									</TableCell>
-									<TableCell className="max-w-[200px]">
-										{item.websiteUrl ? (
-											<a
-												href={item.websiteUrl}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="flex items-center gap-1 text-primary hover:underline text-sm"
-											>
-												<span className="truncate">{item.websiteUrl}</span>
-												<ExternalLink className="h-3 w-3 flex-shrink-0" />
-											</a>
-										) : (
-											<span className="text-sm text-muted-foreground">-</span>
-										)}
-									</TableCell>
-									<TableCell>{item.orderIndex}</TableCell>
-									<TableCell className="text-right">
-										<div className="flex items-center justify-end gap-2">
-											<Button
-												variant="ghost"
-												size="icon"
-												onClick={() => navigate(`/reference/${item.id}`)}
-												className="h-8 w-8 hover:bg-primary/10"
-												title="Detayları Görüntüle"
-											>
-												<Eye className="h-4 w-4" />
-											</Button>
-											<Button
-												variant="ghost"
-												size="icon"
-												onClick={() => navigate(`/reference/edit/${item.id}`)}
-												className="h-8 w-8 hover:bg-primary/10"
-												title="Düzenle"
-											>
-												<Pencil className="h-4 w-4" />
-											</Button>
-											<Button
-												variant="ghost"
-												size="icon"
-												onClick={() => handleDeleteClick(item)}
-												className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive"
-												title="Sil"
-											>
-												<Trash2 className="h-4 w-4" />
-											</Button>
+				<div className="border rounded-lg bg-card shadow-sm overflow-x-auto -mx-4 sm:mx-0">
+					<div className="min-w-full inline-block align-middle">
+						<Table className="min-w-[800px]">
+							<TableHeader>
+								<TableRow>
+									<TableHead className="hidden md:table-cell">ID</TableHead>
+									<TableHead>Logo</TableHead>
+									<TableHead>İsim</TableHead>
+									<TableHead className="hidden md:table-cell">Açıklama</TableHead>
+									<TableHead className="hidden lg:table-cell">Web Sitesi</TableHead>
+									<TableHead className="hidden sm:table-cell">Sıra</TableHead>
+									<TableHead className="text-right">İşlemler</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								<TableRow>
+									<TableCell colSpan={7} className="text-center py-8">
+										<div className="flex items-center justify-center gap-2 text-muted-foreground">
+											<Loader2 className="h-4 w-4 animate-spin" />
+											Yükleniyor...
 										</div>
 									</TableCell>
 								</TableRow>
-							))}
-						</TableBody>
-					</Table>
+							</TableBody>
+						</Table>
+					</div>
+				</div>
+			) : data?.content && data.content.length > 0 ? (
+				<div className="border rounded-lg bg-card shadow-sm overflow-x-auto -mx-4 sm:mx-0">
+					<div className="min-w-full inline-block align-middle">
+						<Table className="min-w-[800px]">
+							<TableHeader>
+								<TableRow>
+									<TableHead className="hidden md:table-cell">ID</TableHead>
+									<TableHead>Logo</TableHead>
+									<TableHead>İsim</TableHead>
+									<TableHead className="hidden md:table-cell">Açıklama</TableHead>
+									<TableHead className="hidden lg:table-cell">Web Sitesi</TableHead>
+									<TableHead className="hidden sm:table-cell">Sıra</TableHead>
+									<TableHead className="text-right">İşlemler</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{data.content.map((item) => (
+									<TableRow key={item.id}>
+										<TableCell className="hidden md:table-cell font-medium">{item.id}</TableCell>
+										<TableCell>
+											{normalizeImageUrl(item.logoUrl) ? (
+												<div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden border border-border/50 bg-muted flex items-center justify-center">
+													<img
+														src={normalizeImageUrl(item.logoUrl)}
+														alt={item.name}
+														className="w-full h-full object-cover"
+													/>
+												</div>
+											) : (
+												<div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg border border-border/50 bg-muted flex items-center justify-center">
+													<Briefcase className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
+												</div>
+											)}
+										</TableCell>
+										<TableCell className="max-w-[150px] sm:max-w-[200px]">
+											<div className="flex items-start gap-2">
+												<Briefcase className="h-4 w-4 mt-1 text-primary/70 flex-shrink-0" />
+												<div className="font-medium line-clamp-2 text-sm sm:text-base">
+													{item.name}
+												</div>
+											</div>
+										</TableCell>
+										<TableCell className="hidden md:table-cell max-w-[200px]">
+											<div className="text-sm text-muted-foreground line-clamp-2">
+												{item.description}
+											</div>
+										</TableCell>
+										<TableCell className="hidden lg:table-cell max-w-[200px]">
+											{item.websiteUrl ? (
+												<a
+													href={item.websiteUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="flex items-center gap-1 text-primary hover:underline text-sm"
+												>
+													<span className="truncate">{item.websiteUrl}</span>
+													<ExternalLink className="h-3 w-3 flex-shrink-0" />
+												</a>
+											) : (
+												<span className="text-sm text-muted-foreground">-</span>
+											)}
+										</TableCell>
+										<TableCell className="hidden sm:table-cell">{item.orderIndex}</TableCell>
+										<TableCell className="text-right">
+											<div className="flex items-center justify-end gap-1 sm:gap-2">
+												<Button
+													variant="ghost"
+													size="icon"
+													onClick={() => navigate(`/reference/${item.id}`)}
+													className="h-8 w-8 hover:bg-primary/10"
+													title="Detayları Görüntüle"
+												>
+													<Eye className="h-4 w-4" />
+												</Button>
+												<Button
+													variant="ghost"
+													size="icon"
+													onClick={() => navigate(`/reference/edit/${item.id}`)}
+													className="h-8 w-8 hover:bg-primary/10"
+													title="Düzenle"
+												>
+													<Pencil className="h-4 w-4" />
+												</Button>
+												<Button
+													variant="ghost"
+													size="icon"
+													onClick={() => handleDeleteClick(item)}
+													className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive"
+													title="Sil"
+												>
+													<Trash2 className="h-4 w-4" />
+												</Button>
+											</div>
+										</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</div>
 				</div>
 			) : (
 				<div className="border rounded-lg bg-card shadow-sm">

@@ -58,6 +58,10 @@ import OfficialPageEditPage from "./pages/official-page/official-page-edit-page"
 import ContactListPage from "./pages/contact/contact-list-page";
 import ContactCreatePage from "./pages/contact/contact-create-page";
 import ContactDetailPage from "./pages/contact/contact-detail-page";
+import FaqListPage from "./pages/faq/faq-list-page";
+import FaqCreatePage from "./pages/faq/faq-create-page";
+import FaqEditPage from "./pages/faq/faq-edit-page";
+import FaqDetailPage from "./pages/faq/faq-detail-page";
 
 
 function App() {
@@ -137,6 +141,11 @@ function App() {
 								<Route path="/contact/create" element={<ContactCreatePage />} />
 								<Route path="/contact/:id" element={<ContactDetailPage />} />
 								<Route path="/contact" element={<ContactListPage />} />
+								{/* FAQ Routes */}
+								<Route path="/faq/create" element={<FaqCreatePage />} />
+								<Route path="/faq/edit/:id" element={<FaqEditPage />} />
+								<Route path="/faq/:id" element={<FaqDetailPage />} />
+								<Route path="/faq" element={<FaqListPage />} />
 							</Route>
 						</Route>
 					</Routes>
