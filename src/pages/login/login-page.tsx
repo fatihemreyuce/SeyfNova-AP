@@ -40,7 +40,7 @@ export default function LoginPage() {
 			await login(loginRequest);
 			navigate("/");
 		} catch (err: any) {
-			toast.error("Invalid email or password. Please try again.");
+			toast.error("Geçersiz e-posta veya şifre. Lütfen tekrar deneyin.");
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -75,7 +75,7 @@ export default function LoginPage() {
 						Seyf Nova
 					</CardTitle>
 					<CardDescription className="text-base text-muted-foreground">
-						Welcome back! Sign in to your account
+						Tekrar hoş geldiniz! Hesabınıza giriş yapın
 					</CardDescription>
 				</CardHeader>
 
@@ -84,14 +84,14 @@ export default function LoginPage() {
 						{/* Email Input */}
 						<div className="space-y-2">
 							<Label htmlFor="email" className="text-sm font-medium">
-								Email
+								E-posta
 							</Label>
 							<div className="relative group">
 								<Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground transition-colors group-focus-within:text-primary" />
 								<Input
 									id="email"
 									type="email"
-									placeholder="you@example.com"
+									placeholder="ornek@email.com"
 									autoComplete="email"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
@@ -105,7 +105,7 @@ export default function LoginPage() {
 						{/* Password Input */}
 						<div className="space-y-2">
 							<Label htmlFor="password" className="text-sm font-medium">
-								Password
+								Şifre
 							</Label>
 							<div className="relative group">
 								<Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground transition-colors group-focus-within:text-primary" />
@@ -125,7 +125,7 @@ export default function LoginPage() {
 									onClick={() => setShowPassword(!showPassword)}
 									disabled={isFormDisabled}
 									className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-md p-1"
-									aria-label={showPassword ? "Hide password" : "Show password"}
+									aria-label={showPassword ? "Şifreyi gizle" : "Şifreyi göster"}
 								>
 									{showPassword ? (
 										<EyeOff className="h-5 w-5 transition-transform duration-200 hover:scale-110" />
@@ -150,11 +150,11 @@ export default function LoginPage() {
 						>
 							{isFormDisabled ? (
 								<>
-									<span className="mr-2">Signing in...</span>
+									<span className="mr-2">Giriş yapılıyor...</span>
 									<div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
 								</>
 							) : (
-								"Sign in"
+								"Giriş Yap"
 							)}
 						</Button>
 					</CardFooter>

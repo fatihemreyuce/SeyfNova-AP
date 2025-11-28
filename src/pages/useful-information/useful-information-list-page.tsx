@@ -25,8 +25,16 @@ import {
 	EmptyTitle,
 } from "@/components/ui/empty";
 import { DeleteModal } from "@/components/ui/delete-modal";
-import { PaginationModal } from "@/components/ui/pagination-modal";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+	Pagination,
+	PaginationContent,
+	PaginationEllipsis,
+	PaginationItem,
+	PaginationLink,
+	PaginationNext,
+	PaginationPrevious,
+} from "@/components/ui/pagination";
 import { useUsefulInformation, useDeleteUsefulInformation } from "@/hooks/use-useful-information";
 import { normalizeImageUrl } from "@/utils/image-url";
 import {
@@ -35,9 +43,6 @@ import {
 	Trash2,
 	Eye,
 	Search,
-	ChevronLeft,
-	ChevronRight,
-	Settings,
 	ArrowLeft,
 	ArrowUpDown,
 	FileText,
@@ -53,7 +58,6 @@ export default function UsefulInformationListPage() {
 	const [sort, setSort] = useState("id,desc");
 
 	const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-	const [isPaginationModalOpen, setIsPaginationModalOpen] = useState(false);
 	const [deletingId, setDeletingId] = useState<number | null>(null);
 	const [deletingItemName, setDeletingItemName] = useState<string>("");
 
@@ -78,19 +82,77 @@ export default function UsefulInformationListPage() {
 		}
 	};
 
-	const handlePaginationApply = (newPage: number, newSize: number) => {
-		setPage(newPage - 1);
-		setSize(newSize);
-		setIsPaginationModalOpen(false);
+	// Pagination helper function - "Önceki 1 2 3 ... Sonraki" formatı
+	const getPageNumbers = (currentPage: number, totalPages: number) => {
+		const pages: (number | string)[] = [];
+		const current = currentPage + 1; // Convert to 1-based for display
+
+		if (totalPages <= 1) {
+			pages.push(1);
+		} else if (totalPages <= 5) {
+			for (let i = 1; i <= totalPages; i++) {
+				pages.push(i);
+			}
+		} else {
+			if (current <= 3) {
+				for (let i = 1; i <= 3; i++) {
+					pages.push(i);
+				}
+				pages.push("ellipsis");
+				pages.push(totalPages);
+			} else if (current >= totalPages - 2) {
+				pages.push(1);
+				pages.push("ellipsis");
+				for (let i = totalPages - 2; i <= totalPages; i++) {
+					pages.push(i);
+				}
+			} else {
+				pages.push(1);
+				pages.push("ellipsis");
+				for (let i = current - 1; i <= current + 1; i++) {
+					pages.push(i);
+				}
+				pages.push("ellipsis");
+				pages.push(totalPages);
+			}
+		}
+
+		return pages;
 	};
 
-	const handlePreviousPage = () => {
-		if (page > 0) setPage(page - 1);
-	};
-
-	const handleNextPage = () => {
-		if (data && page < data.totalPages - 1) setPage(page + 1);
-	};
+	// Pagination mantığı:
+	// - Backend 0-based index kullanıyor (page=0, page=1, ...)
+	// - UI 1-based gösteriyor (Sayfa 1, Sayfa 2, ...)
+	// - totalPages = Math.ceil(totalElements / size)
+	// - Örnek: 11 veri, size=10 → totalPages=2, page=0 (1. sayfa), page=1 (2. sayfa)
+	
+	const totalElements = data?.totalElements || 0;
+	const contentLength = data?.content?.length || 0;
+	
+	// Eğer backend totalElements=0 gönderiyorsa ama sayfada veri varsa:
+	// - Sayfada tam size kadar veri varsa (örneğin 10/10), muhtemelen daha fazla sayfa var
+	// - Bu durumda totalPages'i (page + 1) + 1 olarak hesapla (en az bir sayfa daha var)
+	// - Ya da backend'den gelen totalPages değerini kullan
+	let totalPages = 1;
+	
+	if (totalElements > 0) {
+		// Backend doğru totalElements gönderiyor
+		totalPages = Math.ceil(totalElements / size);
+	} else if (contentLength > 0) {
+		// Backend totalElements=0 gönderiyor ama sayfada veri var
+		if (contentLength === size) {
+			// Sayfa dolu, muhtemelen daha fazla sayfa var
+			// Backend'den gelen totalPages'i kullan, yoksa (page + 1) + 1
+			totalPages = data?.totalPages || (page + 1) + 1;
+		} else {
+			// Sayfa dolu değil, bu son sayfa
+			totalPages = page + 1;
+		}
+	}
+	
+	// hasNextPage: Eğer toplam sayfa > 1 ve şu anki sayfa < son sayfa ise true
+	const hasNextPage = totalPages > 1 && page < totalPages - 1;
+	const hasPreviousPage = page > 0;
 
 	return (
 		<div className="space-y-6">
@@ -156,15 +218,6 @@ export default function UsefulInformationListPage() {
 						<SelectItem value="title,desc">Başlık: Z-A</SelectItem>
 					</SelectContent>
 				</Select>
-				<Button
-					variant="outline"
-					onClick={() => setIsPaginationModalOpen(true)}
-					className="gap-2 w-full sm:w-auto"
-				>
-					<Settings className="h-4 w-4" />
-					<span className="hidden sm:inline">Sayfalama</span>
-					<span className="sm:hidden">Sayfa</span>
-				</Button>
 			</div>
 
 			{/* Table */}
@@ -321,35 +374,56 @@ export default function UsefulInformationListPage() {
 				</div>
 			)}
 
-			{/* Pagination */}
-			{data && data.totalPages > 0 && (
-				<div className="flex items-center justify-between">
-					<div className="text-sm text-muted-foreground">
-						{data.content.length > 0 ? page * size + 1 : 0} - {" "}
-						{Math.min((page + 1) * size, data.totalElements)} / {" "}
-						{data.totalElements} sonuç
-					</div>
-					<div className="flex items-center gap-2">
-						<Button
-							variant="outline"
-							size="icon"
-							onClick={handlePreviousPage}
-							disabled={page === 0}
-						>
-							<ChevronLeft className="h-4 w-4" />
-						</Button>
-						<span className="text-sm font-medium">
-							Sayfa {page + 1} / {data.totalPages}
-						</span>
-						<Button
-							variant="outline"
-							size="icon"
-							onClick={handleNextPage}
-							disabled={page >= data.totalPages - 1}
-						>
-							<ChevronRight className="h-4 w-4" />
-						</Button>
-					</div>
+			{/* Pagination - Sağ köşede */}
+			{data && totalPages > 0 && (
+				<div className="flex justify-end">
+					<Pagination className="justify-end">
+						<PaginationContent>
+							<PaginationItem>
+								<PaginationPrevious
+									href="#"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										if (hasPreviousPage) setPage(page - 1);
+									}}
+									className={!hasPreviousPage ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+								/>
+							</PaginationItem>
+							{getPageNumbers(page, totalPages).map((pageNum, index) => (
+								<PaginationItem key={index}>
+									{pageNum === "ellipsis" ? (
+										<PaginationEllipsis />
+									) : (
+										<PaginationLink
+											href="#"
+											onClick={(e) => {
+												e.preventDefault();
+												setPage((pageNum as number) - 1);
+											}}
+											isActive={page + 1 === pageNum}
+											className="cursor-pointer"
+										>
+											{pageNum}
+										</PaginationLink>
+									)}
+								</PaginationItem>
+							))}
+							<PaginationItem>
+								<PaginationNext
+									href="#"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										if (hasNextPage) {
+											setPage(page + 1);
+										}
+									}}
+									className={!hasNextPage ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+								/>
+							</PaginationItem>
+						</PaginationContent>
+					</Pagination>
 				</div>
 			)}
 
@@ -370,14 +444,6 @@ export default function UsefulInformationListPage() {
 				loading={deleteMutation.isPending}
 			/>
 
-			{/* Pagination Modal */}
-			<PaginationModal
-				open={isPaginationModalOpen}
-				page={page + 1}
-				size={size}
-				onApply={handlePaginationApply}
-				onCancel={() => setIsPaginationModalOpen(false)}
-			/>
 		</div>
 	);
 }
