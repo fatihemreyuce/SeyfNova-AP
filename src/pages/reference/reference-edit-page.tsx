@@ -85,8 +85,11 @@ export default function ReferenceEditPage() {
 		if (!id || !isFormValid) return;
 
 		try {
+			// Only include logo if it's a File (new upload)
+			// objectToFormData will skip null/undefined values
+			// Backend will keep existing logo if no new file is sent
 			const request: ReferenceRequest = {
-				logo: logo || (data?.logoUrl || ""),
+				logo: logo || (null as any), // null will be skipped by objectToFormData
 				name: name.trim(),
 				description: description.trim(),
 				websiteUrl: websiteUrl.trim(),
@@ -194,7 +197,6 @@ export default function ReferenceEditPage() {
 									className="text-base font-medium flex items-center gap-2"
 								>
 									<span>Logo</span>
-									{!logoPreview && <span className="text-destructive">*</span>}
 								</Label>
 								{!logoPreview ? (
 									<div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors">

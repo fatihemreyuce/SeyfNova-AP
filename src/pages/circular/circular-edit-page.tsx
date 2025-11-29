@@ -83,8 +83,11 @@ export default function CircularEditPage() {
 		if (!id || !isFormValid) return;
 
 		try {
+			// Only include file if it's a File (new upload)
+			// objectToFormData will skip null/undefined values
+			// Backend will keep existing file if no new file is sent
 			const request: CircularRequest = {
-				file: file || (data?.fileUrl || ""),
+				file: file || (null as any), // null will be skipped by objectToFormData
 				title: title.trim(),
 				description: description.trim(),
 			};

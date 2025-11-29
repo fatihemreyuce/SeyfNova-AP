@@ -67,8 +67,11 @@ export default function PartnerEditPage() {
 		}
 
 		try {
+			// Only include logo if it's a File (new upload)
+			// objectToFormData will skip null/undefined values
+			// Backend will keep existing logo if no new file is sent
 			const request: PartnerRequest = {
-				logo: logo || (data?.logoUrl || ""),
+				logo: logo || (null as any), // null will be skipped by objectToFormData
 				name: name.trim(),
 				orderIndex: Number(orderIndex),
 			};
@@ -168,7 +171,7 @@ export default function PartnerEditPage() {
 					<form onSubmit={handleSubmit} className="space-y-6">
 						{/* Logo Upload */}
 						<div className="space-y-2">
-							<Label htmlFor="logo">Logo {!logoPreview && "*"}</Label>
+							<Label htmlFor="logo">Logo</Label>
 							{!logoPreview ? (
 								<div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors">
 									<input

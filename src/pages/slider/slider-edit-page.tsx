@@ -76,8 +76,11 @@ export default function SliderEditPage() {
 		}
 
 		try {
+			// Only include image if it's a File (new upload)
+			// objectToFormData will skip null/undefined values
+			// Backend will keep existing image if no new file is sent
 			const request: SliderRequest = {
-				image: image || (data?.imageUrl || ""),
+				image: image || (null as any), // null will be skipped by objectToFormData
 				title: title.trim(),
 				description: description.trim(),
 				orderIndex: Number(orderIndex),
