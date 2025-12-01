@@ -173,7 +173,7 @@ export default function Sidebar() {
 					<span className={`font-semibold text-foreground whitespace-nowrap transition-all duration-300 ${
 						isOpen ? "opacity-100 max-w-full text-base md:text-lg" : "opacity-0 w-0 overflow-hidden max-w-0"
 					}`}>
-						Seyf Nova
+						Seyfh Nova
 					</span>
 				</div>
 
