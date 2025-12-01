@@ -105,10 +105,7 @@ export default function NotificationListPage() {
 	const handleSend = async () => {
 		if (!sendingNotification) return;
 		try {
-			await sendMutation.mutateAsync({
-				title: sendingNotification.title,
-				content: sendingNotification.content,
-			});
+			await sendMutation.mutateAsync(sendingNotification.id);
 			setIsSendDialogOpen(false);
 			setSendingNotification(null);
 		} catch {
@@ -472,15 +469,15 @@ export default function NotificationListPage() {
 						<DialogTitle>Bildirim Gönder</DialogTitle>
 						<DialogDescription>
 							Bu bildirimi göndermek istediğinizden emin misiniz? Tüm kullanıcılara gönderilecektir.
-							{sendingNotification && (
-								<div className="mt-4 p-3 rounded-lg bg-muted/50 border border-border/50">
-									<p className="font-medium text-sm mb-1">{sendingNotification.title}</p>
-									<p className="text-xs text-muted-foreground line-clamp-2">
-										{sendingNotification.content}
-									</p>
-								</div>
-							)}
 						</DialogDescription>
+						{sendingNotification && (
+							<div className="mt-4 p-3 rounded-lg bg-muted/50 border border-border/50">
+								<p className="font-medium text-sm mb-1">{sendingNotification.title}</p>
+								<p className="text-xs text-muted-foreground line-clamp-2">
+									{sendingNotification.content}
+								</p>
+							</div>
+						)}
 					</DialogHeader>
 					<DialogFooter>
 						<Button

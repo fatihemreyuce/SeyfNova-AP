@@ -60,7 +60,7 @@ export const useGetNotificationById = (id: string) => {
 export const useSendNotification = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (request: NotificationRequest) => sendNotification(request),
+        mutationFn: (id: string) => sendNotification(id),
         onSuccess: () => {
             toast.success("Bildirim başarıyla gönderildi");
             queryClient.invalidateQueries({ queryKey: ["notifications"] });

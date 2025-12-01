@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCreateServiceStats } from "@/hooks/use-service-stats";
 import { ArrowLeft, Loader2, Check, Sparkles, TrendingUp, Image as ImageIcon } from "lucide-react";
 
@@ -54,8 +53,8 @@ export default function ServiceStatsCreatePage() {
 	const isLoading = createMutation.isPending;
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
-			<div className="max-w-3xl mx-auto space-y-8">
+		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-10 px-4">
+			<div className="space-y-10">
 				{/* Header */}
 				<div className="flex items-center gap-4">
 					<Button
@@ -83,29 +82,26 @@ export default function ServiceStatsCreatePage() {
 					</div>
 				</div>
 
-				{/* Form */}
-				<Card className="border-2 border-border/60 shadow-2xl shadow-primary/5 bg-card/50 backdrop-blur-sm overflow-hidden">
-					{/* Decorative gradient bar */}
-					<div className="h-1.5 bg-gradient-to-r from-primary via-primary/80 to-primary/60" />
-					
-					<form onSubmit={handleSubmit}>
-						<CardHeader className="pb-6 pt-8 px-8">
-							<div className="flex items-start gap-4">
-								<div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
-									<TrendingUp className="h-6 w-6 text-primary" />
-								</div>
-								<div className="flex-1">
-									<CardTitle className="text-2xl font-semibold mb-2">
-										Hizmet İstatistiği Detayları
-									</CardTitle>
-									<CardDescription className="text-base">
-										Yeni bir hizmet istatistiği oluşturmak için aşağıdaki bilgileri doldurun
-									</CardDescription>
-								</div>
-							</div>
-						</CardHeader>
-						
-						<CardContent className="space-y-8 px-8 pb-8">
+				{/* Form – tüm genişliği kullanan panel */}
+				<form
+					onSubmit={handleSubmit}
+					className="rounded-2xl border border-border/50 bg-card/40 shadow-xl shadow-primary/10 backdrop-blur-sm px-6 lg:px-10 pt-10 pb-8 space-y-10"
+				>
+					{/* Form Header */}
+					<div className="flex items-start gap-4">
+						<div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
+							<TrendingUp className="h-6 w-6 text-primary" />
+						</div>
+						<div className="flex-1">
+							<h2 className="text-2xl font-semibold mb-2">Hizmet İstatistiği Detayları</h2>
+							<p className="text-base text-muted-foreground">
+								Yeni bir hizmet istatistiği oluşturmak için aşağıdaki bilgileri doldurun
+							</p>
+						</div>
+					</div>
+
+					{/* Form Fields */}
+					<div className="space-y-10">
 							{/* Image Upload */}
 							<div className="space-y-3">
 								<Label htmlFor="icon" className="text-base font-medium flex items-center gap-2">
@@ -198,38 +194,38 @@ export default function ServiceStatsCreatePage() {
 									Pozitif bir sayı girin
 								</p>
 							</div>
-						</CardContent>
-						
-						<CardFooter className="flex items-center justify-end gap-4 px-8 pb-8 pt-6 bg-muted/30 border-t border-border/50">
-							<Button
-								type="button"
-								variant="outline"
-								onClick={() => navigate("/service-stats")}
-								disabled={isLoading}
-								className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
-							>
-								İptal
-							</Button>
-							<Button
-								type="submit"
-								disabled={!isFormValid || isLoading}
-								className="h-11 px-8 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-							>
-								{isLoading ? (
-									<>
-										<Loader2 className="h-4 w-4 mr-2 animate-spin" />
-										Oluşturuluyor...
-									</>
-								) : (
-									<>
-										<Check className="h-4 w-4 mr-2" />
-										Hizmet İstatistiği Oluştur
-									</>
-								)}
-							</Button>
-						</CardFooter>
-					</form>
-				</Card>
+						</div>
+
+					{/* Actions */}
+					<div className="flex items-center justify-end gap-4 border-t border-border/50 pt-6">
+						<Button
+							type="button"
+							variant="outline"
+							onClick={() => navigate("/service-stats")}
+							disabled={isLoading}
+							className="h-11 px-6 font-medium border-2 hover:bg-muted/80 transition-all duration-200"
+						>
+							İptal
+						</Button>
+						<Button
+							type="submit"
+							disabled={!isFormValid || isLoading}
+							className="h-11 px-8 font-medium bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+						>
+							{isLoading ? (
+								<>
+									<Loader2 className="h-4 w-4 mr-2 animate-spin" />
+									Oluşturuluyor...
+								</>
+							) : (
+								<>
+									<Check className="h-4 w-4 mr-2" />
+									Hizmet İstatistiği Oluştur
+								</>
+							)}
+						</Button>
+					</div>
+				</form>
 			</div>
 		</div>
 	);

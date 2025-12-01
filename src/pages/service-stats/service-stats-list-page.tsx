@@ -48,8 +48,8 @@ import {
 	ArrowLeft,
 	ArrowUpDown,
 	BarChart3,
+	Image as ImageIcon,
 } from "lucide-react";
-import * as LucideIcons from "lucide-react";
 
 export default function ServiceStatsListPage() {
 	const navigate = useNavigate();
@@ -156,17 +156,10 @@ export default function ServiceStatsListPage() {
 	const hasNextPage = totalPages > 1 && page < totalPages - 1;
 	const hasPreviousPage = page > 0;
 
-	// Icon render helper
-	const renderIcon = (iconName: string) => {
-		try {
-			const IconComponent = (LucideIcons as any)[iconName];
-			if (IconComponent) {
-				return <IconComponent className="h-5 w-5" />;
-			}
-		} catch (error) {
-			// Icon not found
-		}
-		return <BarChart3 className="h-5 w-5" />;
+	// Görsel URL'ini normalize et (local geliştirmede https -> http)
+	const normalizeImageUrl = (url: string | null | undefined): string | null => {
+		if (!url) return null;
+		return url.replace(/^https:\/\/localhost:8080/i, "http://localhost:8080");
 	};
 
 	return (
@@ -296,9 +289,21 @@ export default function ServiceStatsListPage() {
 								{data.content.map((item) => (
 									<TableRow key={item.id}>
 										<TableCell className="hidden md:table-cell font-medium">{item.id}</TableCell>
-										<TableCell>
-											<div className="flex items-center justify-center h-8 w-8 rounded-lg bg-primary/10 text-primary">
-												{renderIcon(item.iconName)}
+										<TableCell className="w-[72px] pr-4 py-2">
+											<div className="flex items-center justify-center">
+												{normalizeImageUrl(item.iconName) ? (
+													<div className="h-12 w-12 rounded-md bg-muted/40 border border-border/60 flex items-center justify-center overflow-hidden shadow-sm">
+														<img
+															src={normalizeImageUrl(item.iconName)!}
+															alt={item.title}
+															className="h-full w-full object-cover"
+														/>
+													</div>
+												) : (
+													<div className="h-12 w-12 rounded-md bg-muted/40 border border-border/60 flex items-center justify-center text-muted-foreground shadow-sm">
+														<ImageIcon className="h-5 w-5" />
+													</div>
+												)}
 											</div>
 										</TableCell>
 										<TableCell className="font-medium text-sm sm:text-base max-w-[200px] sm:max-w-none truncate">{item.title}</TableCell>

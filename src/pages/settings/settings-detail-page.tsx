@@ -30,7 +30,7 @@ export default function SettingsDetailPage() {
 	if (isLoading) {
 		return (
 			<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
-				<div className="max-w-4xl mx-auto space-y-8">
+				<div className="space-y-8">
 					<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 						<div className="flex items-center gap-4">
 							<Skeleton className="h-10 w-10 rounded-full" />
@@ -93,7 +93,7 @@ export default function SettingsDetailPage() {
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
-			<div className="max-w-4xl mx-auto space-y-8">
+			<div className="space-y-8">
 				{/* Header */}
 				<div className="flex items-center justify-between flex-wrap gap-4">
 					<div className="flex items-center gap-4">

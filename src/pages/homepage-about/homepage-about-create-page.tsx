@@ -43,7 +43,7 @@ export default function HomepageAboutCreatePage() {
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
-			<div className="max-w-5xl mx-auto space-y-8">
+			<div className="space-y-8">
 				{/* Header */}
 				<div className="flex items-center gap-4">
 					<Button

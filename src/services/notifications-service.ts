@@ -9,10 +9,9 @@ export const createNotification = async (request: NotificationRequest): Promise<
     });
 }
 
-export const sendNotification = async (request: NotificationRequest): Promise<NotificationResponse> => {
-    return await fetchClient<NotificationRequest, NotificationResponse>("/admin/notifications/send", {
+export const sendNotification = async (id: string): Promise<NotificationResponse> => {
+    return await fetchClient<void, NotificationResponse>(`/admin/notifications/${id}/send`, {
         method: "POST",
-        body: request,
     });
 }
 

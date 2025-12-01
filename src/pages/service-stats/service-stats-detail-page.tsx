@@ -90,8 +90,8 @@ export default function ServiceStatsDetailPage() {
 	}
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-8 px-4">
-			<div className="max-w-3xl mx-auto space-y-8">
+		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 py-10 px-4">
+			<div className="space-y-10">
 				{/* Header */}
 				<div className="flex items-center justify-between flex-wrap gap-4">
 					<div className="flex items-center gap-4">
@@ -126,28 +126,21 @@ export default function ServiceStatsDetailPage() {
 					</Button>
 				</div>
 
-				{/* Details Card */}
-				<Card className="border-2 border-border/60 shadow-2xl shadow-primary/5 bg-card/50 backdrop-blur-sm overflow-hidden">
-					{/* Decorative gradient bar */}
-					<div className="h-1.5 bg-gradient-to-r from-primary via-primary/80 to-primary/60" />
-					
-					<CardHeader className="pb-6 pt-8 px-8">
-						<div className="flex items-start gap-4">
-							<div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
-								<TrendingUp className="h-6 w-6 text-primary" />
-							</div>
-							<div className="flex-1">
-								<CardTitle className="text-2xl font-semibold mb-2">
-									Hizmet İstatistiği Bilgileri
-								</CardTitle>
-								<CardDescription className="text-base">
-									Bu hizmet istatistiği hakkında detaylı bilgi
-								</CardDescription>
-							</div>
+				{/* Details – tüm genişliği kullanan panel */}
+				<section className="rounded-2xl border border-border/50 bg-card/40 shadow-xl shadow-primary/10 backdrop-blur-sm px-6 lg:px-10 pt-10 pb-8 space-y-10">
+					{/* Header */}
+					<div className="flex items-start gap-4">
+						<div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
+							<TrendingUp className="h-6 w-6 text-primary" />
 						</div>
-					</CardHeader>
-					
-					<CardContent className="px-8 pb-8 space-y-8">
+						<div className="flex-1">
+							<h2 className="text-2xl font-semibold mb-2">Hizmet İstatistiği Bilgileri</h2>
+							<p className="text-base text-muted-foreground">Bu hizmet istatistiği hakkında detaylı bilgi</p>
+						</div>
+					</div>
+
+					{/* Content */}
+					<div className="space-y-10">
 						{/* Image */}
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
@@ -205,8 +198,8 @@ export default function ServiceStatsDetailPage() {
 								</p>
 							</div>
 						</div>
-					</CardContent>
-				</Card>
+					</div>
+				</section>
 			</div>
 		</div>
 	);
