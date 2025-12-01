@@ -10,21 +10,24 @@ import { useUpdateService, useGetServiceById } from "@/hooks/use-service";
 import type { ServiceRequest } from "@/types/service.types";
 import { ArrowLeft, Save, Briefcase, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useServiceCategories } from "@/hooks/use-service-category";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function ServiceEditPage() {
 	const navigate = useNavigate();
 	const { id } = useParams<{ id: string }>();
 	const updateMutation = useUpdateService();
 	const { data, isLoading, error } = useGetServiceById(Number(id));
+	const { data: categoryPage, isLoading: isCategoriesLoading } = useServiceCategories("", 0, 100, "name,asc");
 
-	const [categoryId, setCategoryId] = useState<number | "">("");
+	const [categoryId, setCategoryId] = useState<string>("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [orderIndex, setOrderIndex] = useState<number | "">("");
 
 	useEffect(() => {
 		if (data) {
-			setCategoryId(data.categoryId || "");
+			setCategoryId(data.categoryId != null ? String(data.categoryId) : "");
 			setTitle(data.title || "");
 			setDescription(data.description || "");
 			setOrderIndex(data.orderIndex || "");
@@ -42,7 +45,7 @@ export default function ServiceEditPage() {
 		e.preventDefault();
 		if (
 			!id ||
-			categoryId === "" ||
+			!categoryId ||
 			!title.trim() ||
 			!description.trim() ||
 			orderIndex === "" ||
@@ -160,25 +163,27 @@ export default function ServiceEditPage() {
 				</CardHeader>
 				<CardContent className="pt-6">
 					<form onSubmit={handleSubmit} className="space-y-6">
-						{/* Category ID */}
+						{/* Category */}
 						<div className="space-y-2">
-							<Label htmlFor="categoryId">Kategori ID *</Label>
-							<Input
-								id="categoryId"
-								type="number"
-								min="0"
-								placeholder="Örn: 1"
+							<Label htmlFor="categoryId">Kategori *</Label>
+							<Select
 								value={categoryId}
-								onChange={(e) => {
-									const value = e.target.value;
-									setCategoryId(value === "" ? "" : Number(value));
-								}}
-								required
-								disabled={updateMutation.isPending}
-								className="h-11"
-							/>
+								onValueChange={(value) => setCategoryId(value)}
+								disabled={updateMutation.isPending || isCategoriesLoading}
+							>
+								<SelectTrigger id="categoryId" className="h-11">
+									<SelectValue placeholder={isCategoriesLoading ? "Kategoriler yükleniyor..." : "Kategori seçin"} />
+								</SelectTrigger>
+								<SelectContent>
+									{categoryPage?.content.map((category) => (
+										<SelectItem key={category.id} value={String(category.id)}>
+											{category.name}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
 							<p className="text-xs text-muted-foreground">
-								Bu hizmet için kategori ID'sini girin
+								Bu hizmet için kategori seçin
 							</p>
 						</div>
 

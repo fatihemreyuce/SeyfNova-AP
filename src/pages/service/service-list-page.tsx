@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,6 +39,7 @@ import {
 	useServices,
 	useDeleteService,
 } from "@/hooks/use-service";
+import { useServiceCategories } from "@/hooks/use-service-category";
 import {
 	Plus,
 	Pencil,
@@ -63,7 +64,16 @@ export default function ServiceListPage() {
 	const [deletingItemName, setDeletingItemName] = useState<string>("");
 
 	const { data, isLoading } = useServices(search, page, size, sort);
+	const { data: categoryPage } = useServiceCategories("", 0, 100, "name,asc");
 	const deleteMutation = useDeleteService();
+
+	const categoryNameMap = useMemo(() => {
+		if (!categoryPage?.content) return {} as Record<number, string>;
+		return categoryPage.content.reduce((acc, category) => {
+			acc[category.id] = category.name;
+			return acc;
+		}, {} as Record<number, string>);
+	}, [categoryPage]);
 
 	const handleDeleteClick = (item: any) => {
 		setDeletingId(item.id);
@@ -231,7 +241,7 @@ export default function ServiceListPage() {
 							<TableHeader>
 								<TableRow>
 									<TableHead className="hidden md:table-cell">ID</TableHead>
-									<TableHead className="hidden lg:table-cell">Kategori ID</TableHead>
+									<TableHead className="hidden lg:table-cell">Kategori</TableHead>
 									<TableHead>Başlık</TableHead>
 									<TableHead className="hidden md:table-cell">Açıklama</TableHead>
 									<TableHead className="hidden sm:table-cell">Sıra</TableHead>
@@ -276,7 +286,7 @@ export default function ServiceListPage() {
 							<TableHeader>
 								<TableRow>
 									<TableHead className="hidden md:table-cell">ID</TableHead>
-									<TableHead className="hidden lg:table-cell">Kategori ID</TableHead>
+									<TableHead className="hidden lg:table-cell">Kategori</TableHead>
 									<TableHead>Başlık</TableHead>
 									<TableHead className="hidden md:table-cell max-w-[200px]">Açıklama</TableHead>
 									<TableHead className="hidden sm:table-cell">Sıra</TableHead>
@@ -287,7 +297,9 @@ export default function ServiceListPage() {
 								{data.content.map((item) => (
 									<TableRow key={item.id}>
 										<TableCell className="hidden md:table-cell font-medium">{item.id}</TableCell>
-										<TableCell className="hidden lg:table-cell">{item.categoryId}</TableCell>
+										<TableCell className="hidden lg:table-cell">
+											{categoryNameMap[item.categoryId] ?? item.categoryId}
+										</TableCell>
 										<TableCell className="max-w-[200px] sm:max-w-[300px] truncate font-medium">
 											{item.title}
 										</TableCell>
