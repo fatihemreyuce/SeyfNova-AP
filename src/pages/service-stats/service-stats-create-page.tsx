@@ -109,8 +109,8 @@ export default function ServiceStatsCreatePage() {
 									<span className="text-destructive">*</span>
 								</Label>
 								<div className="space-y-4">
-									<div className="flex flex-col sm:flex-row gap-4 sm:items-center">
-										<div className="flex items-center justify-center h-20 w-20 rounded-xl bg-muted/50 border border-dashed border-border/70">
+									<div className="flex flex-col sm:flex-row gap-4 sm:items-center rounded-2xl border border-dashed border-border/70 bg-background/60 px-3 py-3">
+										<div className="flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 rounded-xl bg-muted/50 border border-dashed border-border/70">
 											{iconPreview ? (
 												<img
 													src={iconPreview}
@@ -122,6 +122,18 @@ export default function ServiceStatsCreatePage() {
 											)}
 										</div>
 										<div className="flex-1 space-y-2">
+											<div className="flex items-center gap-3">
+												<label
+													htmlFor="icon"
+													className="inline-flex items-center justify-center rounded-lg border border-primary/70 bg-primary/5 px-4 py-2 text-xs sm:text-sm font-medium text-primary hover:bg-primary/10 cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md"
+												>
+													<ImageIcon className="mr-2 h-4 w-4" />
+													Dosya Seç
+												</label>
+												<span className="text-xs sm:text-sm text-muted-foreground line-clamp-1">
+													{iconFile ? iconFile.name : "Dosya seçilmedi"}
+												</span>
+											</div>
 											<Input
 												id="icon"
 												type="file"
@@ -132,7 +144,7 @@ export default function ServiceStatsCreatePage() {
 												}}
 												required
 												disabled={isLoading}
-												className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm file:mr-4 file:rounded-md file:border-0 file:bg-primary/10 file:px-4 file:py-2 file:text-sm file:font-medium file:text-primary hover:file:bg-primary/15"
+												className="hidden"
 											/>
 											<p className="text-xs text-muted-foreground">
 												PNG, JPG veya WEBP formatında, tercihen kare boyutlarda bir görsel yükleyin.
