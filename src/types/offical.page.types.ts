@@ -7,7 +7,7 @@ export interface QualificationRequest{
 export interface OfficalPageDocumentRequest{
     id: number;
     name: string;
-    asset:string;
+    asset: File | string;
 }
 
 

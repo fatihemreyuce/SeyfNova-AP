@@ -61,7 +61,11 @@ export default function OfficialPageEditPage() {
 		setDocuments(documents.filter((_, i) => i !== index));
 	};
 
-	const handleDocumentChange = (index: number, field: keyof OfficalPageDocumentRequest, value: string | number) => {
+	const handleDocumentChange = (
+		index: number,
+		field: keyof OfficalPageDocumentRequest,
+		value: string | number | File
+	) => {
 		const updated = [...documents];
 		updated[index] = { ...updated[index], [field]: value };
 		setDocuments(updated);
@@ -98,9 +102,14 @@ export default function OfficialPageEditPage() {
 		}
 
 		// Validate documents
-		const validDocuments = documents.filter(
-			(doc) => doc.name.trim() !== "" && doc.asset.trim() !== ""
-		);
+		const validDocuments = documents.filter((doc) => {
+			const hasName = doc.name.trim() !== "";
+			const hasAsset =
+				doc.asset instanceof File ||
+				(typeof doc.asset === "string" && doc.asset.trim() !== "");
+
+			return hasName && hasAsset;
+		});
 
 		// Validate qualifications
 		const validQualifications = qualifications.filter(
@@ -255,10 +264,17 @@ export default function OfficialPageEditPage() {
 								{documents.map((doc, index) => (
 									<div
 										key={index}
-										className="p-4 border rounded-lg bg-muted/30 space-y-4"
+										className="p-4 border rounded-xl bg-muted/40 space-y-4 shadow-sm"
 									>
-										<div className="flex items-center justify-between">
-											<h4 className="font-medium">Doküman {index + 1}</h4>
+										<div className="flex items-center justify-between gap-2">
+											<div className="flex items-center gap-2">
+												<div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+													<FileText className="h-4 w-4 text-primary" />
+												</div>
+												<h4 className="font-medium">
+													Doküman {index + 1}
+												</h4>
+											</div>
 											<Button
 												type="button"
 												variant="ghost"
@@ -283,15 +299,51 @@ export default function OfficialPageEditPage() {
 												/>
 											</div>
 											<div className="space-y-2">
-												<Label htmlFor={`doc-asset-${index}`}>Dosya URL/Path *</Label>
-												<Input
-													id={`doc-asset-${index}`}
-													placeholder="Dosya URL veya path"
-													value={doc.asset}
-													onChange={(e) => handleDocumentChange(index, "asset", e.target.value)}
-													disabled={isSubmitting}
-													className="h-11"
-												/>
+												<Label htmlFor={`doc-asset-${index}`}>Dosya *</Label>
+												<div className="flex items-center gap-2">
+													<label
+														htmlFor={`doc-asset-${index}`}
+														className="inline-flex items-center justify-center rounded-lg border border-dashed border-primary/50 bg-primary/5 px-3 py-2 text-xs sm:text-sm font-medium text-primary hover:bg-primary/10 cursor-pointer transition-colors h-11"
+													>
+														Dosya Seç
+													</label>
+													<span className="text-xs text-muted-foreground line-clamp-1">
+														{doc.asset instanceof File
+															? doc.asset.name
+															: doc.asset
+															? doc.asset
+															: "Henüz dosya seçilmedi"}
+													</span>
+													<Input
+														id={`doc-asset-${index}`}
+														type="file"
+														accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg"
+														onChange={(e) => {
+															const file = e.target.files?.[0];
+															if (file) {
+																handleDocumentChange(index, "asset", file);
+															}
+														}}
+														disabled={isSubmitting}
+														className="hidden"
+													/>
+												</div>
+												<p className="text-xs text-muted-foreground">
+													İzin verilen formatlar: PDF, Office dosyaları, görseller
+												</p>
+												{typeof doc.asset === "string" && doc.asset && (
+													<p className="text-xs text-muted-foreground truncate">
+														Mevcut dosya:{" "}
+														<a
+															href={doc.asset}
+															target="_blank"
+															rel="noopener noreferrer"
+															className="underline"
+														>
+															{doc.asset}
+														</a>
+													</p>
+												)}
 											</div>
 										</div>
 										{doc.id > 0 && (
