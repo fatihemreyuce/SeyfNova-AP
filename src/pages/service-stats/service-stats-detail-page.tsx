@@ -5,9 +5,15 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetServiceStatsById } from "@/hooks/use-service-stats";
-import { ArrowLeft, Pencil, Sparkles, Info, TrendingUp } from "lucide-react";
+import { ArrowLeft, Pencil, Sparkles, Info, TrendingUp, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
-import * as LucideIcons from "lucide-react";
+
+// Local geliştirmede backend yanlışlıkla https döndürse bile http'ye çevir
+const normalizeImageUrl = (url: string | null | undefined): string | null => {
+	if (!url) return null;
+	// https://localhost:8080 -> http://localhost:8080
+	return url.replace(/^https:\/\/localhost:8080/i, "http://localhost:8080");
+};
 
 export default function ServiceStatsDetailPage() {
 	const navigate = useNavigate();
@@ -21,17 +27,7 @@ export default function ServiceStatsDetailPage() {
 		}
 	}, [error, navigate]);
 
-	const renderIcon = (iconName: string) => {
-		try {
-			const IconComponent = (LucideIcons as any)[iconName];
-			if (IconComponent) {
-				return <IconComponent className="h-8 w-8" />;
-			}
-		} catch (error) {
-			// Icon not found
-		}
-		return null;
-	};
+	const imageUrl = normalizeImageUrl(data?.iconName || null);
 
 	if (isLoading) {
 		return (
@@ -152,23 +148,31 @@ export default function ServiceStatsDetailPage() {
 					</CardHeader>
 					
 					<CardContent className="px-8 pb-8 space-y-8">
-						{/* Icon */}
+						{/* Image */}
 						<div className="space-y-3">
 							<Label className="text-base font-medium flex items-center gap-2">
-								<span>İkon</span>
+								<span>Görsel</span>
 							</Label>
 							<div className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 border border-border/50">
-								<div className="flex items-center justify-center h-20 w-20 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary border-2 border-primary/20 shadow-lg shadow-primary/10">
-									{renderIcon(data.iconName) || (
-										<Info className="h-10 w-10" />
-									)}
-								</div>
+								{imageUrl ? (
+									<div className="flex items-center justify-center h-20 w-20 rounded-xl bg-background overflow-hidden border-2 border-primary/20 shadow-lg shadow-primary/10">
+										<img
+											src={imageUrl}
+											alt={data.title}
+											className="h-full w-full object-contain"
+										/>
+									</div>
+								) : (
+									<div className="flex items-center justify-center h-20 w-20 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary border-2 border-primary/20 shadow-lg shadow-primary/10">
+										<ImageIcon className="h-10 w-10" />
+									</div>
+								)}
 								<div className="flex-1">
 									<p className="font-mono text-sm font-semibold text-foreground mb-1">
-										İkon Adı
+										Görsel URL
 									</p>
 									<p className="font-mono text-xs text-muted-foreground bg-background/50 px-3 py-1.5 rounded-md border border-border/50 inline-block">
-										{data.iconName}
+										{imageUrl || "Görsel bulunamadı"}
 									</p>
 								</div>
 							</div>

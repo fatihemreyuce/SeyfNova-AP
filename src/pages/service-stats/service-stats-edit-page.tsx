@@ -6,16 +6,14 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUpdateServiceStats, useGetServiceStatsById } from "@/hooks/use-service-stats";
-import { ArrowLeft, Sparkles, TrendingUp, Check, Info, Loader2 } from "lucide-react";
+import { ArrowLeft, Sparkles, TrendingUp, Check, Info, Loader2, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
-import * as LucideIcons from "lucide-react";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
+
+// Local geliştirmede backend yanlışlıkla https döndürse bile http'ye çevir
+const normalizeImageUrl = (url: string | null | undefined): string | null => {
+	if (!url) return null;
+	return url.replace(/^https:\/\/localhost:8080/i, "http://localhost:8080");
+};
 
 export default function ServiceStatsEditPage() {
 	const navigate = useNavigate();
@@ -23,70 +21,34 @@ export default function ServiceStatsEditPage() {
 	const updateMutation = useUpdateServiceStats();
 	const { data, isLoading, error } = useGetServiceStatsById(Number(id));
 
-	const [icon, setIcon] = useState<string>("BarChart3");
+	const [iconFile, setIconFile] = useState<File | null>(null);
+	const [iconPreview, setIconPreview] = useState<string | null>(null);
 	const [title, setTitle] = useState("");
 	const [numberValue, setNumberValue] = useState<number | "">("");
-
-// Popular Lucide icons for service stats
-const popularIcons = [
-	"BarChart3",
-	"TrendingUp",
-	"Users",
-	"Award",
-	"Star",
-	"Target",
-	"Zap",
-	"Rocket",
-	"ThumbsUp",
-	"CheckCircle",
-	"Heart",
-	"Smile",
-	"Trophy",
-	"Gift",
-	"Shield",
-	"Globe",
-	"Building",
-	"Briefcase",
-	"Mail",
-	"Phone",
-	"MessageSquare",
-	"Clock",
-	"Calendar",
-	"Folder",
-	"FileText",
-] as const;
-
-	// Helper function to extract icon name from URL
-	const extractIconNameFromUrl = (iconValue: string | null | undefined): string => {
-		if (!iconValue) {
-			return "BarChart3";
-		}
-
-		// If it's a URL, extract icon name from it
-		if (iconValue.includes("http://") || iconValue.includes("https://")) {
-			// URL format: https://localhost:8080/uploads/uuid IconName
-			const parts = iconValue.trim().split(/\s+/);
-			if (parts.length > 1) {
-				// Last part should be the icon name
-				const iconName = parts[parts.length - 1];
-				if (iconName && /^[A-Z][a-zA-Z0-9]*$/.test(iconName)) {
-					return iconName;
-				}
-			}
-			return "BarChart3";
-		}
-
-		// If it's already a clean icon name, return it
-		return iconValue.trim();
-	};
+	const [existingIconUrl, setExistingIconUrl] = useState<string | null>(null);
 
 	useEffect(() => {
 		if (data) {
-			setIcon(extractIconNameFromUrl(data.iconName) || "BarChart3");
+			setExistingIconUrl(normalizeImageUrl(data.iconName || null));
 			setTitle(data.title || "");
 			setNumberValue(data.numberValue || "");
 		}
 	}, [data]);
+
+	// Yeni dosya seçildiğinde önizleme URL'sini yönet
+	useEffect(() => {
+		if (!iconFile) {
+			setIconPreview(null);
+			return;
+		}
+
+		const objectUrl = URL.createObjectURL(iconFile);
+		setIconPreview(objectUrl);
+
+		return () => {
+			URL.revokeObjectURL(objectUrl);
+		};
+	}, [iconFile]);
 
 	useEffect(() => {
 		if (error) {
@@ -97,7 +59,7 @@ const popularIcons = [
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (!id || !icon || !title || numberValue === "" || numberValue < 0) {
+		if (!id || !title || numberValue === "" || numberValue < 0) {
 			return;
 		}
 
@@ -105,7 +67,8 @@ const popularIcons = [
 			await updateMutation.mutateAsync({
 				id: Number(id),
 				request: {
-					icon,
+					// Yeni bir görsel seçildiyse gönder, aksi halde backend mevcut görseli korusun
+					icon: iconFile ?? undefined,
 					title,
 					numberValue: Number(numberValue),
 				},
@@ -114,19 +77,6 @@ const popularIcons = [
 		} catch (error) {
 			// Error handled by mutation
 		}
-	};
-
-	// Icon render helper
-	const renderIcon = (iconName: string) => {
-		try {
-			const IconComponent = (LucideIcons as any)[iconName];
-			if (IconComponent) {
-				return <IconComponent className="h-5 w-5" />;
-			}
-		} catch (error) {
-			// Icon not found
-		}
-		return null;
 	};
 
 	if (isLoading) {
@@ -192,7 +142,7 @@ const popularIcons = [
 		);
 	}
 
-	const isFormValid = icon && title.trim() && numberValue !== "" && numberValue >= 0;
+	const isFormValid = title.trim() && numberValue !== "" && numberValue >= 0;
 	const isSubmitting = updateMutation.isPending;
 
 	return (
@@ -248,51 +198,51 @@ const popularIcons = [
 						</CardHeader>
 						
 						<CardContent className="space-y-8 px-8 pb-8">
-							{/* Icon Selection */}
+							{/* Image Upload */}
 							<div className="space-y-3">
 								<Label htmlFor="icon" className="text-base font-medium flex items-center gap-2">
-									<span>İkon</span>
-									<span className="text-destructive">*</span>
+									<span>Görsel</span>
 								</Label>
-								<Select value={icon} onValueChange={setIcon}>
-									<SelectTrigger 
-										id="icon" 
-										className="h-12 border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm"
-									>
-										<div className="flex items-center gap-3 w-full">
-											{renderIcon(icon) && (
-												<div className="flex items-center justify-center h-8 w-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 text-primary border border-primary/20 shadow-sm">
-													{renderIcon(icon)}
-												</div>
+								<div className="space-y-4">
+									<div className="flex flex-col sm:flex-row gap-4 sm:items-center">
+										<div className="flex items-center justify-center h-20 w-20 rounded-xl bg-muted/50 border border-dashed border-border/70 overflow-hidden">
+											{iconPreview ? (
+												<img
+													src={iconPreview}
+													alt="Seçilen görsel önizlemesi"
+													className="h-full w-full object-contain rounded-lg"
+												/>
+											) : existingIconUrl ? (
+												<img
+													src={existingIconUrl}
+													alt={title || "Mevcut görsel"}
+													className="h-full w-full object-contain rounded-lg"
+												/>
+											) : (
+												<ImageIcon className="h-8 w-8 text-muted-foreground" />
 											)}
-											<SelectValue placeholder="Bir ikon seçin" className="text-base" />
 										</div>
-									</SelectTrigger>
-									<SelectContent className="max-h-[300px]">
-										{popularIcons.map((iconName) => {
-											const IconComponent = (LucideIcons as any)[iconName];
-											return (
-												<SelectItem 
-													key={iconName} 
-													value={iconName}
-													className="cursor-pointer hover:bg-muted/80 transition-colors"
-												>
-													<div className="flex items-center gap-3 py-1">
-														{IconComponent && (
-															<div className="flex items-center justify-center h-6 w-6 rounded-md bg-primary/10 text-primary">
-																<IconComponent className="h-4 w-4" />
-															</div>
-														)}
-														<span className="font-medium">{iconName}</span>
-													</div>
-												</SelectItem>
-											);
-										})}
-									</SelectContent>
-								</Select>
+										<div className="flex-1 space-y-2">
+											<Input
+												id="icon"
+												type="file"
+												accept="image/*"
+												onChange={(e) => {
+													const file = e.target.files?.[0] || null;
+													setIconFile(file);
+												}}
+												disabled={isSubmitting}
+												className="h-12 text-base border-2 transition-all duration-200 hover:border-primary/50 focus:border-primary shadow-sm file:mr-4 file:rounded-md file:border-0 file:bg-primary/10 file:px-4 file:py-2 file:text-sm file:font-medium file:text-primary hover:file:bg-primary/15"
+											/>
+											<p className="text-xs text-muted-foreground">
+												İsterseniz yeni bir görsel yükleyerek mevcut görseli güncelleyebilirsiniz.
+											</p>
+										</div>
+									</div>
+								</div>
 								<p className="text-sm text-muted-foreground flex items-center gap-1.5">
 									<span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
-									Bu istatistiği temsil etmek için bir ikon seçin
+									Bu istatistiği temsil etmek için bir görsel kullanılır
 								</p>
 							</div>
 

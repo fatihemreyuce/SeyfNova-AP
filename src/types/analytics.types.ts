@@ -5,40 +5,27 @@ export interface TrackRequest{
 }
 
 export interface TrackResponse{
-   visitorId: string;
-   sessionId: string;
-   tracked: boolean;
+    visitorId: string;
+    sessionId: string;
+    tracked: boolean;
 }
 
-export interface ActiveResponse{
+export interface active {
     count: number;
     timestamp: Date;
 }
 
-export interface topPages{
+export interface topPages {
     pagePath: string;
     viewCount: number;
     uniqueVisitors: number;
-}
-
-
-export interface dashboard{
-    activeVisitors: number;
-    todayUniqueVisitors: number;
-    todayUniqueViews: number;
-    yesterdayUniqueVisitors: number;
-    yesterdayUniqueViews: number;
-    percentageChange: number;
-    dailyStats: dailyStats[];
-    topPages: topPages[];
-    conversion: conversion[];
 }
 
 export interface dailyStats{
     date: Date;
     uniqueVisitors: number;
     totalPageViews: number;
-    avgPagesPerVisitor: number;
+    avgPagePerVisitor: number;
 }
 
 export interface conversion{
@@ -47,4 +34,17 @@ export interface conversion{
     conversionRate: number;
     todayContactForms: number;
     yesterdayContactForms: number;
+}
+
+export interface dashboard{
+    activeVisitors: number;
+    todayUniqueVisitors: number;
+    totalPageViews: number;
+    todayPageViews: number;
+    yesterdayUniqueVisitors: number;
+    yesterdayPageViews: number;
+    percentageChange: number;
+    dailyStats: dailyStats[];
+    topPages: topPages[];
+    conversion: conversion[];
 }

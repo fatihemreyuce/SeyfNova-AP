@@ -1,41 +1,31 @@
 import { fetchClient } from "@/utils/fetch-client";
-import type { TrackRequest, TrackResponse, ActiveResponse, topPages, dashboard, dailyStats, conversion } from "@/types/analytics.types";
+import type { TrackRequest, TrackResponse, dashboard ,active, topPages, dailyStats, conversion} from "@/types/analytics.types";
 import type { Page } from "@/types/pagination";
 
-export const trackPageView = async (request: TrackRequest): Promise<TrackResponse> => {
-    return await fetchClient<TrackRequest, TrackResponse>("/analytics/track", {
+export const createTrack = (request: TrackRequest , visitorId: string, sessionId: string): Promise<TrackResponse> => {
+    return fetchClient<TrackRequest, TrackResponse>(`/analytics/track?visitorId=${visitorId}&sessionId=${sessionId}`, {
         method: "POST",
         body: request,
     });
 }
 
-export const getActiveVisitors = async (): Promise<Page<ActiveResponse>> => {
-    return await fetchClient<void, Page<ActiveResponse>>("/admin/analytics/active", {
-        method: "GET",
-    });
+
+export const getDashboard = (days: number): Promise<Page<dashboard>> => {
+    return fetchClient<void, Page<dashboard>>(`/admin/analytics/dashboard?days=${days}`);
 }
 
-export const getTopPages = async (): Promise<Page<topPages>> => {
-    return await fetchClient<void, Page<topPages>>("/admin/analytics/top-pages", {
-        method: "GET",
-    });
+export const getActive = (): Promise<Page<active>> => {
+    return fetchClient<void, Page<active>>("/admin/analytics/active");  
 }
 
-export const getDashboard = async (): Promise<Page<dashboard>> => {
-    return await fetchClient<void, Page<dashboard>>("/admin/analytics/dashboard", {
-        method: "GET",
-    });
+export const getTopPages = (days: number): Promise<Page<topPages>> => {
+    return fetchClient<void, Page<topPages>>(`/admin/analytics/top-pages?days=${days}`);
 }
 
-export const getDailyStats = async (): Promise<Page<dailyStats>> => {
-    return await fetchClient<void, Page<dailyStats>>("/admin/analytics/daily-stats", {
-        method: "GET",
-    });
+export const getDailyStats = (days: number): Promise<Page<dailyStats>   > => {
+    return fetchClient<void, Page<dailyStats>>(`/admin/analytics/daily-stats?days=${days}`);
 }
 
-export const getConversion = async (): Promise<Page<conversion>> => {
-    return await fetchClient<void, Page<conversion>>("/admin/analytics/conversion", {
-        method: "GET",
-    });
+export const getConversion = (days: number): Promise<Page<conversion>> => {
+    return fetchClient<void, Page<conversion>>(`/admin/analytics/conversion?days=${days}`);
 }
-

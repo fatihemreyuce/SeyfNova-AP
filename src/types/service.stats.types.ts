@@ -1,5 +1,6 @@
 export interface ServiceStatsRequest{
-    icon : string;
+    // Backend multipart/form-data için ikon artık dosya (resim) olarak gönderilecek
+    icon?: File | null;
     numberValue : number;
     title : string;
 }
