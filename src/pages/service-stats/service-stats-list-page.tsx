@@ -35,10 +35,8 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
-import {
-	useServiceStats,
-	useDeleteServiceStats,
-} from "@/hooks/use-service-stats";
+import { useServiceStats, useDeleteServiceStats } from "@/hooks/use-service-stats";
+import { useDebounce } from "@/hooks/use-debounce";
 import {
 	Plus,
 	Pencil,
@@ -54,7 +52,7 @@ import {
 export default function ServiceStatsListPage() {
 	const navigate = useNavigate();
 	
-	const [search, setSearch] = useState("");
+	const [searchInput, setSearchInput] = useState("");
 	const [page, setPage] = useState(0);
 	const [size, setSize] = useState(10);
 	const [sort, setSort] = useState("id,desc");
@@ -63,7 +61,9 @@ export default function ServiceStatsListPage() {
 	const [deletingId, setDeletingId] = useState<number | null>(null);
 	const [deletingItemName, setDeletingItemName] = useState<string>("");
 
-	const { data, isLoading } = useServiceStats(search, page, size, sort);
+	const debouncedSearch = useDebounce(searchInput, 500);
+
+	const { data, isLoading } = useServiceStats(debouncedSearch, page, size, sort);
 	const deleteMutation = useDeleteServiceStats();
 
 	const handleDeleteClick = (item: any) => {
@@ -200,9 +200,9 @@ export default function ServiceStatsListPage() {
 					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
 						placeholder="Ara..."
-						value={search}
+						value={searchInput}
 						onChange={(e) => {
-							setSearch(e.target.value);
+							setSearchInput(e.target.value);
 							setPage(0);
 						}}
 						className="pl-10"

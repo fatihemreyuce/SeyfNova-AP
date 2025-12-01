@@ -35,11 +35,9 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
-import {
-	useServices,
-	useDeleteService,
-} from "@/hooks/use-service";
+import { useServices, useDeleteService } from "@/hooks/use-service";
 import { useServiceCategories } from "@/hooks/use-service-category";
+import { useDebounce } from "@/hooks/use-debounce";
 import {
 	Plus,
 	Pencil,
@@ -54,7 +52,7 @@ import {
 export default function ServiceListPage() {
 	const navigate = useNavigate();
 	
-	const [search, setSearch] = useState("");
+	const [searchInput, setSearchInput] = useState("");
 	const [page, setPage] = useState(0);
 	const [size, setSize] = useState(10);
 	const [sort, setSort] = useState("id,desc");
@@ -63,7 +61,9 @@ export default function ServiceListPage() {
 	const [deletingId, setDeletingId] = useState<number | null>(null);
 	const [deletingItemName, setDeletingItemName] = useState<string>("");
 
-	const { data, isLoading } = useServices(search, page, size, sort);
+	const debouncedSearch = useDebounce(searchInput, 500);
+
+	const { data, isLoading } = useServices(debouncedSearch, page, size, sort);
 	const { data: categoryPage } = useServiceCategories("", 0, 100, "name,asc");
 	const deleteMutation = useDeleteService();
 
@@ -203,9 +203,9 @@ export default function ServiceListPage() {
 					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
 						placeholder="Ara..."
-						value={search}
+						value={searchInput}
 						onChange={(e) => {
-							setSearch(e.target.value);
+							setSearchInput(e.target.value);
 							setPage(0); // Reset to first page on search
 						}}
 						className="pl-10"
@@ -353,12 +353,12 @@ export default function ServiceListPage() {
 						<EmptyHeader>
 							<EmptyTitle>Hizmet bulunamadı</EmptyTitle>
 							<EmptyDescription>
-								{search
+								{searchInput
 									? "Arama kriterlerinize uygun sonuç bulunamadı. Arama terimlerinizi değiştirmeyi deneyin."
 									: "Yeni bir hizmet oluşturarak başlayın."}
 							</EmptyDescription>
 						</EmptyHeader>
-						{!search && (
+						{!searchInput && (
 							<Button
 								onClick={() => navigate("/service/create")}
 								className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"

@@ -35,10 +35,8 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
-import {
-	useHomePageAbout,
-	useDeleteHomePageAbout,
-} from "@/hooks/use-homapage-about";
+import { useHomePageAbout, useDeleteHomePageAbout } from "@/hooks/use-homapage-about";
+import { useDebounce } from "@/hooks/use-debounce";
 import {
 	Plus,
 	Pencil,
@@ -53,7 +51,7 @@ import {
 export default function HomepageAboutListPage() {
 	const navigate = useNavigate();
 	
-	const [search, setSearch] = useState("");
+	const [searchInput, setSearchInput] = useState("");
 	const [page, setPage] = useState(0);
 	const [size, setSize] = useState(10);
 	const [sort, setSort] = useState("id,desc");
@@ -62,7 +60,9 @@ export default function HomepageAboutListPage() {
 	const [deletingId, setDeletingId] = useState<number | null>(null);
 	const [deletingItemName, setDeletingItemName] = useState<string>("");
 
-	const { data, isLoading } = useHomePageAbout(search, page, size, sort);
+	const debouncedSearch = useDebounce(searchInput, 500);
+
+	const { data, isLoading } = useHomePageAbout(debouncedSearch, page, size, sort);
 	const deleteMutation = useDeleteHomePageAbout();
 
 	const handleDeleteClick = (item: any) => {
@@ -193,9 +193,9 @@ export default function HomepageAboutListPage() {
 					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
 						placeholder="Ara..."
-						value={search}
+						value={searchInput}
 						onChange={(e) => {
-							setSearch(e.target.value);
+							setSearchInput(e.target.value);
 							setPage(0); // Reset to first page on search
 						}}
 						className="pl-10"
@@ -345,12 +345,12 @@ export default function HomepageAboutListPage() {
 						<EmptyHeader>
 							<EmptyTitle>Ana sayfa hakkında bulunamadı</EmptyTitle>
 							<EmptyDescription>
-								{search
+								{searchInput
 									? "Arama kriterlerinize uygun sonuç bulunamadı. Arama terimlerinizi değiştirmeyi deneyin."
 									: "Yeni bir ana sayfa hakkında içeriği oluşturarak başlayın."}
 							</EmptyDescription>
 						</EmptyHeader>
-						{!search && (
+						{!searchInput && (
 							<Button
 								onClick={() => navigate("/homepage-about/create")}
 								className="mt-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg shadow-primary/25"
